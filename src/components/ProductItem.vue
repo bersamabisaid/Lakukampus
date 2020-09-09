@@ -1,5 +1,8 @@
 <template>
-    <router-link :to="{name: ''}">
+    <router-link
+        :to="{name: ''}"
+        class="product-card"
+    >
         <q-card>
             <img
                 :src="imgSrc"
@@ -27,13 +30,26 @@
             <q-separator />
 
             <q-card-actions vertical>
-                <q-btn
-                    color="blue"
+                <q-btn-group
                     flat
+                    stretch
                 >
-                    <q-icon name="add" />
-                    Add to Cart
-                </q-btn>
+                    <q-btn
+                        icon="favorite"
+                        size="sm"
+                        color="grey"
+                        flat
+                    >
+                        <q-tooltip>Add to wishlist</q-tooltip>
+                    </q-btn>
+                    <q-btn
+                        color="blue"
+                        flat
+                    >
+                        <q-icon name="add" />
+                        Add to Cart
+                    </q-btn>
+                </q-btn-group>
             </q-card-actions>
         </q-card>
     </router-link>
@@ -62,3 +78,10 @@ export default {
     },
 };
 </script>
+
+<style lang="scss">
+.product-card {
+    width: 200px;
+    margin: map-get($space-md, y) map-get($space-md, x);
+}
+</style>

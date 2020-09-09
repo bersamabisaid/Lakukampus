@@ -16,7 +16,12 @@
                         </q-btn>
                     </q-toolbar-title>
 
-                    <div class="flex justify-center">
+                    <!-- eslint-disable -->
+                    <q-form
+                        class="flex justify-center"
+                        @submit.prevent="$router.push(searchNavigate)"
+                    >
+                    <!-- eslint-enable -->
                         <q-select
                             v-model="category"
                             label="Category"
@@ -40,7 +45,7 @@
                             <template v-slot:append>
                                 <!-- eslint-disable -->
                                 <q-btn
-                                    :to="search ? {name: 'Search', query: {q: search, category}} : {name: 'Home'}"
+                                    :to="searchNavigate"
                                     icon="search"
                                     round
                                     flat
@@ -48,7 +53,13 @@
                                 <!-- eslint-enable -->
                             </template>
                         </q-input>
-                    </div>
+                    </q-form>
+
+                    <q-btn
+                        icon="shopping_cart"
+                        flat
+                        round
+                    />
 
                     <q-btn-dropdown
                         label="Hi, Alwan!"
@@ -89,6 +100,17 @@ export default {
         search: null,
         category: null,
     }),
+    computed: {
+        searchNavigate() {
+            return this.search ? {
+                name: 'Search',
+                query: {
+                    q: this.search,
+                    category: this.category,
+                },
+            } : { name: 'Home' };
+        },
+    },
 };
 </script>
 
@@ -97,7 +119,8 @@ export default {
     &__container {
         width: 100%;
         display: grid;
-        grid-template-columns: auto 1fr auto;
+        grid-template-columns: auto 1fr auto auto;
+        align-items: center;
     }
 }
 </style>
