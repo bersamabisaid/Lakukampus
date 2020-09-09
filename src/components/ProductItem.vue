@@ -10,9 +10,15 @@
             >
 
             <q-card-section class="flex column">
-                <span class="text-body2 text-weight-regular">
+                <span class="text-subtitle2 text-weight-regular ellipsis full-width">
                     {{ title }}
+                    <q-tooltip>
+                        {{ title }}
+                    </q-tooltip>
                 </span>
+                <small class="text-caption">
+                    Anonymous
+                </small>
                 <div class="full-width flex justify-between">
                     <span class="self-end">
                         <q-icon
@@ -24,6 +30,29 @@
                     <span class="text-h6 text-weight-regular">
                         Rp{{ price }}
                     </span>
+                </div>
+                <div class="product-card__chips">
+                    <q-chip
+                        label="promo"
+                        size="sm"
+                        dense
+                        color="info"
+                        text-color="white"
+                    />
+                    <q-chip
+                        label="rent only"
+                        size="sm"
+                        dense
+                        color="info"
+                        text-color="white"
+                    />
+                    <q-chip
+                        label="most popular"
+                        size="sm"
+                        dense
+                        color="info"
+                        text-color="white"
+                    />
                 </div>
             </q-card-section>
 
@@ -83,5 +112,15 @@ export default {
 .product-card {
     width: 200px;
     margin: map-get($space-md, y) map-get($space-md, x);
+
+    &__chips {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+
+        & > .q-chip:nth-child(n+4) {
+            display: none;
+        }
+    }
 }
 </style>

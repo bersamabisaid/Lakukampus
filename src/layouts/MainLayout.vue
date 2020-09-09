@@ -59,6 +59,7 @@
                         icon="shopping_cart"
                         flat
                         round
+                        :to="{name: 'MyCart'}"
                     />
 
                     <q-btn-dropdown

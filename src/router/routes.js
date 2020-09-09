@@ -13,6 +13,11 @@ const routes = [
                 name: 'Search',
                 component: () => import('pages/Search'),
             },
+            {
+                path: '/my-cart',
+                name: 'MyCart',
+                component: () => import('pages/MyCart'),
+            },
         ],
     },
 

@@ -1,5 +1,9 @@
 // app global css in SCSS form
 
+body {
+    overflow-y: scroll;
+}
+
 a:-webkit-any-link {
     color: inherit;
     text-decoration: inherit;
