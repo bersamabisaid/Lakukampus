@@ -110,6 +110,7 @@ export default {
 
 <style lang="scss">
 .product-card {
+    display: block;
     width: 200px;
     margin: map-get($space-md, y) map-get($space-md, x);
 
