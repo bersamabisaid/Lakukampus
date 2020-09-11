@@ -22,6 +22,8 @@
                         img-src="https://picsum.photos/150"
                         :price="10"
                         :ratings="1.2"
+                        no-action
+                        minimalsm
                     />
                 </q-td>
             </template>

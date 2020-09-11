@@ -20,18 +20,24 @@
                     Anonymous
                 </small>
                 <div class="full-width flex justify-between">
-                    <span class="self-end">
+                    <span
+                        v-if="!minimalsm"
+                        class="self-end"
+                    >
                         <q-icon
                             name="star"
                             color="yellow-7"
                         />
                         <small> {{ ratings }}</small>
                     </span>
-                    <span class="text-h6 text-weight-regular">
+                    <span :class="['text-h6 text-weight-regular', minimalsm ? 'q-ml-auto' : '']">
                         Rp{{ price }}
                     </span>
                 </div>
-                <div class="product-card__chips">
+                <div
+                    v-if="!minimalsm"
+                    class="product-card__chips"
+                >
                     <q-chip
                         label="promo"
                         size="sm"
@@ -56,30 +62,32 @@
                 </div>
             </q-card-section>
 
-            <q-separator />
+            <template v-if="!noAction">
+                <q-separator />
 
-            <q-card-actions vertical>
-                <q-btn-group
-                    flat
-                    stretch
-                >
-                    <q-btn
-                        icon="favorite"
-                        size="sm"
-                        color="grey"
+                <q-card-actions vertical>
+                    <q-btn-group
                         flat
+                        stretch
                     >
-                        <q-tooltip>Add to wishlist</q-tooltip>
-                    </q-btn>
-                    <q-btn
-                        color="blue"
-                        flat
-                    >
-                        <q-icon name="add" />
-                        Add to Cart
-                    </q-btn>
-                </q-btn-group>
-            </q-card-actions>
+                        <q-btn
+                            icon="favorite"
+                            size="sm"
+                            color="grey"
+                            flat
+                        >
+                            <q-tooltip>Add to wishlist</q-tooltip>
+                        </q-btn>
+                        <q-btn
+                            color="blue"
+                            flat
+                        >
+                            <q-icon name="add" />
+                            Add to Cart
+                        </q-btn>
+                    </q-btn-group>
+                </q-card-actions>
+            </template>
         </q-card>
     </router-link>
 </template>
@@ -103,6 +111,14 @@ export default {
         ratings: {
             type: Number,
             required: true,
+        },
+        noAction: {
+            type: Boolean,
+            default: false,
+        },
+        minimalsm: {
+            type: Boolean,
+            default: false,
         },
     },
 };
