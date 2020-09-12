@@ -12,48 +12,60 @@
                 </h1>
                 <div class="row q-col-gutter-lg">
                     <div class="col row full-width q-mb-md">
-                        <cart-item-list class="col full-width" />
+                        <cart-item-list
+                            class="col full-width"
+                        />
                     </div>
                 </div>
             </div>
             <div class="col-1" />
         </div>
 
-        <q-card
-            ref="cartPagefooter"
-            class="fixed-bottom shadow-24"
+        <transition
+            appear
+            enter-active-class="animated slideInUp"
+            leave-active-class="animated slideInDown"
         >
-            <q-card-section>
-                <div class="flex items-center q-mx-sm">
+            <q-card
+                ref="cartPagefooter"
+                class="fixed-bottom shadow-24"
+            >
+                <div class="flex items-stretch">
                     <q-btn
                         icon="delete"
                         color="red"
-                        round
-                        outline
+                        flat
+                        padding="lg"
+                        class="q-ml-sm"
                     />
                     <q-space />
-                    <span class="text-h6 text-weight-regular q-mx-lg">
-                        <small class="text-caption text-grey-7">total</small>
-                        Rp 0
-                    </span>
-                    <template v-if="false">
+                    <q-card-section>
+                        <span
+                            class="text-h6 text-weight-regular q-mx-lg"
+                        >
+                            <small class="text-caption text-grey-7">total</small>
+                            Rp 0
+                        </span>
+                    </q-card-section>
+                    <template v-if="true">
                         <q-separator vertical />
                         <q-btn
                             flat
                             color="positive"
+                            class="q-px-sm"
                         >
                             Proceed Transaction
                             <q-icon name="keyboard_arrow_right" />
                         </q-btn>
                     </template>
                 </div>
-            </q-card-section>
-        </q-card>
+            </q-card>
+        </transition>
     </q-page>
 </template>
 
 <script>
-import { dom } from 'quasar';
+// import { dom } from 'quasar';
 import CartItemList from './CartItemList';
 
 export default {
@@ -73,15 +85,16 @@ export default {
                 price: 10,
             },
         ],
+        footerTransition: false,
     }),
 
     mounted() {
-        const pageFooterEl = this.$refs.cartPagefooter.$el;
-        const pageFooterElHeight = dom.height(pageFooterEl);
+        // const pageFooterEl = this.$refs.cartPagefooter.$el;
+        // const pageFooterElHeight = dom.height(pageFooterEl);
 
-        dom.css(this.$el, {
-            paddingBottom: dom.style(this.$el, 'padding-bottom') + pageFooterElHeight,
-        });
+        // dom.css(this.$el, {
+        //     paddingBottom: dom.style(this.$el, 'padding-bottom') + pageFooterElHeight,
+        // });
     },
 
     components: {
