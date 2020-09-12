@@ -1,36 +1,59 @@
 <template>
-    <q-page padding>
+    <q-page
+        padding
+        style="padding-bottom: 20vh"
+    >
         <div class="row">
             <div class="col-1" />
             <div class="col">
-                <h1>My Cart</h1>
+                <h1 class="text-h3">
+                    <q-icon name="shopping_cart" />
+                    My Cart
+                </h1>
                 <div class="row q-col-gutter-lg">
-                    <div class="col-9">
-                        <div class="row full-width q-mb-md">
-                            <cart-item-list
-                                title="Anonymous"
-                                :cols="cols"
-                                :data="data"
-                                row-key="number"
-                                @selection="onSelection"
-                            />
-                        </div>
-                    </div>
-                    <div class="col relative-position">
-                        <q-card class="cart-total-card">
-                            <q-card-section>
-                                Total
-                            </q-card-section>
-                        </q-card>
+                    <div class="col row full-width q-mb-md">
+                        <cart-item-list class="col full-width" />
                     </div>
                 </div>
             </div>
             <div class="col-1" />
         </div>
+
+        <q-card
+            ref="cartPagefooter"
+            class="fixed-bottom shadow-24"
+        >
+            <q-card-section>
+                <div class="flex items-center q-mx-sm">
+                    <q-btn
+                        icon="delete"
+                        color="red"
+                        round
+                        outline
+                    />
+                    <q-space />
+                    <span class="text-h6 text-weight-regular q-mx-lg">
+                        <small class="text-caption text-grey-7">total</small>
+                        Rp 0
+                    </span>
+                    <template v-if="false">
+                        <q-separator vertical />
+                        <q-btn
+                            flat
+                            color="positive"
+                        >
+                            Proceed Transaction
+                            <q-icon name="keyboard_arrow_right" />
+                        </q-btn>
+                    </template>
+                </div>
+            </q-card-section>
+        </q-card>
     </q-page>
 </template>
 
 <script>
+import { dom } from 'quasar';
 import CartItemList from './CartItemList';
 
 export default {
@@ -38,38 +61,27 @@ export default {
 
     data: () => ({
         selected: [],
-        cols: [
-            {
-                name: 'number',
-                field: 'number',
-                required: true,
-                label: '#',
-                align: 'left',
-            },
-            {
-                name: 'item',
-                field: 'item',
-                required: true,
-                label: 'Item',
-                align: 'left',
-            },
-        ],
         data: [
             {
-                number: 1,
                 item: 'dsaddsad',
+                qty: 1,
+                price: 10,
             },
             {
-                number: 2,
                 item: 'item',
+                qty: 1,
+                price: 10,
             },
         ],
     }),
 
-    methods: {
-        onSelection(selected) {
-            console.log(selected);
-        },
+    mounted() {
+        const pageFooterEl = this.$refs.cartPagefooter.$el;
+        const pageFooterElHeight = dom.height(pageFooterEl);
+
+        dom.css(this.$el, {
+            paddingBottom: dom.style(this.$el, 'padding-bottom') + pageFooterElHeight,
+        });
     },
 
     components: {
