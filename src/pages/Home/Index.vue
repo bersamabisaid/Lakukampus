@@ -21,6 +21,7 @@
                         :img-src="product.thumbnail"
                         :price="product.price"
                         :ratings="product.ratings"
+                        @product:add-to-cart="$emit('product:add-to-cart', index)"
                     />
                     <template v-slot:loading>
                         <div class="products__container">

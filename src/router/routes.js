@@ -18,6 +18,11 @@ const routes = [
                 name: 'MyCart',
                 component: () => import('pages/MyCart'),
             },
+            {
+                path: '/chat/:id',
+                name: 'Chat',
+                component: () => import('pages/Chat'),
+            },
         ],
     },
 

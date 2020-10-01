@@ -18,7 +18,7 @@
 
                     <!-- eslint-disable -->
                     <q-form
-                        class="flex justify-center"
+                        class="search-form__container"
                         @submit.prevent="$router.push(searchNavigate)"
                     >
                     <!-- eslint-enable -->
@@ -29,7 +29,7 @@
                             standout
                             dense
                             dark
-                            class="q-ml-md"
+                            class="search-form__category-input"
                             style="width: 150px;"
                         />
 
@@ -39,8 +39,7 @@
                             dark
                             dense
                             standout
-                            class="q-ml-md"
-                            style="width: 30vw;"
+                            class="search-form__text-input"
                         >
                             <template v-slot:append>
                                 <!-- eslint-disable -->
@@ -55,41 +54,52 @@
                         </q-input>
                     </q-form>
 
-                    <q-btn
-                        icon="shopping_cart"
-                        flat
-                        round
-                        :to="{name: 'MyCart'}"
-                    />
+                    <div class="toolbar__group-btn-action">
+                        <q-btn
+                            icon="shopping_cart"
+                            flat
+                            round
+                            :to="{name: 'MyCart'}"
+                        >
+                            <q-badge
+                                color="red"
+                                floating
+                            >
+                                {{ cartAmount }}
+                            </q-badge>
+                        </q-btn>
 
-                    <q-btn-dropdown
-                        label="Hi, Alwan!"
-                        no-caps
-                        flat
-                    >
-                        <q-list>
-                            <q-item-label header>
-                                <q-img src="'icons/favicon-128x128.png'" />
-                                <span>Account</span>
-                            </q-item-label>
-                            <q-item>
-                                <q-item-section>
-                                    Settings
-                                </q-item-section>
-                            </q-item>
-                            <q-item>
-                                <q-item-section>
-                                    Logout
-                                </q-item-section>
-                            </q-item>
-                        </q-list>
-                    </q-btn-dropdown>
+                        <q-btn-dropdown
+                            label="Hi, bbid!"
+                            no-caps
+                            flat
+                        >
+                            <q-list>
+                                <q-item-label header>
+                                    <q-img src="'icons/favicon-128x128.png'" />
+                                    <span>Account</span>
+                                </q-item-label>
+                                <q-item>
+                                    <q-item-section>
+                                        Settings
+                                    </q-item-section>
+                                </q-item>
+                                <q-item>
+                                    <q-item-section>
+                                        Logout
+                                    </q-item-section>
+                                </q-item>
+                            </q-list>
+                        </q-btn-dropdown>
+                    </div>
                 </div>
             </q-toolbar>
         </q-header>
 
         <q-page-container>
-            <router-view />
+            <router-view
+                @product:add-to-cart="cartAmount += 1"
+            />
         </q-page-container>
     </q-layout>
 </template>
@@ -100,6 +110,7 @@ export default {
     data: () => ({
         search: null,
         category: null,
+        cartAmount: 0,
     }),
     computed: {
         searchNavigate() {
@@ -121,7 +132,44 @@ export default {
         width: 100%;
         display: grid;
         grid-template-columns: auto 1fr auto auto;
-        align-items: center;
+        grid-template-areas:
+            "brand searchForm groupBtnAction";
+
+        @media screen and (max-width: $breakpoint-sm) {
+            grid-template-areas:
+                "brand . groupBtnAction"
+                "searchForm searchForm searchForm"
+            ;
+        }
+    }
+
+    &__group-btn-action {
+        grid-area: groupBtnAction;
+    }
+}
+
+.search-form {
+    &__container {
+        grid-area: searchForm;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__category-input {
+        margin-left: map-get($space-md, x);
+
+        @media screen and (max-width: $breakpoint-xs) {
+            display: none;
+        }
+    }
+
+    &__text-input {
+        width: 30vw;
+        margin-left: map-get($space-md, x);
+
+        @media screen and (max-width: $breakpoint-xs) {
+            width: 100%;
+        }
     }
 }
 </style>

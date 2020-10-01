@@ -50,6 +50,7 @@
                     <template v-if="true">
                         <q-separator vertical />
                         <q-btn
+                            :to="{name: 'Chat', params: {id: 10101}}"
                             flat
                             color="positive"
                             class="q-px-sm"
@@ -65,7 +66,6 @@
 </template>
 
 <script>
-// import { dom } from 'quasar';
 import CartItemList from './CartItemList';
 
 export default {
@@ -87,15 +87,6 @@ export default {
         ],
         footerTransition: false,
     }),
-
-    mounted() {
-        // const pageFooterEl = this.$refs.cartPagefooter.$el;
-        // const pageFooterElHeight = dom.height(pageFooterEl);
-
-        // dom.css(this.$el, {
-        //     paddingBottom: dom.style(this.$el, 'padding-bottom') + pageFooterElHeight,
-        // });
-    },
 
     components: {
         CartItemList,

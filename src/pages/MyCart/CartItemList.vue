@@ -22,7 +22,7 @@
                     <q-card-section>
                         <div class="flex justify-center">
                             <q-card
-                                v-for="i in 10"
+                                v-for="i in 3"
                                 :key="i"
                                 class="q-ma-md"
                                 style="width: 200px"

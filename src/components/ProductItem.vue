@@ -81,6 +81,7 @@
                         <q-btn
                             color="blue"
                             flat
+                            @click="$emit('product:add-to-cart')"
                         >
                             <q-icon name="add" />
                             Add to Cart
