@@ -42,14 +42,12 @@
                             class="search-form__text-input"
                         >
                             <template v-slot:append>
-                                <!-- eslint-disable -->
                                 <q-btn
                                     :to="searchNavigate"
                                     icon="search"
                                     round
                                     flat
                                 />
-                                <!-- eslint-enable -->
                             </template>
                         </q-input>
                     </q-form>
@@ -75,8 +73,11 @@
                             flat
                         >
                             <q-list>
-                                <q-item-label header>
-                                    <q-img src="'icons/favicon-128x128.png'" />
+                                <q-item-label
+                                    header
+                                    @click="login"
+                                >
+                                    <q-img src="icons/favicon-128x128.png" />
                                     <span>Account</span>
                                 </q-item-label>
                                 <q-item>
@@ -105,6 +106,8 @@
 </template>
 
 <script>
+import auth from 'src/services/auth';
+
 export default {
     name: 'MainLayout',
     data: () => ({
@@ -121,6 +124,12 @@ export default {
                     category: this.category,
                 },
             } : { name: 'Home' };
+        },
+    },
+
+    methods: {
+        login() {
+            auth.googleLogin();
         },
     },
 };
