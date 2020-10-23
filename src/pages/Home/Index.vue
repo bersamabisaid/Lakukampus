@@ -74,12 +74,9 @@ export default {
         },
         async fetchProducts(n) {
             // eslint-disable-next-line prefer-const
-            let loaded = [];
-            // eslint-disable-next-line no-plusplus
-            for (let index = 0; index < n; index++) {
-                // eslint-disable-next-line no-await-in-loop
-                loaded.push(await this.getProduct());
-            }
+            const product = await this.getProduct();
+            const loaded = [...Array(n)].map(() => product);
+
             this.products.push(...loaded);
             this.fetched += n;
         },
