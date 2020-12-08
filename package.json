@@ -13,6 +13,7 @@
     "@quasar/extras": "^1.0.0",
     "@vue/composition-api": "^0.6.4",
     "core-js": "^3.6.5",
+    "firebase": "^8.1.2",
     "quasar": "^1.0.0"
   },
   "devDependencies": {
@@ -25,7 +26,8 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-loader": "^3.0.3",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-vue": "^6.1.2"
+    "eslint-plugin-vue": "^6.1.2",
+    "workbox-webpack-plugin": "^5.1.4"
   },
   "browserslist": [
     "last 10 Chrome versions",
