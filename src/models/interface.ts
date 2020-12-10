@@ -26,7 +26,8 @@ export interface Seller {
 }
 
 export interface Item {
-  category: firebase.firestore.DocumentReference<Category>;
+  shop: firebase.firestore.DocumentReference<Shop>;
+  category: firebase.firestore.DocumentReference<Category> | null;
   name: string;
   stock: number;
   price: number;
