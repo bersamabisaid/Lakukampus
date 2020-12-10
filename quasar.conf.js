@@ -9,6 +9,7 @@
 /* eslint func-names: 0 */
 /* eslint global-require: 0 */
 /* eslint-disable @typescript-eslint/no-var-requires */
+const { resolve } = require('path');
 const { configure } = require('quasar/wrappers');
 
 module.exports = configure((ctx) => ({
@@ -79,6 +80,12 @@ module.exports = configure((ctx) => ({
           exclude: /node_modules/,
         });
       }
+
+      cfg.resolve.alias = {
+        ...cfg.resolve.alias,
+
+        models: resolve(__dirname, './src/models'),
+      };
     },
   },
 
