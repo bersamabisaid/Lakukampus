@@ -1,6 +1,6 @@
-import firebase from 'firebase';
+import type firebase from 'firebase';
 
-export type RecordedModel<T> = T & {
+export type ModelBuilderObject<T> = T & {
   _created: firebase.firestore.Timestamp;
   _updated: firebase.firestore.Timestamp;
 }
