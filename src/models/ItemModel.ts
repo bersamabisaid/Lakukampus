@@ -1,5 +1,4 @@
 import type fb from 'firebase';
-import firebase from 'src/firebase';
 import Model from 'src/models/Model';
 import {
   Category, Item, ModelBuilderObject, Shop,
@@ -12,45 +11,44 @@ export default class ItemModel extends Model<Item> {
     shop: fb.firestore.DocumentReference<Shop>,
     data: Item | Pick<Item, 'name'>,
   ) {
-    const serverTimeNow = firebase.firestore.FieldValue.serverTimestamp();
+    const defaultVal: Partial<Item> = {
+      stock: 0,
+      price: 0,
+      description: '',
+      shop,
+      category: null,
+      tags: [],
+    };
+    const obj: Partial<Item> = {};
 
     return {
-      obj: {
-        // default values
-        stock: 0,
-        price: 0,
-        description: '',
-        shop,
-        category: null,
-        tags: [] as string[],
-        _created: serverTimeNow,
-        // replace the default values
-        ...data,
-        _updated: serverTimeNow,
-      } as ModelBuilderObject<Item>,
+      buildObj: () => ({
+        ...defaultVal,
+        ...super._builderObjectMerge(data, obj),
+      } as ModelBuilderObject<Item>),
 
       setCategory(val: fb.firestore.DocumentReference<Category>) {
-        this.obj.category = val;
+        obj.category = val;
       },
 
       setName(val: string) {
-        this.obj.name = val;
+        obj.name = val;
       },
 
       setStock(val: number) {
-        this.obj.stock = val;
+        obj.stock = val;
       },
 
       setPrice(val: number) {
-        this.obj.price = val;
+        obj.price = val;
       },
 
       setDescription(val: string) {
-        this.obj.description = val;
+        obj.description = val;
       },
 
       setTags(val: string[]) {
-        this.obj.tags = val;
+        obj.tags = val;
       },
     };
   }

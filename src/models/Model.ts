@@ -1,5 +1,7 @@
 import type fb from 'firebase';
+import firebase from 'src/firebase';
 import { ModelBuilderObject } from 'models/interface';
+import 'src/firebaseServices';
 
 export default abstract class Model<T = fb.firestore.DocumentData> {
   constructor(
@@ -31,5 +33,17 @@ export default abstract class Model<T = fb.firestore.DocumentData> {
         return createInstanceMethod(snapshot, options);
       },
     };
+  }
+
+  protected static _builderObjectMerge<T = unknown>(oldData: Partial<T>, newData: Partial<T>) {
+    const serverTimeNow = firebase.firestore.FieldValue.serverTimestamp();
+
+    return {
+      _created: serverTimeNow,
+      _deleted: serverTimeNow,
+      ...oldData,
+      ...newData,
+      _updated: serverTimeNow,
+    } as ModelBuilderObject<T>;
   }
 }

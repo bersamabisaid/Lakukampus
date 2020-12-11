@@ -1,8 +1,5 @@
-import firebase from 'src/firebase';
 import Model from 'models/Model';
-import {
-  Shop, Item, ModelBuilderObject,
-} from 'models/interface';
+import { Shop, Item, ModelBuilderObject } from 'models/interface';
 import ItemModel from 'models/ItemModel';
 
 export default class ShopModel extends Model<Shop> {
@@ -11,34 +8,33 @@ export default class ShopModel extends Model<Shop> {
   public static builder(
     data: Shop | Pick<Shop, 'name'>,
   ) {
-    const serverTimeNow = firebase.firestore.FieldValue.serverTimestamp();
+    const defaultVal: Partial<Shop> = {
+      description: '',
+      headerImg: '',
+      img: '',
+    };
+    const obj: Partial<Shop> = {};
 
     return {
-      obj: {
-        // default values
-        description: '',
-        headerImg: '',
-        img: '',
-        // replace the values
-        _created: serverTimeNow,
-        ...data,
-        _updated: serverTimeNow,
-      } as ModelBuilderObject<Shop>,
+      buildObj: () => ({
+        ...defaultVal,
+        ...super._builderObjectMerge(data, obj),
+      } as ModelBuilderObject<Shop>),
 
       setName(val: string) {
-        this.obj.name = val;
+        obj.name = val;
       },
 
       setDescription(val: string) {
-        this.obj.description = val;
+        obj.description = val;
       },
 
       setHeaderImg(val: string) {
-        this.obj.headerImg = val;
+        obj.headerImg = val;
       },
 
       setImg(val: string) {
-        this.obj.img = val;
+        obj.img = val;
       },
     };
   }
