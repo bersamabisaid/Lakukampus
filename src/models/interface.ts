@@ -3,6 +3,7 @@ import type firebase from 'firebase';
 export type ModelBuilderObject<T> = T & {
   _created: firebase.firestore.Timestamp;
   _updated: firebase.firestore.Timestamp;
+  _deleted: firebase.firestore.Timestamp | null;
 }
 
 export interface User {
