@@ -23,18 +23,22 @@ export default class ShopModel extends Model<Shop> {
 
       setName(val: string) {
         obj.name = val;
+        return this;
       },
 
       setDescription(val: string) {
         obj.description = val;
+        return this;
       },
 
       setHeaderImg(val: string) {
         obj.headerImg = val;
+        return this;
       },
 
       setImg(val: string) {
         obj.img = val;
+        return this;
       },
     };
   }

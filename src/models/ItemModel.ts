@@ -29,26 +29,32 @@ export default class ItemModel extends Model<Item> {
 
       setCategory(val: fb.firestore.DocumentReference<Category>) {
         obj.category = val;
+        return this;
       },
 
       setName(val: string) {
         obj.name = val;
+        return this;
       },
 
       setStock(val: number) {
         obj.stock = val;
+        return this;
       },
 
       setPrice(val: number) {
         obj.price = val;
+        return this;
       },
 
       setDescription(val: string) {
         obj.description = val;
+        return this;
       },
 
       setTags(val: string[]) {
         obj.tags = val;
+        return this;
       },
     };
   }
