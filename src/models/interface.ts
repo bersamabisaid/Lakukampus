@@ -12,7 +12,7 @@ export interface User {
   img: string;
   address: string;
   phoneNumber: string;
-  birthDate: firebase.firestore.Timestamp;
+  birthDate: firebase.firestore.Timestamp | null;
 }
 
 export interface Seller {
