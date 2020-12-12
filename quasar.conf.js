@@ -85,6 +85,7 @@ module.exports = configure((ctx) => ({
         ...cfg.resolve.alias,
 
         models: resolve(__dirname, './src/models'),
+        composition: resolve(__dirname, './src/composition'),
       };
     },
   },
