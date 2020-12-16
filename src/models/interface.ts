@@ -6,6 +6,11 @@ export type ModelBuilderObject<T> = T & {
   _deleted: firebase.firestore.Timestamp | null;
 }
 
+export interface BuilderObject<T> {
+  buildObj: () => ModelBuilderObject<T>;
+  [key: string]: (val: unknown) => this | ModelBuilderObject<T>;
+}
+
 export interface User {
   name: string;
   email: string;

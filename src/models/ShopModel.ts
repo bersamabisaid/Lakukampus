@@ -1,5 +1,7 @@
 import Model from 'models/Model';
-import { Shop, Item, ModelBuilderObject } from 'models/interface';
+import {
+  Shop, Item, ModelBuilderObject, BuilderObject,
+} from 'models/interface';
 import ItemModel from 'models/ItemModel';
 
 export default class ShopModel extends Model<Shop> {
@@ -40,7 +42,7 @@ export default class ShopModel extends Model<Shop> {
         obj.img = val;
         return this;
       },
-    };
+    } as BuilderObject<Shop>;
   }
 
   public itemBuilder(

@@ -1,7 +1,7 @@
 import type fb from 'firebase';
 import Model from 'src/models/Model';
 import {
-  Category, Item, ModelBuilderObject, Shop,
+  Category, Item, ModelBuilderObject, BuilderObject, Shop,
 } from 'models/interface';
 
 export default class ItemModel extends Model<Item> {
@@ -56,7 +56,7 @@ export default class ItemModel extends Model<Item> {
         obj.tags = val;
         return this;
       },
-    };
+    } as BuilderObject<Item>;
   }
 
   private static _getConverter() {
