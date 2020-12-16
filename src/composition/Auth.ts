@@ -8,8 +8,8 @@ const providers = {
   Google: new firebase.auth.GoogleAuthProvider(),
 };
 
-const signedInUser = ref<UserModel | null>(null);
-const state = ref({
+export const signedInUser = ref<UserModel | null>(null);
+export const state = ref({
   get isWaitingRedirectResult() {
     return Boolean(SessionStorage.getItem('state.isWaitingRedirectResult'));
   },
