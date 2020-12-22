@@ -23,7 +23,7 @@ export default abstract class Model<T = fb.firestore.DocumentData> {
       ) => T,
   ) {
     return {
-      toFirestore(data: new () => T): fb.firestore.DocumentData {
+      toFirestore(data: T): fb.firestore.DocumentData {
         return data;
       },
       fromFirestore(
