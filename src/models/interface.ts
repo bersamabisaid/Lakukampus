@@ -61,7 +61,6 @@ export interface ItemPurchased {
 export interface Transaction {
   user: firebase.firestore.DocumentReference<User>;
   shop: firebase.firestore.DocumentReference<Shop>;
-  date: firebase.firestore.Timestamp;
   itemPurchased: ItemPurchased[];
 }
 
