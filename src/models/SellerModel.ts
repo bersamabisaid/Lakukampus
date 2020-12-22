@@ -4,8 +4,12 @@ import {
   Seller, Shop, BuilderObject, ModelBuilderObject,
 } from 'models/interface';
 import { signedInUser } from 'composition/Auth';
+import Unauthenticated from 'models/Unauthenticated';
+import { db } from 'src/firebaseServices';
 
 export default class SellerModel extends Model<Seller> {
+  public static REF = db.collection('sellers') as fb.firestore.CollectionReference<ModelBuilderObject<Seller>>;
+
   public static builder(data: Omit<Seller, 'shops' | 'user'>) {
     if (signedInUser.value) {
       const defaults = {
@@ -70,6 +74,6 @@ export default class SellerModel extends Model<Seller> {
       } as BuilderObject<Seller>;
     }
 
-    throw new Error('Unauthenticated!');
+    throw new Unauthenticated();
   }
 }

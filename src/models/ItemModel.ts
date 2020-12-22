@@ -3,27 +3,30 @@ import Model from 'src/models/Model';
 import {
   Category, Item, ModelBuilderObject, BuilderObject, Shop,
 } from 'models/interface';
+import { db } from 'src/firebaseServices';
 
 export default class ItemModel extends Model<Item> {
+  public static REF = db.collection('items') as fb.firestore.CollectionReference<ModelBuilderObject<Item>>;
+
   public static converter = ItemModel._getConverter();
+
+  protected static defaults: Partial<Item> = {
+    stock: 0,
+    price: 0,
+    description: '',
+    category: null,
+    tags: [],
+  }
 
   public static builder(
     shop: fb.firestore.DocumentReference<Shop>,
     data: Item | Pick<Item, 'name'>,
   ) {
-    const defaultVal: Partial<Item> = {
-      stock: 0,
-      price: 0,
-      description: '',
-      shop,
-      category: null,
-      tags: [],
-    };
-    const obj: Partial<Item> = {};
+    const obj: Partial<Item> = { shop };
 
     return {
       buildObj: () => ({
-        ...defaultVal,
+        ...this.defaults,
         ...super._builderObjectMerge(data, obj),
       } as ModelBuilderObject<Item>),
 

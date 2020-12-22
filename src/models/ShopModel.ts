@@ -10,9 +10,15 @@ import { db } from 'src/firebaseServices';
 import type fb from 'firebase';
 
 export default class ShopModel extends Model<Shop> {
-  public static REF = db.collection('shops') as fb.firestore.CollectionReference<Shop>;
+  public static REF = db.collection('shops') as fb.firestore.CollectionReference<ModelBuilderObject<Shop>>;
 
   public static converter = ShopModel._getConverter();
+
+  private static defaults: Partial<Shop> = {
+    description: '',
+    headerImg: '',
+    img: '',
+  };
 
   public async doTransaction(...items: ItemPurchased[]) {
     if (signedInUser.value) {
@@ -28,19 +34,12 @@ export default class ShopModel extends Model<Shop> {
     throw new Unauthenticated();
   }
 
-  public static builder(
-    data: Shop | Pick<Shop, 'name'>,
-  ) {
-    const defaultVal: Partial<Shop> = {
-      description: '',
-      headerImg: '',
-      img: '',
-    };
+  public static builder(data: Shop | Pick<Shop, 'name'>) {
     const obj: Partial<Shop> = {};
 
     return {
       buildObj: () => ({
-        ...defaultVal,
+        ...this.defaults,
         ...super._builderObjectMerge(data, obj),
       } as ModelBuilderObject<Shop>),
 
@@ -66,9 +65,7 @@ export default class ShopModel extends Model<Shop> {
     } as BuilderObject<Shop>;
   }
 
-  public itemBuilder(
-    data: Item | Pick<Item, 'name'>,
-  ) {
+  public itemBuilder(data: Item | Pick<Item, 'name'>) {
     return ItemModel.builder(this.doc.ref, data);
   }
 

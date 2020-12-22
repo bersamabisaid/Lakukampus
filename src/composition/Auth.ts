@@ -19,7 +19,7 @@ export const state = ref({
 });
 
 auth.onAuthStateChanged(async (user) => {
-  signedInUser.value = user ? await UserModel.fromUserCredential(user) : null;
+  signedInUser.value = user && await UserModel.fromUserCredential(user);
 });
 
 export default function useAuth() {
