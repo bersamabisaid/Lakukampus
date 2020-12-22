@@ -35,14 +35,16 @@ export default abstract class Model<T = fb.firestore.DocumentData> {
     };
   }
 
-  protected static _builderObjectMerge<T = unknown>(oldData: Partial<T>, newData: Partial<T>) {
+  protected static _builderObjectMerge<T = unknown>(...datas: Partial<T>[]) {
     const serverTimeNow = firebase.firestore.FieldValue.serverTimestamp();
 
     return {
       _created: serverTimeNow,
       _deleted: serverTimeNow,
-      ...oldData,
-      ...newData,
+      ...datas.reduce((prev, data) => ({
+        ...prev,
+        ...data,
+      }), {} as Partial<T>),
       _updated: serverTimeNow,
     } as ModelBuilderObject<T>;
   }
