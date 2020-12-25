@@ -1,10 +1,17 @@
 <template>
   <q-page padding>
     <h1>Ini Dashboard</h1>
-      <div class="column">
-        <q-btn label="to Login page" to="/" />
-        <q-btn label="Logout" color="negative" @click="logout" />
-      </div>
+    <div class="column">
+      <q-btn
+        label="to Login page"
+        to="/"
+      />
+      <q-btn
+        label="Logout"
+        color="negative"
+        @click="logout"
+      />
+    </div>
   </q-page>
 </template>
 

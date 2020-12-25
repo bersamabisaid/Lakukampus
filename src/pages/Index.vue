@@ -5,13 +5,25 @@
       active
       :todos="todos"
       :meta="meta"
-    ></example-component>
+    />
 
-    <q-btn v-if="!signedInUser" label="Login" color="primary" @click="login" />
+    <q-btn
+      v-if="!signedInUser"
+      label="Login"
+      color="primary"
+      @click="login"
+    />
     <template v-else>
-      <q-btn label="Logout" color="negative" @click="logout" />
+      <q-btn
+        label="Logout"
+        color="negative"
+        @click="logout"
+      />
     </template>
-      <q-btn label="to dashboard" to="/dashboard" />
+    <q-btn
+      label="to dashboard"
+      to="/dashboard"
+    />
   </q-page>
 </template>
 
