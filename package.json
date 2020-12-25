@@ -6,7 +6,8 @@
   "author": "Anhzf <36941633+Epiclygend@users.noreply.github.com>",
   "private": true,
   "scripts": {
-    "lint": "eslint --ext .js,.ts,.vue ./",
+    "start": "quasar dev",
+    "lint": "eslint --ext .js,.ts,.vue ./ --fix",
     "test": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
