@@ -4,7 +4,7 @@ import {
 } from 'models/interface';
 import ItemModel from 'models/ItemModel';
 import TransactionModel from 'models/TransactionModel';
-import { signedInUser } from 'composition/Auth';
+import { signedInUser } from 'composition/useAuth';
 import Unauthenticated from 'models/Unauthenticated';
 import { db } from 'src/firebaseServices';
 import type fb from 'firebase';

@@ -6,6 +6,12 @@
       :todos="todos"
       :meta="meta"
     ></example-component>
+
+    <q-btn v-if="!signedInUser" label="Login" color="primary" @click="login" />
+    <template v-else>
+      <q-btn label="Logout" color="negative" @click="logout" />
+    </template>
+      <q-btn label="to dashboard" to="/dashboard" />
   </q-page>
 </template>
 
@@ -13,11 +19,16 @@
 import { Todo, Meta } from 'components/models';
 import ExampleComponent from 'components/CompositionComponent.vue';
 import { defineComponent, ref } from '@vue/composition-api';
+import useAuth from 'composition/useAuth';
+import useGuestOnlyGuard from 'composition/useGuestOnlyGuard';
 
 export default defineComponent({
   name: 'PageIndex',
+
   components: { ExampleComponent },
-  setup() {
+
+  setup(props, ctx) {
+    useGuestOnlyGuard(props, ctx);
     const todos = ref<Todo[]>([
       {
         id: 1,
@@ -43,7 +54,7 @@ export default defineComponent({
     const meta = ref<Meta>({
       totalCount: 1200,
     });
-    return { todos, meta };
+    return { todos, meta, ...useAuth() };
   },
 });
 </script>

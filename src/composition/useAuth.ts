@@ -2,7 +2,7 @@ import { onBeforeMount, ref } from '@vue/composition-api';
 import firebase from 'src/firebase';
 import { auth } from 'src/firebaseServices';
 import UserModel from 'models/UserModel';
-import { SessionStorage } from 'quasar';
+import { Loading, SessionStorage } from 'quasar';
 
 const providers = {
   Google: new firebase.auth.GoogleAuthProvider(),
@@ -10,24 +10,36 @@ const providers = {
 
 export const signedInUser = ref<UserModel | null>(null);
 export const state = ref({
+  isWaitingAuthentication: true,
+
   get isWaitingRedirectResult() {
     return Boolean(SessionStorage.getItem('state.isWaitingRedirectResult'));
   },
+
   set isWaitingRedirectResult(v) {
     SessionStorage.set('state.isWaitingRedirectResult', v);
   },
 });
 
 auth.onAuthStateChanged(async (user) => {
+  if (state.value.isWaitingAuthentication) {
+    state.value.isWaitingAuthentication = false;
+  }
+
   signedInUser.value = user && await UserModel.fromUserCredential(user);
 });
 
-export default function useAuth() {
+export default () => {
   const login = async () => {
     state.value.isWaitingRedirectResult = true;
     await auth.signInWithRedirect(providers.Google);
   };
-  const logout = async () => auth.signOut();
+  const logout = () => {
+    Loading.show({ message: 'Logging out' });
+
+    auth.signOut()
+      .finally(() => Loading.hide());
+  };
 
   onBeforeMount(async () => {
     if (state.value.isWaitingRedirectResult) {
@@ -43,7 +55,8 @@ export default function useAuth() {
 
   return {
     signedInUser,
+    state,
     login,
     logout,
   };
-}
+};

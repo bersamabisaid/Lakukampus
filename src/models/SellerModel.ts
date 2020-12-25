@@ -3,7 +3,7 @@ import Model from 'models/Model';
 import {
   Seller, Shop, BuilderObject, ModelBuilderObject,
 } from 'models/interface';
-import { signedInUser } from 'composition/Auth';
+import { signedInUser } from 'composition/useAuth';
 import Unauthenticated from 'models/Unauthenticated';
 import { db } from 'src/firebaseServices';
 

@@ -121,7 +121,7 @@ module.exports = configure((ctx) => ({
 
     // Quasar plugins
     plugins: [
-      'SessionStorage',
+      'SessionStorage', 'Loading', 'Notify',
     ],
   },
 
