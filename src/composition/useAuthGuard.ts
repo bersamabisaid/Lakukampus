@@ -1,12 +1,12 @@
 import { SetupContext, watch } from '@vue/composition-api';
-import { signedInUser, state } from 'composition/useAuth';
+import { signedInUser, authState } from 'composition/useAuth';
 import { Loading } from 'quasar';
 
 export default (props: unknown, ctx: SetupContext) => {
   watch(
     signedInUser,
     async (val) => {
-      if (state.value.isWaitingAuthentication) {
+      if (authState.value.isWaitingAuthentication) {
         Loading.show({
           message: 'authenticating...',
         });

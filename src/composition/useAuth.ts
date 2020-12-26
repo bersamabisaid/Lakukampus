@@ -9,7 +9,7 @@ const providers = {
 };
 
 export const signedInUser = ref<UserModel | null>(null);
-export const state = ref({
+export const authState = ref({
   isWaitingAuthentication: true,
 
   get isWaitingRedirectResult() {
@@ -22,8 +22,8 @@ export const state = ref({
 });
 
 auth.onAuthStateChanged(async (user) => {
-  if (state.value.isWaitingAuthentication) {
-    state.value.isWaitingAuthentication = false;
+  if (authState.value.isWaitingAuthentication) {
+    authState.value.isWaitingAuthentication = false;
   }
 
   signedInUser.value = user && await UserModel.fromUserCredential(user);
@@ -31,7 +31,7 @@ auth.onAuthStateChanged(async (user) => {
 
 export default () => {
   const login = async () => {
-    state.value.isWaitingRedirectResult = true;
+    authState.value.isWaitingRedirectResult = true;
     await auth.signInWithRedirect(providers.Google);
   };
   const logout = () => {
@@ -42,10 +42,10 @@ export default () => {
   };
 
   onBeforeMount(async () => {
-    if (state.value.isWaitingRedirectResult) {
+    if (authState.value.isWaitingRedirectResult) {
       try {
         await auth.getRedirectResult();
-        state.value.isWaitingRedirectResult = false;
+        authState.value.isWaitingRedirectResult = false;
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error({ ...err });
@@ -55,7 +55,7 @@ export default () => {
 
   return {
     signedInUser,
-    state,
+    authState,
     login,
     logout,
   };
