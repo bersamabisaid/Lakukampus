@@ -26,10 +26,4 @@ export default function PaginatableModel<TModel extends AcceptedModel>(model: TM
   };
 
   return Paginatable;
-  // return Paginatable as TModel & {
-  //   getPaginatedCollection: () => ({
-  //     docs: TModel[],
-  //     next: () => typeof Paginatable.getPaginatedCollection()
-  //   })
-  // };
 }
