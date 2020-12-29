@@ -13,8 +13,12 @@ interface AcceptedModel extends Constructor, HasConverter {
 
 export default function PaginatableModel<TModel extends AcceptedModel>(model: TModel) {
   const Paginatable = class extends model {
-    public static async getPaginatedCollection(query: fb.firestore.Query, limit = 20) {
-      const snapshots = await query.limit(limit).withConverter(model.converter).get();
+    public static async getPaginatedCollection(
+      query: fb.firestore.Query,
+      limit = 20,
+      options: fb.firestore.GetOptions = {},
+    ) {
+      const snapshots = await query.limit(limit).withConverter(model.converter).get(options);
       const { docs, query: finalQuery } = snapshots;
       const lastDoc = snapshots.docs[snapshots.docs.length - 1];
 
