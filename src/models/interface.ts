@@ -65,12 +65,12 @@ export interface Transaction {
 }
 
 export interface Chat {
-  user: firebase.firestore.DocumentReference<User>;
+  participants: firebase.firestore.DocumentReference<User>[];
   shop: firebase.firestore.DocumentReference<Shop>;
   messages: ChatMessage[];
 }
 
 export interface ChatMessage {
-  from: boolean;
+  from: firebase.firestore.DocumentReference<User>;
   content: string;
 }
