@@ -4,8 +4,9 @@ import {
   Category, Item, ModelBuilderObject, BuilderObject, Shop,
 } from 'models/interface';
 import { db } from 'src/firebaseServices';
+import PaginatableModel from 'models/PaginatableModel';
 
-export default class ItemModel extends Model<Item> {
+export default PaginatableModel(class ItemModel extends Model<Item> {
   public static REF = db.collection('items') as fb.firestore.CollectionReference<ModelBuilderObject<Item>>;
 
   public static converter = ItemModel._getConverter();
@@ -65,4 +66,4 @@ export default class ItemModel extends Model<Item> {
   private static _getConverter() {
     return super._makeConverter<ItemModel, Item>((snapshot) => new ItemModel(snapshot));
   }
-}
+});

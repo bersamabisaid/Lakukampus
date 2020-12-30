@@ -12,7 +12,7 @@ interface AcceptedModel extends Constructor, HasConverter {
 }
 
 export default function PaginatableModel<TModel extends AcceptedModel>(model: TModel) {
-  const Paginatable = class extends model {
+  return class Paginatable extends model {
     public static async getPaginatedCollection(
       query: fb.firestore.Query,
       limit = 20,
@@ -28,6 +28,4 @@ export default function PaginatableModel<TModel extends AcceptedModel>(model: TM
       };
     }
   };
-
-  return Paginatable;
 }
