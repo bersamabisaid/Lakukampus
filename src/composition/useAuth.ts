@@ -1,14 +1,13 @@
 import { onBeforeMount, ref } from '@vue/composition-api';
-import firebase from 'src/firebase';
-import { auth } from 'src/firebaseServices';
-import UserModel from 'models/UserModel';
+import firebase, { auth } from 'src/firebase';
 import { Loading, SessionStorage } from 'quasar';
+import type fb from 'firebase';
 
 const providers = {
   Google: new firebase.auth.GoogleAuthProvider(),
 };
 
-export const signedInUser = ref<UserModel | null>(null);
+export const signedInUser = ref<fb.User | null>(null);
 export const authState = ref({
   isWaitingAuthentication: true,
 
@@ -21,12 +20,12 @@ export const authState = ref({
   },
 });
 
-auth.onAuthStateChanged(async (user) => {
+auth.onAuthStateChanged((user) => {
   if (authState.value.isWaitingAuthentication) {
     authState.value.isWaitingAuthentication = false;
   }
 
-  signedInUser.value = user && await UserModel.fromUserCredential(user);
+  signedInUser.value = user;
 });
 
 export default () => {
