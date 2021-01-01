@@ -1,14 +1,9 @@
 import type firebase from 'firebase';
 
-export type ModelBuilderObject<T> = T & {
+export type StoredModel<T> = T & {
   _created: firebase.firestore.Timestamp;
   _updated: firebase.firestore.Timestamp;
   _deleted: firebase.firestore.Timestamp | null;
-}
-
-export interface BuilderObject<T> {
-  buildObj: () => ModelBuilderObject<T>;
-  [key: string]: (val: unknown) => this | ModelBuilderObject<T>;
 }
 
 export interface User {
