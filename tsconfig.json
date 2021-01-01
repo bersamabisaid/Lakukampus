@@ -13,5 +13,6 @@
       "src/*": ["src/*"],
       "app/*": ["*"]
     },
+    "experimentalDecorators": true
   }
 }
