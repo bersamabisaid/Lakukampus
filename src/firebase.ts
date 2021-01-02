@@ -38,7 +38,11 @@ db.enablePersistence()
     }
   });
 
+const fireUtils = {
+  get firestoreNow() { return firebase.firestore.Timestamp.now(); },
+};
+
 export default firebase;
 export {
-  db, auth, fns,
+  db, auth, fns, fireUtils,
 };
