@@ -1,6 +1,6 @@
-import BaseModel from 'models/BaseModel';
+import Model from 'models/Model';
 import { User } from 'models/interface';
 
-export default BaseModel<User>({
+export default Model<User>({
   path: 'users',
 });

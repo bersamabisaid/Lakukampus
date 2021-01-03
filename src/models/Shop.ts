@@ -1,7 +1,7 @@
-import BaseModel from 'models/BaseModel';
+import Model from 'models/Model';
 import { Shop } from 'models/interface';
 
-export default BaseModel<Shop>({
+export default Model<Shop>({
   path: 'shops',
   defaults: {
     description: '',

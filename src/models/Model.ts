@@ -2,42 +2,43 @@ import { db, fireUtils } from 'src/firebase';
 import { StoredModel } from 'models/interface';
 import type fb from 'firebase';
 
-interface ModelOptions<T = fb.firestore.DocumentData> {
+interface ModelOptions<TModel = fb.firestore.DocumentData> {
   path: string;
 
   paginateLimitDefault?: number;
 
-  defaults?: Partial<T>;
+  defaults?: Partial<TModel>;
 }
 
 export default <TModel = fb.firestore.DocumentData>(
   {
-    path, defaults = {},
+    path,
+    defaults = {},
     paginateLimitDefault = 20,
   }: ModelOptions<TModel>,
-) => class {
-  public static get ref() {
+) => ({
+  get ref() {
     return db.collection(path) as fb.firestore.CollectionReference<StoredModel<TModel>>;
-  }
+  },
 
-  public static get defaults() {
+  get defaults() {
     return defaults;
-  }
+  },
 
-  public static find(id: string) {
+  find(id: string) {
     return this.ref.doc(id).get();
-  }
+  },
 
-  public static create(data: TModel) {
+  create(data: TModel) {
     return this.ref.add({
       ...data,
       _created: fireUtils.firestoreNow,
       _updated: fireUtils.firestoreNow,
       _deleted: null,
     });
-  }
+  },
 
-  public static async paginate(
+  async paginate(
     query: fb.firestore.Query<StoredModel<TModel>>,
     limit = paginateLimitDefault,
   ) {
@@ -52,5 +53,5 @@ export default <TModel = fb.firestore.DocumentData>(
         return finalQuery.startAfter(limit * page).limit(limit);
       },
     };
-  }
-};
+  },
+});

@@ -1,7 +1,8 @@
-import BaseModel from 'models/BaseModel';
-import { Item } from 'models/interface';
+import SubcollectionModel from 'models/SubcollectionModel';
+import Shop from 'models/Shop';
+import { Item as ItemInterface } from 'models/interface';
 
-export default BaseModel<Item>({
+const [Item, ItemGroupCollection] = SubcollectionModel<typeof Shop, ItemInterface>({
   path: 'items',
   defaults: {
     description: '',
@@ -11,3 +12,9 @@ export default BaseModel<Item>({
     price: 0,
   },
 });
+
+export default Item;
+
+export {
+  ItemGroupCollection,
+};

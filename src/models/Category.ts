@@ -1,6 +1,6 @@
-import BaseModel from 'models/BaseModel';
+import Model from 'models/Model';
 import { Category } from 'models/interface';
 
-export default BaseModel<Category>({
+export default Model<Category>({
   path: 'categories',
 });
