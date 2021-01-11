@@ -10,6 +10,19 @@ interface ModelOptions<TModel = fb.firestore.DocumentData> {
   defaults?: Partial<TModel>;
 }
 
+const extendsSnapshot = <T>(
+  snapshot: fb.firestore.DocumentSnapshot<StoredModel<T>>,
+) => {
+  Object.assign(snapshot, {
+    update: (data: Partial<T>) => snapshot.ref.update({
+      ...data,
+      _updated: fireUtils.firestoreNow,
+    }),
+  });
+
+  return snapshot;
+};
+
 export default <TModel = fb.firestore.DocumentData>(
   {
     path,
@@ -25,8 +38,10 @@ export default <TModel = fb.firestore.DocumentData>(
     return defaults;
   },
 
-  find(id: string) {
-    return this.ref.doc(id).get();
+  async find(id: string) {
+    const doc = await this.ref.doc(id).get();
+
+    return extendsSnapshot(doc);
   },
 
   create(data: TModel) {
