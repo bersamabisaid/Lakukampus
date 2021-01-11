@@ -29,6 +29,7 @@ export interface Seller {
 export interface Item {
   category: firebase.firestore.DocumentReference<Category> | null;
   name: string;
+  img: string;
   stock: number;
   price: number;
   description: string;
