@@ -61,10 +61,9 @@ export interface Transaction {
 export interface Chat {
   participants: firebase.firestore.DocumentReference<User>[];
   shop: firebase.firestore.DocumentReference<Shop>;
-  messages: ChatMessage[];
 }
 
 export interface ChatMessage {
   from: firebase.firestore.DocumentReference<User>;
-  content: string;
+  content: string | Item;
 }
