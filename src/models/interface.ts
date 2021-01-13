@@ -56,7 +56,6 @@ export interface ItemPurchased {
 export interface Transaction {
   user: firebase.firestore.DocumentReference<User>;
   shop: firebase.firestore.DocumentReference<Shop>;
-  itemPurchased: ItemPurchased[];
 }
 
 export interface Chat {
