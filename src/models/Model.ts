@@ -13,8 +13,27 @@ interface ModelWithTimestamp {
 
 type ModelData<T extends fb.firestore.DocumentData> = T & ModelWithTimestamp;
 
+interface DataModelCtor<TDataModel extends fb.firestore.DocumentData> {
+  new (data: ModelData<TDataModel> | TDataModel): ModelData<TDataModel>
+
+  ref: fb.firestore.CollectionReference<ModelData<TDataModel>>
+
+  applyTemplate: (data: Partial<TDataModel>) => ModelData<TDataModel>
+
+  converter: fb.firestore.FirestoreDataConverter<InstanceType<DataModelCtor<TDataModel>>>
+
+  find: (
+    id: string,
+    options?: fb.firestore.GetOptions
+  ) => Promise<fb.firestore.DocumentSnapshot<InstanceType<DataModelCtor<TDataModel>>>>
+
+  create: (data: Partial<TDataModel>) =>
+    Promise<(options?: fb.firestore.GetOptions | undefined) =>
+      ReturnType<DataModelCtor<TDataModel>['find']>>
+}
+
 // type guard for Model fullfilled fields
-function isModelData <T extends Record<string, unknown>>(data: T): data is T & ModelWithTimestamp {
+function isModelData <T extends Record<string, unknown>>(data: T): data is ModelData<T> {
   return ('_created' in data && fireUtils.isTimestamp(data._created))
     && ('_updated' in data && fireUtils.isTimestamp(data._updated))
     && ('_deleted' in data && (fireUtils.isTimestamp(data._deleted) || data._deleted === null));
@@ -40,28 +59,7 @@ export default function Model <
 
       Object.assign(this, payload);
       Object.seal(this);
-    }) as unknown as tDataModel;
-
-    type DataModelInstance = InstanceType<typeof DataModel>;
-
-    interface tDataModel {
-      new (data: tModelData | TDataModel): tModelData
-
-      ref: fb.firestore.CollectionReference<tModelData>
-
-      applyTemplate: (data: Partial<TDataModel>) => tModelData
-
-      converter: fb.firestore.FirestoreDataConverter<DataModelInstance>
-
-      find: (
-        id: string,
-        options?: fb.firestore.GetOptions
-      ) => Promise<fb.firestore.DocumentSnapshot<DataModelInstance>>
-
-      create: (data: Partial<TDataModel>) =>
-        Promise<(options?: fb.firestore.GetOptions | undefined) =>
-          ReturnType<tDataModel['find']>>
-    }
+    }) as unknown as DataModelCtor<TDataModel>;
 
     DataModel.ref = db.collection(path) as fb.firestore.CollectionReference<tModelData>;
 
@@ -77,7 +75,7 @@ export default function Model <
         return new DataModel(snapshot.data(options));
       },
 
-      toFirestore(modelObject: DataModelInstance) {
+      toFirestore(modelObject: InstanceType<typeof DataModel>) {
         // eslint-disable-next-line prefer-object-spread
         return Object.assign({}, modelObject);
       },
