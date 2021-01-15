@@ -13,7 +13,7 @@
       "src/*": ["src/*"],
       "app/*": ["*"]
     },
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
   },
   "exclude": [
     "functions"

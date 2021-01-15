@@ -38,8 +38,10 @@ db.enablePersistence()
     }
   });
 
+type tt = firebase.firestore.Timestamp;
 const fireUtils = {
   get firestoreNow() { return firebase.firestore.Timestamp.now(); },
+  isTimestamp: (data: unknown): data is tt => data instanceof firebase.firestore.Timestamp,
 };
 
 export default firebase;

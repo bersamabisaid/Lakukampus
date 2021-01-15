@@ -1,6 +1,27 @@
 import Model from 'models/Model';
-import { User } from 'models/interface';
+import type fb from 'firebase';
 
-export default Model<User>({
+interface IUser {
+  name: string;
+  email: string;
+  img: string;
+  address: string;
+  phoneNumber: string;
+  birthDate: fb.firestore.Timestamp | null;
+}
+
+export default Model<IUser>({
   path: 'users',
+}, {
+  name: '',
+
+  email: '',
+
+  img: '',
+
+  address: '',
+
+  phoneNumber: '',
+
+  birthDate: null,
 });

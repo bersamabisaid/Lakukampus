@@ -1,6 +1,11 @@
 import Model from 'models/Model';
-import { Category } from 'models/interface';
 
-export default Model<Category>({
+interface ICategory {
+  name: string;
+}
+
+export default Model<ICategory>({
   path: 'categories',
+}, {
+  name: '',
 });

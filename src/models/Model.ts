@@ -1,72 +1,98 @@
 import { db, fireUtils } from 'src/firebase';
-import { StoredModel } from 'models/interface';
 import type fb from 'firebase';
 
-interface ModelOptions<TModel = fb.firestore.DocumentData> {
+interface ModelOptions {
   path: string;
-
-  paginateLimitDefault?: number;
-
-  defaults?: Partial<TModel>;
 }
 
-const extendsSnapshot = <T>(
-  snapshot: fb.firestore.DocumentSnapshot<StoredModel<T>>,
-) => {
-  Object.assign(snapshot, {
-    update: (data: Partial<T>) => snapshot.ref.update({
-      ...data,
-      _updated: fireUtils.firestoreNow,
-    }),
-  });
+interface ModelWithTimestamp {
+  _created: fb.firestore.Timestamp;
+  _updated: fb.firestore.Timestamp;
+  _deleted: fb.firestore.Timestamp | null;
+}
 
-  return snapshot;
-};
+type ModelData<T extends fb.firestore.DocumentData> = T & ModelWithTimestamp;
 
-export default <TModel = fb.firestore.DocumentData>(
-  {
-    path,
-    defaults = {},
-    paginateLimitDefault = 20,
-  }: ModelOptions<TModel>,
-) => ({
-  get ref() {
-    return db.collection(path) as fb.firestore.CollectionReference<StoredModel<TModel>>;
-  },
+// type guard for Model fullfilled fields
+function isModelData <T extends Record<string, unknown>>(data: T): data is T & ModelWithTimestamp {
+  return ('_created' in data && fireUtils.isTimestamp(data._created))
+    && ('_updated' in data && fireUtils.isTimestamp(data._updated))
+    && ('_deleted' in data && (fireUtils.isTimestamp(data._deleted) || data._deleted === null));
+}
 
-  get defaults() {
-    return defaults;
-  },
+export default function Model <
+    TDataModel extends fb.firestore.DocumentData
+  >(
+  { path }: ModelOptions,
+  model: TDataModel,
+) {
+  type tModelData = ModelData<TDataModel>;
 
-  async find(id: string) {
-    const doc = await this.ref.doc(id).get();
+  const modelTemplate = Object.assign(model, {
+    _created: fireUtils.firestoreNow,
+    _updated: fireUtils.firestoreNow,
+    _deleted: null,
+  } as ModelWithTimestamp);
 
-    return extendsSnapshot(doc);
-  },
+  return ((function () {
+    const DataModel = (function (this: tModelData, data: tModelData | TDataModel) {
+      const payload = isModelData(data) ? data : DataModel.applyTemplate(data);
 
-  create(data: TModel) {
-    return this.ref.add({
-      ...data,
-      _created: fireUtils.firestoreNow,
-      _updated: fireUtils.firestoreNow,
-      _deleted: null,
-    });
-  },
+      Object.assign(this, payload);
+      Object.seal(this);
+    }) as unknown as tDataModel;
 
-  async paginate(
-    query: fb.firestore.Query<StoredModel<TModel>>,
-    limit = paginateLimitDefault,
-  ) {
-    const finalQuery = query.limit(limit);
-    const { docs } = await finalQuery.get();
-    let page = 1;
+    type DataModelInstance = InstanceType<typeof DataModel>;
 
-    return {
-      docs,
-      next: () => {
-        page += 1;
-        return finalQuery.startAfter(limit * page).limit(limit);
+    interface tDataModel {
+      new (data: tModelData | TDataModel): tModelData
+
+      ref: fb.firestore.CollectionReference<tModelData>
+
+      applyTemplate: (data: Partial<TDataModel>) => tModelData
+
+      converter: fb.firestore.FirestoreDataConverter<DataModelInstance>
+
+      find: (
+        id: string,
+        options?: fb.firestore.GetOptions
+      ) => Promise<fb.firestore.DocumentSnapshot<DataModelInstance>>
+
+      create: (data: Partial<TDataModel>) =>
+        Promise<(options?: fb.firestore.GetOptions | undefined) =>
+          ReturnType<tDataModel['find']>>
+    }
+
+    DataModel.ref = db.collection(path) as fb.firestore.CollectionReference<tModelData>;
+
+    DataModel.applyTemplate = (data) => {
+      // eslint-disable-next-line prefer-object-spread
+      const copiedTemplate = Object.assign({}, modelTemplate);
+
+      return Object.assign(copiedTemplate, data);
+    };
+
+    DataModel.converter = {
+      fromFirestore(snapshot: fb.firestore.QueryDocumentSnapshot<tModelData>, options) {
+        return new DataModel(snapshot.data(options));
+      },
+
+      toFirestore(modelObject: DataModelInstance) {
+        // eslint-disable-next-line prefer-object-spread
+        return Object.assign({}, modelObject);
       },
     };
-  },
-});
+
+    DataModel.find = (id, options = { source: 'default' }) => DataModel.ref.doc(id)
+      .withConverter(DataModel.converter).get(options);
+
+    DataModel.create = async (data) => {
+      const createdModel = new DataModel(DataModel.applyTemplate(data));
+      const created = await DataModel.ref.withConverter(DataModel.converter).add(createdModel);
+
+      return DataModel.find.bind(null, created.id);
+    };
+
+    return Object.freeze(DataModel);
+  })());
+}

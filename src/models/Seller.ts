@@ -1,10 +1,34 @@
-import { Seller } from 'models/interface';
 import Model from 'models/Model';
+import Shop from 'models/Shop';
+import User from 'models/User';
 
-export default Model<Seller>({
+interface ISeller {
+  user: typeof User['ref']['doc'] | null;
+  shops: typeof Shop['ref']['doc'][];
+  faculty: string;
+  program: string;
+  studentId: string;
+  address: string;
+  identityImg: string;
+  batchYear: number;
+}
+
+export default Model<ISeller>({
   path: 'sellers',
+}, {
+  user: null,
 
-  defaults: {
-    shops: [],
-  },
+  shops: [],
+
+  faculty: '',
+
+  program: '',
+
+  studentId: '',
+
+  address: '',
+
+  identityImg: '',
+
+  batchYear: new Date().getFullYear(),
 });
