@@ -1,17 +1,19 @@
 import { db } from 'src/firebase';
-import BaseModelFactory, { BaseModelCtor, ModelData } from 'models/ModelFactory/BaseModelFactory';
-import type fb from 'firebase';
+import Constructor, { BaseModelCtor, ModelData } from 'models/ModelFactory/Constructor';
 import Converter from 'models/ModelFactory/Converter';
 import Find from 'models/ModelFactory/find';
 import Create from 'models/ModelFactory/Create';
+import type fb from 'firebase';
 
-interface ModelOptions {
+export interface ModelOptions {
   path: string;
 }
 
-interface DataModelCtor<
+export interface DataModelCtor<
   TDataModel extends fb.firestore.DocumentData
 > extends BaseModelCtor<TDataModel> {
+  ref: fb.firestore.CollectionReference<ModelData<TDataModel>>
+
   converter: fb.firestore.FirestoreDataConverter<InstanceType<DataModelCtor<TDataModel>>>
 
   find: (
@@ -26,16 +28,13 @@ interface DataModelCtor<
     Promise<ReturnType<DataModelCtor<TDataModel>['ref']['doc']>>
 }
 
-export default function Model <
-    TDataModel extends fb.firestore.DocumentData
-  >(
+export default function Model <TDataModel extends fb.firestore.DocumentData>(
   { path }: ModelOptions,
   model: TDataModel,
 ) {
-  const DataModel = BaseModelFactory<TDataModel, ModelData<TDataModel>>(
-    model,
-    db.collection(path) as fb.firestore.CollectionReference<ModelData<TDataModel>>,
-  ) as DataModelCtor<TDataModel>;
+  const DataModel = Constructor(model) as DataModelCtor<TDataModel>;
+
+  DataModel.ref = db.collection(path) as fb.firestore.CollectionReference<ModelData<TDataModel>>;
 
   DataModel.converter = Converter(DataModel);
 

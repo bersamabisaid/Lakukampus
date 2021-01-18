@@ -1,4 +1,4 @@
-import { BaseModelCtor, ModelData } from 'models/ModelFactory/BaseModelFactory';
+import { BaseModelCtor, ModelData } from 'models/ModelFactory/Constructor';
 import type fb from 'firebase';
 
 export default function Converter<

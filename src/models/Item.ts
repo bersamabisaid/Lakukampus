@@ -1,20 +1,51 @@
-// import SubcollectionModel from 'models/SubcollectionModel';
-// import Shop from 'models/Shop';
-// import { Item as ItemInterface } from 'models/interface';
+import Shop from 'models/Shop';
+import SubModel from 'models/Submodel';
+import Category from 'models/Category';
+import { repeatedPromises } from 'src/utils/Promises';
+import { commerce, random } from 'faker';
 
-// const [Item, ItemGroupCollection] = SubcollectionModel<typeof Shop, ItemInterface>({
-//   path: 'items',
-//   defaults: {
-//     description: '',
-//     tags: [],
-//     category: null,
-//     stock: 0,
-//     price: 0,
-//   },
-// });
+interface IItem {
+  category: InstanceType<typeof Category> | null;
+  name: string;
+  img: string;
+  stock: number;
+  price: number;
+  description: string;
+  tags: string[];
+}
 
-// export default Item;
+const Item = SubModel({
+  parent: Shop,
+  path: 'items',
+}, {
+  name: '',
 
-// export {
-//   ItemGroupCollection,
-// };
+  category: null,
+
+  img: '',
+
+  stock: 1,
+
+  price: 0,
+
+  description: '',
+
+  tags: [],
+} as IItem);
+
+const itemSeed = (
+  parent: Parameters<typeof Item>[0],
+  count: number,
+) => repeatedPromises(() => Item(parent).create({
+  name: commerce.productName(),
+  img: random.image(),
+  stock: random.number(100),
+  price: random.number({ precision: 1000 }),
+  description: commerce.productDescription(),
+}))(count);
+
+export default Item;
+
+export {
+  itemSeed,
+};

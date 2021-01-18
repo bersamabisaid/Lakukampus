@@ -12,8 +12,6 @@ export type ModelData<T extends fb.firestore.DocumentData> = T & ModelWithTimest
 export interface BaseModelCtor<TDataModel extends fb.firestore.DocumentData> {
   new (data: ModelData<TDataModel> | TDataModel): ModelData<TDataModel>
 
-  ref: fb.firestore.CollectionReference<ModelData<TDataModel>>
-
   applyTemplate: (
     data: Partial<TDataModel>,
   ) =>
@@ -21,37 +19,34 @@ export interface BaseModelCtor<TDataModel extends fb.firestore.DocumentData> {
 }
 
 // type guard for Model fullfilled fields
-function isModelData <T extends Record<string, unknown>>(data: T): data is ModelData<T> {
+const isModelData = function <T extends Record<string, unknown>> (data: T): data is ModelData<T> {
   return ('_created' in data && fireUtils.isTimestamp(data._created))
     && ('_updated' in data && fireUtils.isTimestamp(data._updated))
     && ('_deleted' in data && (fireUtils.isTimestamp(data._deleted) || data._deleted === null));
-}
+};
 
-export default function BaseModelFactory<
-  T extends fb.firestore.DocumentData,
-  U extends ModelData<T>
->(
-  template: T,
-  collectionRef: fb.firestore.CollectionReference<U>,
+export default function Constructor<TDataModel extends fb.firestore.DocumentData>(
+  modelTemplate: TDataModel,
 ) {
-  const modelTemplate = Object.assign(template, {
+  const template = Object.assign(modelTemplate, {
     _created: fireUtils.firestoreNow,
     _updated: fireUtils.firestoreNow,
     _deleted: null,
   } as ModelWithTimestamp);
 
-  const BaseModel = function (this: U, data: T | U) {
+  const BaseModel = function (
+    this: ModelData<TDataModel>,
+    data: TDataModel | ModelData<TDataModel>,
+  ) {
     const payload = isModelData(data) ? data : BaseModel.applyTemplate(data);
 
     Object.assign(this, payload);
     Object.seal(this);
-  } as unknown as BaseModelCtor<T>;
-
-  BaseModel.ref = collectionRef;
+  } as unknown as BaseModelCtor<TDataModel>;
 
   BaseModel.applyTemplate = (data) => {
     // eslint-disable-next-line prefer-object-spread
-    const copiedTemplate = Object.assign({}, modelTemplate);
+    const copiedTemplate = Object.assign({}, template);
 
     return Object.assign(copiedTemplate, data);
   };

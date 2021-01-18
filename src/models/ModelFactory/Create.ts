@@ -1,4 +1,4 @@
-import { BaseModelCtor } from 'models/ModelFactory/BaseModelFactory';
+import { BaseModelCtor } from 'models/ModelFactory/Constructor';
 import type fb from 'firebase';
 
 export default function Create<T extends fb.firestore.DocumentData>(
