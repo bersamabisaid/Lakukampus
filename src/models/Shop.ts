@@ -1,8 +1,8 @@
 import Model from 'models/Model';
-import baseSeed from 'models/seed';
 import {
   company, image, lorem, random,
 } from 'faker';
+import { repeatedPromises } from 'src/utils/Promises';
 
 interface IShop {
   name: string;
@@ -23,12 +23,12 @@ const Shop = Model<IShop>({
   img: '',
 });
 
-const shopSeed = baseSeed(async () => (await Shop.create({
+const shopSeed = repeatedPromises(() => Shop.create({
   name: company.companyName(),
   description: lorem.paragraphs(),
   img: random.image(),
   headerImg: image.abstract(),
-}))());
+}));
 
 export default Shop;
 

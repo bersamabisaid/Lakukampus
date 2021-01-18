@@ -1,42 +1,29 @@
-import { db, fireUtils } from 'src/firebase';
+import { db } from 'src/firebase';
+import BaseModelFactory, { BaseModelCtor, ModelData } from 'models/ModelFactory/BaseModelFactory';
 import type fb from 'firebase';
+import Converter from 'models/ModelFactory/Converter';
+import Find from 'models/ModelFactory/find';
+import Create from 'models/ModelFactory/Create';
 
 interface ModelOptions {
   path: string;
 }
 
-interface ModelWithTimestamp {
-  _created: fb.firestore.Timestamp;
-  _updated: fb.firestore.Timestamp;
-  _deleted: fb.firestore.Timestamp | null;
-}
-
-type ModelData<T extends fb.firestore.DocumentData> = T & ModelWithTimestamp;
-
-interface DataModelCtor<TDataModel extends fb.firestore.DocumentData> {
-  new (data: ModelData<TDataModel> | TDataModel): ModelData<TDataModel>
-
-  ref: fb.firestore.CollectionReference<ModelData<TDataModel>>
-
-  applyTemplate: (data: Partial<TDataModel>) => ModelData<TDataModel>
-
+interface DataModelCtor<
+  TDataModel extends fb.firestore.DocumentData
+> extends BaseModelCtor<TDataModel> {
   converter: fb.firestore.FirestoreDataConverter<InstanceType<DataModelCtor<TDataModel>>>
 
   find: (
     id: string,
-    options?: fb.firestore.GetOptions
-  ) => Promise<fb.firestore.DocumentSnapshot<InstanceType<DataModelCtor<TDataModel>>>>
+    options?: fb.firestore.GetOptions,
+  ) =>
+    Promise<fb.firestore.DocumentSnapshot<InstanceType<DataModelCtor<TDataModel>>>>
 
-  create: (data: Partial<TDataModel>) =>
-    Promise<(options?: fb.firestore.GetOptions | undefined) =>
-      ReturnType<DataModelCtor<TDataModel>['find']>>
-}
-
-// type guard for Model fullfilled fields
-function isModelData <T extends Record<string, unknown>>(data: T): data is ModelData<T> {
-  return ('_created' in data && fireUtils.isTimestamp(data._created))
-    && ('_updated' in data && fireUtils.isTimestamp(data._updated))
-    && ('_deleted' in data && (fireUtils.isTimestamp(data._deleted) || data._deleted === null));
+  create: (
+    data: Partial<TDataModel>,
+  ) =>
+    Promise<ReturnType<DataModelCtor<TDataModel>['ref']['doc']>>
 }
 
 export default function Model <
@@ -45,52 +32,22 @@ export default function Model <
   { path }: ModelOptions,
   model: TDataModel,
 ) {
-  type tModelData = ModelData<TDataModel>;
+  const DataModel = BaseModelFactory<TDataModel, ModelData<TDataModel>>(
+    model,
+    db.collection(path) as fb.firestore.CollectionReference<ModelData<TDataModel>>,
+  ) as DataModelCtor<TDataModel>;
 
-  const modelTemplate = Object.assign(model, {
-    _created: fireUtils.firestoreNow,
-    _updated: fireUtils.firestoreNow,
-    _deleted: null,
-  } as ModelWithTimestamp);
+  DataModel.converter = Converter(DataModel);
 
-  return ((function () {
-    const DataModel = (function (this: tModelData, data: tModelData | TDataModel) {
-      const payload = isModelData(data) ? data : DataModel.applyTemplate(data);
+  DataModel.find = (id, options = { source: 'default' }) => Find(
+    DataModel.ref, DataModel.converter, id, options,
+  );
 
-      Object.assign(this, payload);
-      Object.seal(this);
-    }) as unknown as DataModelCtor<TDataModel>;
+  DataModel.create = (data) => Create(
+    DataModel.ref,
+    DataModel.converter,
+    new DataModel(DataModel.applyTemplate(data)),
+  );
 
-    DataModel.ref = db.collection(path) as fb.firestore.CollectionReference<tModelData>;
-
-    DataModel.applyTemplate = (data) => {
-      // eslint-disable-next-line prefer-object-spread
-      const copiedTemplate = Object.assign({}, modelTemplate);
-
-      return Object.assign(copiedTemplate, data);
-    };
-
-    DataModel.converter = {
-      fromFirestore(snapshot: fb.firestore.QueryDocumentSnapshot<tModelData>, options) {
-        return new DataModel(snapshot.data(options));
-      },
-
-      toFirestore(modelObject: InstanceType<typeof DataModel>) {
-        // eslint-disable-next-line prefer-object-spread
-        return Object.assign({}, modelObject);
-      },
-    };
-
-    DataModel.find = (id, options = { source: 'default' }) => DataModel.ref.doc(id)
-      .withConverter(DataModel.converter).get(options);
-
-    DataModel.create = async (data) => {
-      const createdModel = new DataModel(DataModel.applyTemplate(data));
-      const created = await DataModel.ref.withConverter(DataModel.converter).add(createdModel);
-
-      return DataModel.find.bind(null, created.id);
-    };
-
-    return Object.freeze(DataModel);
-  })());
+  return Object.freeze(DataModel);
 }
