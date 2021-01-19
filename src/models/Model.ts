@@ -23,7 +23,7 @@ export interface DataModelCtor<
     Promise<fb.firestore.DocumentSnapshot<InstanceType<DataModelCtor<TDataModel>>>>
 
   create: (
-    data: Partial<TDataModel>,
+    data: Partial<TDataModel> | InstanceType<DataModelCtor<TDataModel>>,
   ) =>
     Promise<ReturnType<DataModelCtor<TDataModel>['ref']['doc']>>
 }
@@ -45,7 +45,8 @@ export default function Model <TDataModel extends fb.firestore.DocumentData>(
   DataModel.create = (data) => Create(
     DataModel.ref,
     DataModel.converter,
-    new DataModel(DataModel.applyTemplate(data)),
+    data instanceof DataModel ? data
+      : new DataModel(DataModel.applyTemplate(data)),
   );
 
   return Object.freeze(DataModel);

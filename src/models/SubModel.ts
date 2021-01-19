@@ -28,7 +28,7 @@ interface ModelFactoryResult<TDataModel extends fb.firestore.DocumentData> {
     Promise<fb.firestore.DocumentSnapshot<InstanceType<BaseModelCtor<TDataModel>>>>
 
   create: (
-    data: Partial<TDataModel>,
+    data: Partial<TDataModel> | InstanceType<SubModelDataCtor<TDataModel>>,
   ) =>
     Promise<ReturnType<SubModelDataCtor<TDataModel>['ref']['doc']>>
 }
@@ -64,7 +64,8 @@ export default function SubModel<
       return Create(
         this.ref,
         ModelFactory.converter,
-        new SubModelData(BaseConstructor.applyTemplate(data)),
+        data instanceof SubModelData ? data
+          : new SubModelData(BaseConstructor.applyTemplate(data)),
       );
     },
   } as ModelFactoryResult<TDataModel>);
