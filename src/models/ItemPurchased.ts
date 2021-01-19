@@ -1,19 +1,22 @@
-// import { ItemPurchased as ItemPurchasedInterface } from 'models/interface';
-// import SubcollectionModel from 'models/SubcollectionModel';
-// import Transaction from 'models/Transaction';
+import Item from 'models/Item';
+import SubModel from 'models/Submodel';
+import Transaction from 'models/Transaction';
 
-// eslint-disable-next-line max-len
-// const [ItemPurchased, ItemPurchasedGroup] = SubcollectionModel<typeof Transaction, ItemPurchasedInterface>({
-//   path: 'itemPurchased',
+interface IItemPurchased {
+  item: ReturnType<typeof Item>['ref']['doc'] | null;
+  qty: number;
+  description: string;
+}
 
-//   defaults: {
-//     qty: 1,
-//     description: '',
-//   },
-// });
+const ItemPurchased = SubModel({
+  parent: Transaction,
+  path: 'itemPurchased',
+}, {
+  item: null,
 
-// export default ItemPurchased;
+  qty: 1,
 
-// export {
-//   ItemPurchasedGroup,
-// };
+  description: '',
+} as IItemPurchased);
+
+export default ItemPurchased;

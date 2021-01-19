@@ -1,13 +1,20 @@
-// import { ChatMessage as ChatMessageInterface } from 'models/interface';
-// import Chat from 'models/Chat';
-// import SubcollectionModel from 'models/SubcollectionModel';
+import SubModel from 'models/Submodel';
+import Chat from 'models/Chat';
+import User from 'models/User';
+import Item from 'models/Item';
 
-// const [ChatMessage, ChatMessageGroup] = SubcollectionModel<typeof Chat, ChatMessageInterface>({
-//   path: 'messages',
-// });
+interface IChatMessage {
+  from: typeof User['ref']['doc'] | null;
+  content: string | ReturnType<typeof Item>['ref']['doc'];
+}
 
-// export default ChatMessage;
+const ChatMessage = SubModel({
+  parent: Chat,
+  path: 'messages',
+}, {
+  from: null,
 
-// export {
-//   ChatMessageGroup,
-// };
+  content: '',
+} as IChatMessage);
+
+export default ChatMessage;

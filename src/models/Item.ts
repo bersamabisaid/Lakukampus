@@ -1,11 +1,11 @@
-import Shop from 'models/Shop';
 import SubModel from 'models/Submodel';
+import Shop from 'models/Shop';
 import Category from 'models/Category';
 import { repeatedPromises } from 'src/utils/Promises';
 import { commerce, random } from 'faker';
 
 interface IItem {
-  category: InstanceType<typeof Category> | null;
+  category: typeof Category['ref']['doc'] | null;
   name: string;
   img: string;
   stock: number;
