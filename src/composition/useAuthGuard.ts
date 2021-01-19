@@ -4,16 +4,16 @@ import { Loading } from 'quasar';
 
 export default (props: unknown, ctx: SetupContext) => {
   watch(
-    signedInUser,
-    async (val) => {
-      if (authState.value.isWaitingAuthentication) {
+    authState,
+    async () => {
+      if (authState.isWaitingAuthentication) {
         Loading.show({
           message: 'authenticating...',
         });
       } else {
         Loading.hide();
 
-        if (!val) {
+        if (!signedInUser.value) {
           await ctx.root.$router.push({ name: 'Auth' });
         }
       }

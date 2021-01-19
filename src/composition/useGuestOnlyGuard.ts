@@ -6,7 +6,7 @@ export default (props: unknown, ctx: SetupContext) => {
   watch(
     signedInUser,
     async (val) => {
-      if (!authState.value.isWaitingAuthentication && val) {
+      if (!authState.isWaitingAuthentication && val) {
         Notify.create('You\'re already logged in!');
         await ctx.root.$router.push({ name: 'Dashboard' });
       }
