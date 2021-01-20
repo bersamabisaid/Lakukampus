@@ -20,6 +20,17 @@ const routes: RouteConfig[] = [
       },
     ],
   },
+  {
+    path: '/home',
+    component: () => import('layouts/MainHomepage.vue'),
+    children: [
+      {
+        name: 'Home',
+        path: '',
+        component: () => import('pages/Home/Index.vue'),
+      },
+    ],
+  },
 
   // Always leave this as last one,
   // but you can also remove it

@@ -1,14 +1,9 @@
 import type firebase from 'firebase';
 
-export type ModelBuilderObject<T> = T & {
+export type StoredModel<T> = T & {
   _created: firebase.firestore.Timestamp;
   _updated: firebase.firestore.Timestamp;
   _deleted: firebase.firestore.Timestamp | null;
-}
-
-export interface BuilderObject<T> {
-  buildObj: () => ModelBuilderObject<T>;
-  [key: string]: (val: unknown) => this | ModelBuilderObject<T>;
 }
 
 export interface User {
@@ -32,9 +27,9 @@ export interface Seller {
 }
 
 export interface Item {
-  shop: firebase.firestore.DocumentReference<Shop>;
   category: firebase.firestore.DocumentReference<Category> | null;
   name: string;
+  img: string;
   stock: number;
   price: number;
   description: string;
@@ -61,16 +56,14 @@ export interface ItemPurchased {
 export interface Transaction {
   user: firebase.firestore.DocumentReference<User>;
   shop: firebase.firestore.DocumentReference<Shop>;
-  itemPurchased: ItemPurchased[];
 }
 
 export interface Chat {
   participants: firebase.firestore.DocumentReference<User>[];
   shop: firebase.firestore.DocumentReference<Shop>;
-  messages: ChatMessage[];
 }
 
 export interface ChatMessage {
   from: firebase.firestore.DocumentReference<User>;
-  content: string;
+  content: string | Item;
 }

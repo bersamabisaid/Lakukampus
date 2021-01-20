@@ -1,15 +1,14 @@
-import { onBeforeMount, ref } from '@vue/composition-api';
-import firebase from 'src/firebase';
-import { auth } from 'src/firebaseServices';
-import UserModel from 'models/UserModel';
+import { onBeforeMount, reactive, ref } from '@vue/composition-api';
+import firebase, { auth } from 'src/firebase';
 import { Loading, SessionStorage } from 'quasar';
+import type fb from 'firebase';
 
 const providers = {
   Google: new firebase.auth.GoogleAuthProvider(),
 };
 
-export const signedInUser = ref<UserModel | null>(null);
-export const authState = ref({
+export const signedInUser = ref<fb.User | null>(null);
+export const authState = reactive({
   isWaitingAuthentication: true,
 
   get isWaitingRedirectResult() {
@@ -21,17 +20,17 @@ export const authState = ref({
   },
 });
 
-auth.onAuthStateChanged(async (user) => {
-  if (authState.value.isWaitingAuthentication) {
-    authState.value.isWaitingAuthentication = false;
+auth.onAuthStateChanged((user) => {
+  if (authState.isWaitingAuthentication) {
+    authState.isWaitingAuthentication = false;
   }
 
-  signedInUser.value = user && await UserModel.fromUserCredential(user);
+  signedInUser.value = user;
 });
 
 export default () => {
   const login = async () => {
-    authState.value.isWaitingRedirectResult = true;
+    authState.isWaitingRedirectResult = true;
     await auth.signInWithRedirect(providers.Google);
   };
   const logout = () => {
@@ -42,10 +41,10 @@ export default () => {
   };
 
   onBeforeMount(async () => {
-    if (authState.value.isWaitingRedirectResult) {
+    if (authState.isWaitingRedirectResult) {
       try {
         await auth.getRedirectResult();
-        authState.value.isWaitingRedirectResult = false;
+        authState.isWaitingRedirectResult = false;
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error({ ...err });
