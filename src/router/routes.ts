@@ -21,13 +21,13 @@ const routes: RouteConfig[] = [
     ],
   },
   {
-    path: '/homepage',
+    path: '/home',
     component: () => import('layouts/MainHomepage.vue'),
     children: [
       {
-        name: 'Homepage',
+        name: 'Home',
         path: '',
-        component: () => import('pages/Homepage.vue'),
+        component: () => import('pages/Home/Index.vue'),
       },
     ],
   },

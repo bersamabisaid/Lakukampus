@@ -8,7 +8,7 @@
         <q-toolbar>
           <q-toolbar-title class="text-grey-10">
             <img
-              src="~assets/Lakukampus_Logo.png"
+              src="~assets/images/Lakukampus_Logo.png"
               style="width: 13%"
               class="q-pt-sm q-pl-lg"
             >

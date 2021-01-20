@@ -16,6 +16,7 @@
           arrows
           height="300px"
           class="bg-primary text-white shadow-1 rounded-borders"
+          style="width: 65%"
         >
           <q-carousel-slide
             name="style"
@@ -66,6 +67,19 @@
             </div>
           </q-carousel-slide>
         </q-carousel>
+        <q-card
+          class="my-card"
+          style="height: 30%; width: 30%"
+        >
+          <q-img
+            src="~assets/images/mountain.jpg"
+            basic
+          >
+            <div class="absolute-bottom text-subtitle2 text-center">
+              Title
+            </div>
+          </q-img>
+        </q-card>
       </div>
     </div>
   </q-page>
@@ -73,7 +87,7 @@
 
 <script>
 export default {
-  name: 'PageIndex',
+  name: 'Home',
   data() {
     return {
       slide: 'style',
