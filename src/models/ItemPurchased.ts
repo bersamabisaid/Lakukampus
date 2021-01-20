@@ -3,7 +3,7 @@ import SubModel from 'models/Submodel';
 import Transaction from 'models/Transaction';
 
 interface IItemPurchased {
-  item: ReturnType<typeof Item>['ref']['doc'] | null;
+  item: ReturnType<ReturnType<typeof Item>['ref']['doc']> | null;
   qty: number;
   description: string;
 }

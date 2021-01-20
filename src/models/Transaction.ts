@@ -3,8 +3,8 @@ import Shop from 'models/Shop';
 import User from 'models/User';
 
 interface ITransaction {
-  user: typeof User['ref']['doc'] | null;
-  shop: typeof Shop['ref']['doc'] | null;
+  user: ReturnType<typeof User['ref']['doc']> | null;
+  shop: ReturnType<typeof Shop['ref']['doc']> | null;
 }
 
 export default Model<ITransaction>({

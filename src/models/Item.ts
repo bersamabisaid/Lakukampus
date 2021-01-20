@@ -5,7 +5,7 @@ import { repeatedPromises } from 'src/utils/Promises';
 import { commerce, random } from 'faker';
 
 interface IItem {
-  category: typeof Category['ref']['doc'] | null;
+  category: ReturnType<typeof Category['ref']['doc']> | null;
   name: string;
   img: string;
   stock: number;
