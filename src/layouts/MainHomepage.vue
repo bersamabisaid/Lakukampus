@@ -16,7 +16,7 @@
             <q-input
               v-model="search"
               debounce="500"
-              class="q-ml-lg"
+              class="q-ml-lg q-my-sm"
               filled
               placeholder="Search"
               :dense="true"

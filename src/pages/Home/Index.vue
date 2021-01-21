@@ -64,6 +64,7 @@
           </div>
         </q-carousel-slide>
       </q-carousel>
+
       <q-card
         class="my-card"
         style="margin-left: 70px"
@@ -73,6 +74,31 @@
           style="height: 100%"
         />
       </q-card>
+
+      <div class="text-h6 text-bold q-pt-xl">
+        Kategori pilihan
+      </div>
+
+      <q-separator color="black" />
+
+      <div
+        v-for="n in 8"
+        :key="n"
+      >
+        <q-card
+          class="category-card q-ma-xs q-mt-md q-mx-md"
+        >
+          <q-img
+            src="~assets/images/mountain.jpg"
+          />
+        </q-card>
+        <div
+          class="text-h6"
+          style="margin-left: 130px"
+        >
+          Title
+        </div>
+      </div>
     </div>
   </q-page>
 </template>
@@ -92,4 +118,7 @@ export default {
 <style lang="sass">
   .my-card
     width: 30%
+
+  .category-card
+    width: 280px
 </style>
