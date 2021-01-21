@@ -32,21 +32,22 @@
             color="black"
             icon="view_list"
             label="Kategori"
-            size="md"
-            style="margin-right: 200px"
+            size="sm"
+            style="margin-right: 250px"
           />
           <q-btn
             outline
             class="q-mr-md"
             color="warning"
             label="Masuk"
-            size="md"
+            size="sm"
           />
           <q-btn
             push
             class="q-mr-md"
             color="warning"
             label="Daftar"
+            size="sm"
           />
         </q-toolbar>
       </q-header>
