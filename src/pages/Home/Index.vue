@@ -156,6 +156,66 @@
           <q-img />
         </q-card>
       </div>
+
+      <!-- JUST CARD -->
+      <div class="q-pt-xl">
+        <q-card class="just-card bg-grey-6">
+          <q-card-section />
+        </q-card>
+      </div>
+      <div
+        class="q-ma-md"
+        style="margin-top: 55px; margin-left: 80px"
+      >
+        <h4 class="text-bold">
+          Yuk mulai jualan<br>
+          di Lakukampus !
+          <div class="text-h6">
+            Mudah, nyaman, dan eksklusif<br>
+            khusus anak yu-en-es!
+          </div>
+        </h4>
+        <q-btn
+          push
+          class="q-mr-md"
+          color="warning"
+          label="Gabung Sekarang!"
+          size="md"
+        />
+        <q-btn
+          outline
+          class="q-mr-md"
+          color="warning"
+          label="Pelajari"
+          size="md"
+        />
+      </div>
+    </div>
+
+    <div class="row text-dark bg-grey-3 q-mt-xl">
+      <div class="col-3">
+        <ul class="text-h6 text-weight-bold q-mt-lg">
+          Lakukampus
+        </ul>
+        <ul>Tentang Kami</ul>
+        <ul>Karir</ul>
+      </div>
+      <div class="col-3">
+        <ul class="text-h6 text-weight-bold q-mt-lg">
+          Pusat Bantuan
+        </ul>
+        <ul>Syarat dan Ketentuan</ul>
+        <ul>Jaminan keamanan</ul>
+      </div>
+      <div class="col-3">
+        <ul class="text-h6 text-weight-bold q-mt-lg">
+          Kanal
+        </ul>
+        <ul>BersamaBisa</ul>
+        <ul>Instagram</ul>
+        <ul>Facebook</ul>
+        <ul>Youtube</ul>
+      </div>
     </div>
   </q-page>
 </template>
@@ -185,4 +245,8 @@ export default {
 
   .new-stuff-card
     width: 390px
+
+  .just-card
+    width: 700px
+    height: 300px
 </style>
