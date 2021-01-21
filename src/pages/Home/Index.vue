@@ -75,6 +75,7 @@
         />
       </q-card>
 
+      <!-- KATEGORI PILIHAN -->
       <div class="text-h6 text-bold q-pt-xl">
         Kategori pilihan
       </div>
@@ -99,6 +100,24 @@
           Title
         </div>
       </div>
+
+      <!-- KHUSUS DANUSAN -->
+      <div class="text-h6 text-bold q-pt-xl">
+        Khusus Danusan
+      </div>
+
+      <q-separator color="black" />
+
+      <div
+        v-for="n in 12"
+        :key="n"
+      >
+        <q-card
+          class="danusan-card q-ma-xs q-mt-md q-mx-xs"
+        >
+          <q-img />
+        </q-card>
+      </div>
     </div>
   </q-page>
 </template>
@@ -121,4 +140,8 @@ export default {
 
   .category-card
     width: 280px
+
+  .danusan-card
+    width: 200px
+    height: 280px
 </style>
