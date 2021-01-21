@@ -118,6 +118,44 @@
           <q-img />
         </q-card>
       </div>
+
+      <!-- BARANG BARU -->
+      <div class="text-h6 text-bold q-pt-xl">
+        Barang Baru
+      </div>
+
+      <q-separator color="black" />
+
+      <div
+        v-for="n in 3"
+        :key="n"
+      >
+        <q-card
+          class="new-stuff-card q-ma-xs q-mt-md q-mx-md"
+        >
+          <q-img
+            src="~assets/images/mountain.jpg"
+          />
+        </q-card>
+      </div>
+
+      <!-- SPECIAL FOR YOUUU -->
+      <div class="text-h6 text-bold q-pt-xl">
+        Spesial Untuk Kamu
+      </div>
+
+      <q-separator color="black" />
+
+      <div
+        v-for="n in 12"
+        :key="n"
+      >
+        <q-card
+          class="danusan-card q-ma-xs q-mt-md q-mx-xs"
+        >
+          <q-img />
+        </q-card>
+      </div>
     </div>
   </q-page>
 </template>
@@ -144,4 +182,7 @@ export default {
   .danusan-card
     width: 200px
     height: 280px
+
+  .new-stuff-card
+    width: 390px
 </style>
