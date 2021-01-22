@@ -1,4 +1,5 @@
 import { fireUtils } from 'src/firebase';
+import { cloneObject } from 'utils/Object';
 import type fb from 'firebase';
 
 export interface ModelWithTimestamp {
@@ -45,8 +46,7 @@ export default function Constructor<TDataModel extends fb.firestore.DocumentData
   } as unknown as BaseModelCtor<TDataModel>;
 
   BaseModel.applyTemplate = (data) => {
-    // eslint-disable-next-line prefer-object-spread
-    const copiedTemplate = Object.assign({}, template);
+    const copiedTemplate = cloneObject(template);
 
     return Object.assign(copiedTemplate, data);
   };

@@ -1,4 +1,5 @@
 import { BaseModelCtor, ModelData } from 'models/ModelFactory/Constructor';
+import { cloneObject } from 'utils/Object';
 import type fb from 'firebase';
 
 export default function Converter<
@@ -11,8 +12,7 @@ export default function Converter<
       return new Model(snapshot.data(options));
     },
     toFirestore(modelObject: InstanceType<typeof Model>) {
-      // eslint-disable-next-line prefer-object-spread
-      return Object.assign({}, modelObject);
+      return cloneObject(modelObject);
     },
   } as fb.firestore.FirestoreDataConverter<ModelData<TDataModel>>;
 }

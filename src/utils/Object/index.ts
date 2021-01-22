@@ -4,4 +4,4 @@ export const assignObjectProperties = (from: unknown, to = {}) => Object.defineP
 ) as typeof from & typeof to;
 
 // eslint-disable-next-line prefer-object-spread
-export const cloneObject = (source: unknown) => Object.assign({}, source);
+export const cloneObject = <T = unknown>(source: T) => Object.assign({}, source) as typeof source;
