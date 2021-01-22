@@ -1,4 +1,4 @@
-export const copyObjectProperties = (from: unknown, to = {}) => Object.defineProperties(
+export const copyObjectProperties = <T = unknown>(from: T, to = {}) => Object.defineProperties(
   to,
   Object.getOwnPropertyDescriptors(from),
 ) as typeof from & typeof to;
