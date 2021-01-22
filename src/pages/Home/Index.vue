@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <div class="row q-pt-lg justify-left">
+    <div class="row q-pa-md q-ml-md self-center">
       <q-carousel
         v-model="slide"
         transition-prev="scale"
@@ -80,15 +80,16 @@
         Kategori pilihan
       </div>
 
-      <q-separator color="black" />
+      <q-separator
+        class="separator-cus"
+        color="black"
+      />
 
       <div
         v-for="n in 8"
         :key="n"
       >
-        <q-card
-          class="category-card q-ma-xs q-mt-md q-mx-md"
-        >
+        <q-card class="category-card q-ma-xs q-mt-md q-mx-md">
           <q-img
             src="~assets/images/mountain.jpg"
           />
@@ -191,32 +192,6 @@
         />
       </div>
     </div>
-
-    <div class="row text-dark bg-grey-3 q-mt-xl">
-      <div class="col-3">
-        <ul class="text-h6 text-weight-bold q-mt-lg">
-          Lakukampus
-        </ul>
-        <ul>Tentang Kami</ul>
-        <ul>Karir</ul>
-      </div>
-      <div class="col-3">
-        <ul class="text-h6 text-weight-bold q-mt-lg">
-          Pusat Bantuan
-        </ul>
-        <ul>Syarat dan Ketentuan</ul>
-        <ul>Jaminan keamanan</ul>
-      </div>
-      <div class="col-3">
-        <ul class="text-h6 text-weight-bold q-mt-lg">
-          Kanal
-        </ul>
-        <ul>BersamaBisa</ul>
-        <ul>Instagram</ul>
-        <ul>Facebook</ul>
-        <ul>Youtube</ul>
-      </div>
-    </div>
   </q-page>
 </template>
 
@@ -249,4 +224,7 @@ export default {
   .just-card
     width: 700px
     height: 300px
+
+  .separator-cus
+    margin-right: 38px
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="q-pa-md">
+  <div>
     <q-layout view="hHh Lpr lff">
       <q-header
         elevated
@@ -55,6 +55,52 @@
       <q-page-container>
         <router-view />
       </q-page-container>
+
+      <q-footer
+        elevated
+        class="footer-cus bg-grey-1"
+      >
+        <q-toolbar class="q-mt-md justify-start">
+          <div class="col-cus text-dark">
+            <ul class="ul-cus">
+              <div class="text-h6 text-weight-bold q-my-md">
+                Lakukampus
+              </div>
+              <div class="q-gutter-md q-mt-md">
+                <li>Tentang Kami</li>
+                <li>Karir</li>
+              </div>
+            </ul>
+          </div>
+
+          <div class="col-cus text-dark">
+            <ul class="q-mt-md ul-cus">
+              <div class="text-h6 text-weight-bold q-my-md">
+                Pusat Bantuan
+              </div>
+              <div class="q-gutter-md q-mt-md">
+                <li>Syarat dan Ketentuan</li>
+                <li>Kebijakan Privasi</li>
+                <li>Jaminan Keamanan</li>
+              </div>
+            </ul>
+          </div>
+
+          <div class="col-cus text-dark">
+            <ul class="q-mt-md ul-cus">
+              <div class="text-h6 text-weight-bold q-my-md">
+                Kanal
+              </div>
+              <div class="q-gutter-md q-mt-md">
+                <li>BersamaBisa</li>
+                <li>Instagram</li>
+                <li>Facebook</li>
+                <li>Youtube</li>
+              </div>
+            </ul>
+          </div>
+        </q-toolbar>
+      </q-footer>
     </q-layout>
   </div>
 </template>
@@ -78,9 +124,15 @@ export default {
 };
 </script>
 
-<style lang="css">
-.flex-break {
-    flex: 1 0 100% !important;
-    height: 0 !important;
-}
+<style lang="sass">
+  .footer-cus
+    height: 250px
+    width: 100%
+
+  .ul-cus
+    list-style-type: none
+
+  .col-cus
+    height: 230px
+    width: 220px
 </style>
