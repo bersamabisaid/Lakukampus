@@ -10,6 +10,7 @@
       "boot/*": ["src/boot/*"],
       "models/*": ["src/models/*"],
       "composition/*": ["src/composition/*"],
+      "utils/*": ["src/utils/*"],
       "src/*": ["src/*"],
       "app/*": ["*"]
     },
