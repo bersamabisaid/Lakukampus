@@ -31,7 +31,17 @@ const routes: RouteConfig[] = [
       },
     ],
   },
-
+  {
+    path: '/front',
+    component: () => import('layouts/MainFront.vue'),
+    children: [
+      {
+        name: 'Login',
+        path: '/front/login',
+        component: () => import('pages/FrontSide/SignUp.vue'),
+      },
+    ],
+  },
   // Always leave this as last one,
   // but you can also remove it
   {

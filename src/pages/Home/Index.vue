@@ -91,7 +91,7 @@
       >
         <q-card class="category-card q-ma-xs q-mt-md q-mx-md">
           <q-img
-            src="~assets/images/mountain.jpg"
+            src="https://picsum.photos/seed/picsum/280/175"
           />
         </q-card>
         <div
@@ -135,7 +135,7 @@
           class="new-stuff-card q-ma-xs q-mt-md q-mx-md"
         >
           <q-img
-            src="~assets/images/mountain.jpg"
+            src="https://picsum.photos/seed/picsum/390/243"
           />
         </q-card>
       </div>
