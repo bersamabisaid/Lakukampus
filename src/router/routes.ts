@@ -32,12 +32,12 @@ const routes: RouteConfig[] = [
     ],
   },
   {
-    path: '/front',
+    path: '/lakukampus',
     component: () => import('layouts/MainFront.vue'),
     children: [
       {
-        name: 'Login',
-        path: '/front/login',
+        name: 'SignUp',
+        path: '/lakukampus/signup',
         component: () => import('pages/FrontSide/SignUp.vue'),
       },
     ],

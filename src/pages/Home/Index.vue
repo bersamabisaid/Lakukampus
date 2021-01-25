@@ -113,10 +113,98 @@
         v-for="n in 12"
         :key="n"
       >
-        <q-card
-          class="danusan-card q-ma-xs q-mt-md q-mx-xs"
-        >
-          <q-img />
+        <q-card class="danusan-card q-ma-xs q-mt-md q-mx-xs">
+          <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
+
+          <q-card-section>
+            <div class="row no-wrap items-center">
+              <div class="col text-h6 ellipsis">
+                Cafe Basilico
+              </div>
+            </div>
+
+            <!-- <q-rating
+              v-model="stars"
+              :max="5"
+              size="32px"
+            /> -->
+            <div
+              class="text-negative float-right"
+              style="margin-right: 80px"
+            >
+              -33%
+            </div>
+            <div
+              class="done"
+              style="font-size: 12px"
+            >
+              Rp. 2000
+            </div>
+            <div class="text-weight-bolder">
+              Rp. 999
+            </div>
+          </q-card-section>
+
+          <q-card-section
+            class="q-pt-none q-pl-xs"
+          >
+            <!-- <div>
+              <q-icon
+                :name="outlinedLocationOn"
+                color="cyan-4"
+              />
+              <div
+                class="text-cyan-4 text-subtitle2 float-right q-mr-md"
+              >
+                FMIPA
+                <q-icon
+                  :name="outlinedMoped"
+                  color="cyan-4"
+                />
+                <div
+                  class="text-cyan-4 text-subtitle2"
+                >
+                  Bisa Antar
+                </div>
+              </div>
+            </div> -->
+            <q-badge
+              color="white"
+              flat
+            >
+              <q-icon
+                :name="outlinedLocationOn"
+                color="cyan-4"
+                class="q-mr-xs"
+              />
+              <div
+                class="text-subtitle-2 text-cyan-4"
+              >
+                FMIPA
+              </div>
+            </q-badge>
+            <q-badge
+              color="white"
+              flat
+            >
+              <q-icon
+                :name="outlinedMoped"
+                color="cyan-4"
+                class="q-mr-xs"
+              />
+              <div
+                class="text-subtitle-2 text-cyan-4"
+              >
+                Bisa Antar
+              </div>
+            </q-badge>
+            <q-icon
+              name="stars"
+              color="warning"
+              class="q-ml-sm"
+              style="font-size: 20px"
+            />
+          </q-card-section>
         </q-card>
       </div>
 
@@ -195,7 +283,9 @@
   </q-page>
 </template>
 
-<script>
+<script lang="ts">
+import { outlinedLocationOn, outlinedMoped } from '@quasar/extras/material-icons-outlined';
+
 export default {
   name: 'Home',
   data() {
@@ -203,6 +293,10 @@ export default {
       slide: 'style',
       lorem: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo.',
     };
+  },
+  created() {
+    this.outlinedLocationOn = outlinedLocationOn;
+    this.outlinedMoped = outlinedMoped;
   },
 };
 </script>
@@ -227,4 +321,9 @@ export default {
 
   .separator-cus
     margin-right: 38px
+
+  .done
+    text-decoration: line-through
+    color: #bbb
+
 </style>
