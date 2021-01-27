@@ -1,5 +1,5 @@
 import { BaseModelCtor, ModelData } from 'models/ModelFactory/Constructor';
-import { cloneObject } from 'utils/Object';
+import { cloneObject, copyObjectProperties } from 'utils/Object';
 import type fb from 'firebase';
 
 export default function Converter<
@@ -15,4 +15,18 @@ export default function Converter<
       return cloneObject(modelObject);
     },
   } as fb.firestore.FirestoreDataConverter<ModelData<TDataModel>>;
+}
+
+export function ConverterV2 <
+  TDataModel extends fb.firestore.DocumentData
+>(model: new () => TDataModel) {
+  return {
+    fromFirestore(snapshot: fb.firestore.QueryDocumentSnapshot<TDataModel>, options) {
+      // eslint-disable-next-line new-cap
+      return copyObjectProperties(snapshot.data(options), new model());
+    },
+    toFirestore(modelObject: InstanceType<typeof model>) {
+      return cloneObject(modelObject);
+    },
+  } as fb.firestore.FirestoreDataConverter<TDataModel>;
 }
