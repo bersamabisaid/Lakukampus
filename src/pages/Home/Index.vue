@@ -148,26 +148,6 @@
           <q-card-section
             class="q-pt-none q-pl-xs"
           >
-            <!-- <div>
-              <q-icon
-                :name="outlinedLocationOn"
-                color="cyan-4"
-              />
-              <div
-                class="text-cyan-4 text-subtitle2 float-right q-mr-md"
-              >
-                FMIPA
-                <q-icon
-                  :name="outlinedMoped"
-                  color="cyan-4"
-                />
-                <div
-                  class="text-cyan-4 text-subtitle2"
-                >
-                  Bisa Antar
-                </div>
-              </div>
-            </div> -->
             <q-badge
               color="white"
               flat
@@ -292,11 +272,9 @@ export default {
     return {
       slide: 'style',
       lorem: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo.',
+      outlinedLocationOn,
+      outlinedMoped,
     };
-  },
-  created() {
-    this.outlinedLocationOn = outlinedLocationOn;
-    this.outlinedMoped = outlinedMoped;
   },
 };
 </script>
