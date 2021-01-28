@@ -42,6 +42,17 @@ const routes: RouteConfig[] = [
       },
     ],
   },
+  {
+    path: '/my-cart',
+    component: () => import('layouts/MainHomepage.vue'),
+    children: [
+      {
+        name: 'CartIndex',
+        path: '/my-cart',
+        component: () => import('pages/MyCart/CartIndex.vue'),
+      },
+    ],
+  },
   // Always leave this as last one,
   // but you can also remove it
   {
