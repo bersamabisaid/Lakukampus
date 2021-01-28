@@ -22,7 +22,7 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/home',
-    component: () => import('layouts/MainHomepage.vue'),
+    component: () => import('layouts/MainHomepageConsumer.vue'),
     children: [
       {
         name: 'Home',

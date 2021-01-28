@@ -34,22 +34,41 @@
               icon="view_list"
               label="Kategori"
               size="sm"
-              style="margin-right: 185px"
             />
             <q-btn
-              outline
-              class="q-mr-md"
-              color="warning"
-              label="Masuk"
+              flat
+              color="black"
+              icon="shopping_cart"
+              label="Keranjang"
               size="sm"
             />
             <q-btn
-              push
-              class="q-mr-md"
-              color="warning"
-              label="Daftar"
+              flat
+              color="black"
+              icon="chat_bubble"
+              label="Chat"
               size="sm"
-            />
+            >
+              <q-badge
+                color="orange"
+                floating
+              >
+                4
+              </q-badge>
+            </q-btn>
+            <q-btn
+              flat
+              color="black"
+              size="sm"
+              class="q-ml-md on-right"
+            >
+              <q-avatar>
+                <img src="https://cdn.quasar.dev/img/avatar.png">
+              </q-avatar>
+              <div class="q-ml-sm text-capitalize">
+                Halo <em class="text-weight-bold">Shabi</em>
+              </div>
+            </q-btn>
           </div>
         </q-toolbar>
       </q-header>
@@ -137,4 +156,8 @@ export default {
   .col-cus
     height: 230px
     width: 220px
+
+  em
+     font-style: normal
+     text-decoration: none
 </style>
