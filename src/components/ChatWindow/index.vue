@@ -52,7 +52,10 @@ export default defineComponent({
   },
 
   props: {
-    value: Boolean,
+    value: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data() {
