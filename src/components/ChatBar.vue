@@ -23,7 +23,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import ChatWindow from 'components/ChatWindow.vue';
+import ChatWindow from 'components/ChatWindow/index.vue';
 
 export default defineComponent({
   name: 'ChatBar',
