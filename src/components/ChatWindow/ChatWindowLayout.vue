@@ -1,6 +1,6 @@
 <template>
   <q-layout
-    view="lHh lpr lFr"
+    view="hHh LpR lFr"
     container
     class="chat-window"
   >
@@ -29,10 +29,7 @@
     </q-footer>
 
     <q-page-container>
-      <q-page
-        padding
-        class="bg-white"
-      >
+      <q-page class="bg-white">
         <slot />
       </q-page>
     </q-page-container>
@@ -59,7 +56,7 @@ export default defineComponent({
   max-width: 100vw;
   min-height: 500px;
   max-height: 100vh;
-  box-shadow: $shadow-2;
+  box-shadow: $shadow-24;
   border-radius: $generic-border-radius;
 }
 </style>

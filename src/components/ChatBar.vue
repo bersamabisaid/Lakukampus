@@ -14,7 +14,7 @@
       color="red"
     />
     <chat-window
-      v-show="isChatOpen"
+      v-model="isChatOpen"
       style="bottom: 2rem; right: -1rem;"
       class="absolute shadow-24"
     />

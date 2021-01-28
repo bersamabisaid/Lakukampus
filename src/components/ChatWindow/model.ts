@@ -3,3 +3,8 @@ export interface Contact {
   lastMessage: string;
   unreadMessages: number;
 }
+
+export interface Chat {
+  content: string;
+  fromMe: boolean;
+}

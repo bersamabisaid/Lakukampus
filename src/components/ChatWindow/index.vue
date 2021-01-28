@@ -1,7 +1,12 @@
 <template>
-  <chat-window-layout>
+  <chat-window-layout v-show="value">
     <template #header-bar>
-      <div>Chats ({{ unreadMessages }})</div>
+      <div
+        @click="closeChatWindow"
+        class="non-selectable"
+      >
+        Chats ({{ unreadMessages }})
+      </div>
 
       <q-space />
 
@@ -9,6 +14,8 @@
         dense
         flat
         icon="close"
+        @click="closeChatWindow"
+        title="hide chat window"
       />
     </template>
 
@@ -23,7 +30,7 @@
     </template>
 
     <template #default>
-      <chat-messages />
+      <chat-messages :chat-messages="chatMessages" />
     </template>
   </chat-window-layout>
 </template>
@@ -35,13 +42,17 @@ import ChatWindowLayout from './ChatWindowLayout.vue';
 import ChatList from './ChatList.vue';
 import ChatMessages from './ChatMessages.vue';
 import ChatTextInput from './ChatTextInput.vue';
-import type { Contact } from './model';
+import type { Contact, Chat } from './model';
 
 export default defineComponent({
   name: 'ChatWindow',
 
   components: {
     ChatWindowLayout, ChatList, ChatMessages, ChatTextInput,
+  },
+
+  props: {
+    value: Boolean,
   },
 
   data() {
@@ -53,15 +64,26 @@ export default defineComponent({
         lastMessage: lorem.words(),
         unreadMessages: random.number({ min: 0, max: 50, precision: 1 }),
       } as Contact)),
+
+      chatMessages: Array.from(Array(10)).map(() => ({
+        content: lorem.paragraph(),
+        fromMe: random.boolean(),
+      } as Chat)),
     };
   },
 
   computed: {
-    unreadMessages() {
+    unreadMessages(): number {
       return this.contacts.reduce(
         (total: number, { unreadMessages }: Contact) => total + unreadMessages,
         0,
-      ) as number;
+      );
+    },
+  },
+
+  methods: {
+    closeChatWindow() {
+      this.$emit('input', !this.value);
     },
   },
 });
