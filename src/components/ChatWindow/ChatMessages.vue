@@ -57,11 +57,12 @@ export default defineComponent({
         text: contents,
       } as unknown as QChatMessage,
     });
+    const chatMessages: ImprovedChatMessage[] = this.mergedChatMessages;
 
     return h(
       'div',
       { staticClass: 'q-pa-md' },
-      this.mergedChatMessages.map((chat: ImprovedChatMessage) => (
+      chatMessages.map((chat: ImprovedChatMessage) => (
         chat.fromMe
           ? fromMeEl(chat)
           : fromOtherEl(chat)

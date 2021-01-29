@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import CartItemList from './CartItemList';
+import CartItemList from './CartItemList.vue';
 
 export default {
   name: 'CartIndex',
