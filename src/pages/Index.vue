@@ -22,8 +22,13 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
+import useAuth from 'composition/useAuth';
 
 export default defineComponent({
   name: 'PageIndex',
+
+  setup() {
+    return useAuth();
+  },
 });
 </script>
