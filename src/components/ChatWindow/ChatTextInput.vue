@@ -33,7 +33,7 @@ export default defineComponent({
 
   methods: {
     sendMessage() {
-      this.$emit('message-entered');
+      this.$emit('message-entered', this.value);
       // reset value
       this.$emit('input', '');
     },

@@ -26,11 +26,15 @@
     <template #bottom>
       <chat-text-input
         v-model="chatInput"
+        @message-entered="sendMessage"
       />
     </template>
 
     <template #default>
-      <chat-messages :chat-messages="chatMessages" />
+      <chat-messages
+        ref="chats"
+        :chat-messages="chatMessages"
+      />
     </template>
   </chat-window-layout>
 </template>
@@ -40,7 +44,7 @@ import { defineComponent } from '@vue/composition-api';
 import { lorem, internet, random } from 'faker';
 import ChatWindowLayout from './ChatWindowLayout.vue';
 import ChatList from './ChatList.vue';
-import ChatMessages from './ChatMessages.vue';
+import ChatMessages, { IChatMessages } from './ChatMessages';
 import ChatTextInput from './ChatTextInput.vue';
 import type { Contact, Chat } from './model';
 
@@ -87,6 +91,15 @@ export default defineComponent({
   methods: {
     closeChatWindow() {
       this.$emit('input', !this.value);
+    },
+
+    sendMessage(message: string) {
+      this.chatMessages.push({
+        content: message,
+        fromMe: true,
+      });
+
+      (this.$refs.chats as IChatMessages).scrollToLastMessage();
     },
   },
 });

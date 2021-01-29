@@ -29,7 +29,7 @@
     </q-footer>
 
     <q-page-container>
-      <q-page class="bg-white">
+      <q-page class="flex bg-white">
         <slot />
       </q-page>
     </q-page-container>

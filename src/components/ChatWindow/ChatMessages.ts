@@ -1,10 +1,17 @@
-<script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import { QChatMessage } from 'quasar';
+import { QChatMessage, QScrollArea } from 'quasar';
 import type { Chat } from './model';
 
 interface ImprovedChatMessage extends Chat {
   contents: Chat['content'][];
+}
+
+export interface IChatMessages extends Vue {
+  chatMessages: Chat[];
+
+  mergedChatMessages: ImprovedChatMessage[];
+
+  scrollToLastMessage: () => void;
 }
 
 export default defineComponent({
@@ -37,11 +44,23 @@ export default defineComponent({
     },
   },
 
+  methods: {
+    scrollToLastMessage() {
+      (this.$refs.scrollArea as QScrollArea).setScrollPercentage(1.1, 400);
+    },
+  },
+
+  mounted() {
+    this.scrollToLastMessage();
+  },
+
   render(h) {
     const fromMeEl = ({ contents }: ImprovedChatMessage) => h(QChatMessage, {
       props: {
-        size: 11,
-        bgColor: 'grey-4',
+        sent: true,
+        bgColor: 'primary',
+        textColor: 'white',
+        size: '11',
         stamp: '17 seconds ago',
         text: contents,
       } as unknown as QChatMessage,
@@ -49,19 +68,24 @@ export default defineComponent({
 
     const fromOtherEl = ({ contents }: ImprovedChatMessage) => h(QChatMessage, {
       props: {
-        sent: true,
-        bgColor: 'primary',
-        textColor: 'white',
-        size: 11,
+        bgColor: 'grey-4',
+        size: '11',
         stamp: '12 seconds ago',
         text: contents,
       } as unknown as QChatMessage,
     });
+
     const chatMessages: ImprovedChatMessage[] = this.mergedChatMessages;
 
     return h(
-      'div',
-      { staticClass: 'q-pa-md' },
+      QScrollArea,
+      {
+        ref: 'scrollArea',
+        staticClass: 'full-width q-px-md',
+        staticStyle: {
+          alignSelf: 'stretch',
+        },
+      },
       chatMessages.map((chat: ImprovedChatMessage) => (
         chat.fromMe
           ? fromMeEl(chat)
@@ -69,5 +93,5 @@ export default defineComponent({
       )),
     );
   },
+
 });
-</script>
