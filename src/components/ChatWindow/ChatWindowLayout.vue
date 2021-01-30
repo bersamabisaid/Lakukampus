@@ -4,10 +4,12 @@
     container
     class="chat-window"
   >
-    <q-header elevated>
-      <q-bar v-if="!noHeader">
+    <q-header>
+      <q-bar v-if="!noHeaderBar">
         <slot name="header-bar" />
       </q-bar>
+
+      <slot name="header" />
     </q-header>
 
     <q-drawer
@@ -43,7 +45,7 @@ export default defineComponent({
   name: 'ChatWindowLayout',
 
   props: {
-    noHeader: {
+    noHeaderBar: {
       type: Boolean,
       default: false,
     },

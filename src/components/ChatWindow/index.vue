@@ -19,6 +19,8 @@
       />
     </template>
 
+    <template #header />
+
     <template #side-bar>
       <chat-list :contacts="contacts" />
     </template>
@@ -35,15 +37,24 @@
         ref="chats"
         :chat-messages="chatMessages"
       />
+
+      <chat-title
+        :photo="chatThumbnail"
+        :title="chatTitle"
+        status="online"
+      />
     </template>
   </chat-window-layout>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import { lorem, internet, random } from 'faker';
+import {
+  lorem, internet, random, image,
+} from 'faker';
 import useChat from 'composition/useChat';
 import ChatWindowLayout from './ChatWindowLayout.vue';
+import ChatTitle from './ChatTitle.vue';
 import ChatList from './ChatList.vue';
 import ChatMessages, { IChatMessages } from './ChatMessages';
 import ChatTextInput from './ChatTextInput.vue';
@@ -53,7 +64,7 @@ export default defineComponent({
   name: 'ChatWindow',
 
   components: {
-    ChatWindowLayout, ChatList, ChatMessages, ChatTextInput,
+    ChatWindowLayout, ChatTitle, ChatList, ChatMessages, ChatTextInput,
   },
 
   setup() {
@@ -66,6 +77,8 @@ export default defineComponent({
 
   data() {
     return {
+      chatTitle: internet.userName(),
+      chatThumbnail: image.business(50, 50),
       chatInput: '',
 
       contacts: Array.from(Array(10)).map(() => ({

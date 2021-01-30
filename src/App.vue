@@ -6,6 +6,7 @@
       v-model="chatState.isChatWindowOpen"
       seamless
       :position="chatState.position"
+      :style="{width: $q.screen.sizes.sm}"
     >
       <chat-window />
     </q-dialog>

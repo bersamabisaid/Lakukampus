@@ -84,6 +84,7 @@ export default defineComponent({
         staticClass: 'full-width q-px-md',
         staticStyle: {
           alignSelf: 'stretch',
+          marginTop: '50px',
         },
       },
       chatMessages.map((chat: ImprovedChatMessage) => (
