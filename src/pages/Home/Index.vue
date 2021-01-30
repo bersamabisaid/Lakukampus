@@ -114,12 +114,12 @@
         :key="n"
       >
         <q-card class="danusan-card q-ma-xs q-mt-md q-mx-xs">
-          <q-img src="https://cdn.quasar.dev/img/chicken-salad.jpg" />
+          <q-img :src="productPhoto" />
 
           <q-card-section>
             <div class="row no-wrap items-center">
               <div class="col text-h6 ellipsis">
-                Cafe Basilico
+                {{ productName }}
               </div>
             </div>
 
@@ -138,7 +138,7 @@
               class="done"
               style="font-size: 12px"
             >
-              Rp. 2000
+              Rp. {{ productPrice }}
             </div>
             <div class="text-weight-bolder">
               Rp. 999
@@ -154,11 +154,11 @@
             >
               <q-icon
                 :name="outlinedLocationOn"
-                color="cyan-4"
+                color="teal-7"
                 class="q-mr-xs"
               />
               <div
-                class="text-subtitle-2 text-cyan-4"
+                class="text-subtitle-2 text-teal-7"
               >
                 FMIPA
               </div>
@@ -169,11 +169,11 @@
             >
               <q-icon
                 :name="outlinedMoped"
-                color="cyan-4"
+                color="teal-7"
                 class="q-mr-xs"
               />
               <div
-                class="text-subtitle-2 text-cyan-4"
+                class="text-subtitle-2 text-teal-7"
               >
                 Bisa Antar
               </div>
@@ -203,7 +203,7 @@
           class="new-stuff-card q-ma-xs q-mt-md q-mx-md"
         >
           <q-img
-            src="https://picsum.photos/seed/picsum/390/243"
+            src="https://picsum.photos/390/243"
           />
         </q-card>
       </div>
@@ -265,15 +265,20 @@
 
 <script lang="ts">
 import { outlinedLocationOn, outlinedMoped } from '@quasar/extras/material-icons-outlined';
+import { commerce, lorem, image } from 'faker';
 
 export default {
   name: 'Home',
   data() {
     return {
       slide: 'style',
-      lorem: 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo.',
+      lorem: lorem.paragraph(),
       outlinedLocationOn,
       outlinedMoped,
+
+      productName: commerce.productName(),
+      productPrice: commerce.price(),
+      productPhoto: image.food(),
     };
   },
 };

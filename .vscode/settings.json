@@ -6,6 +6,7 @@
   "vetur.experimental.templateInterpolationService": true,
   "conventionalCommits.scopes": [
     "model",
-    "functions"
+    "functions",
+    "page"
   ]
 }
