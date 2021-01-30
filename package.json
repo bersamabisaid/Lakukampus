@@ -16,7 +16,8 @@
     "@vue/composition-api": "^0.6.7",
     "core-js": "^3.6.5",
     "firebase": "^8.1.2",
-    "quasar": "^1.0.0"
+    "quasar": "^1.0.0",
+    "vuex-composition-helpers": "^1.0.22"
   },
   "devDependencies": {
     "@quasar/app": "^2.0.0",

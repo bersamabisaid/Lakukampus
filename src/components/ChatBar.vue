@@ -4,38 +4,33 @@
       label="Chats"
       size="1rem"
       icon="chat"
-      :icon-right="isChatOpen ? 'expand_more' : 'expand_less'"
+      :icon-right="chatState.isChatWindowOpen ? 'expand_more' : 'expand_less'"
       text-color="grey-10"
-      @click="isChatOpen = !isChatOpen"
+      @click="toggleChatWindow"
     />
     <q-badge
       floating
       label="10"
       color="red"
     />
-    <chat-window
-      v-model="isChatOpen"
-      style="bottom: 2rem; right: -1rem;"
-      class="absolute shadow-24"
-    />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import ChatWindow from 'components/ChatWindow/index.vue';
+import useChat from 'composition/useChat';
 
 export default defineComponent({
   name: 'ChatBar',
 
-  components: {
-    ChatWindow,
+  setup() {
+    return useChat();
   },
 
-  data() {
-    return {
-      isChatOpen: false,
-    };
+  methods: {
+    toggleChatWindow() {
+      this.setChatWindowOpen((st) => !st);
+    },
   },
 });
 </script>

@@ -5,7 +5,7 @@
     class="chat-window"
   >
     <q-header elevated>
-      <q-bar>
+      <q-bar v-if="!noHeader">
         <slot name="header-bar" />
       </q-bar>
     </q-header>
@@ -42,6 +42,13 @@ import { defineComponent } from '@vue/composition-api';
 export default defineComponent({
   name: 'ChatWindowLayout',
 
+  props: {
+    noHeader: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
   data() {
     return {
       contactListOpen: true,
@@ -53,10 +60,10 @@ export default defineComponent({
 <style lang="scss">
 .chat-window {
   min-width: $breakpoint-xs;
-  max-width: 100vw;
+  max-width: calc(100vw - 2rem);
   min-height: 500px;
-  max-height: 100vh;
-  box-shadow: $shadow-24;
+  max-height: calc(100vh - 2rem);
+  box-shadow: $shadow-24 !important;
   border-radius: $generic-border-radius;
 }
 </style>

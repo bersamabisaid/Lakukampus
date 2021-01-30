@@ -1,8 +1,8 @@
 <template>
-  <chat-window-layout v-show="value">
+  <chat-window-layout v-bind="$attrs">
     <template #header-bar>
       <div
-        @click="closeChatWindow"
+        @click="setChatWindowOpen(false)"
         class="non-selectable"
       >
         Chats ({{ unreadMessages }})
@@ -14,7 +14,7 @@
         dense
         flat
         icon="close"
-        @click="closeChatWindow"
+        @click="setChatWindowOpen(false)"
         title="hide chat window"
       />
     </template>
@@ -42,6 +42,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import { lorem, internet, random } from 'faker';
+import useChat from 'composition/useChat';
 import ChatWindowLayout from './ChatWindowLayout.vue';
 import ChatList from './ChatList.vue';
 import ChatMessages, { IChatMessages } from './ChatMessages';
@@ -55,11 +56,12 @@ export default defineComponent({
     ChatWindowLayout, ChatList, ChatMessages, ChatTextInput,
   },
 
-  props: {
-    value: {
-      type: Boolean,
-      default: true,
-    },
+  setup() {
+    const { setChatWindowOpen } = useChat();
+
+    return {
+      setChatWindowOpen,
+    };
   },
 
   data() {
@@ -89,10 +91,6 @@ export default defineComponent({
   },
 
   methods: {
-    closeChatWindow() {
-      this.$emit('input', !this.value);
-    },
-
     sendMessage(message: string) {
       this.chatMessages.push({
         content: message,
