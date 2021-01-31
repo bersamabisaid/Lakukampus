@@ -29,8 +29,6 @@
           <q-card-section
             class="row items-center"
             style="height: 345.3px"
-            v-for="i in 2"
-            :key="i"
           >
             <div class="col-3">
               <q-card
@@ -62,7 +60,7 @@
             <div class="text-h5 col text-weight-medium q-mr-xl">
               Buku Edensor by Andrea hirata tetralogi laskar pelangi
             </div>
-            <div class="text-h4 col col-2">
+            <div class="text-h4 col-2">
               <q-btn-group>
                 <q-btn
                   icon="remove"
