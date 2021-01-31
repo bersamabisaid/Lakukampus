@@ -64,8 +64,9 @@ export default {
 };
 </script>
 
-<style lang="sass">
-   em
-     font-style: normal
-     text-decoration: none
+<style lang="scss">
+   em {
+     font-style: normal;
+     text-decoration: none;
+    }
 </style>

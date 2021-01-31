@@ -109,10 +109,4 @@ export default {
     font-style: normal;
     text-decoration: none;
   }
-
-  // FLEX ROW / COLUMN BREAK
-  .flex-break {
-    flex: 1 0 100% !important;
-    width: 0 !important;
-  }
 </style>

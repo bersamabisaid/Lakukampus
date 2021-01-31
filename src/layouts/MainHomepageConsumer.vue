@@ -145,19 +145,23 @@ export default {
 };
 </script>
 
-<style lang="sass">
-  .footer-cus
-    height: 250px
-    width: 100%
+<style lang="scss">
+  .footer-cus {
+    height: 250px;
+    width: 100%;
+  }
 
-  .ul-cus
-    list-style-type: none
+  .ul-cus {
+    list-style-type: none;
+  }
 
-  .col-cus
-    height: 230px
-    width: 220px
+  .col-cus {
+    height: 230px;
+    width: 220px ;
+  }
 
-  em
-     font-style: normal
-     text-decoration: none
+  em {
+     font-style: normal;
+     text-decoration: none;
+  }
 </style>
