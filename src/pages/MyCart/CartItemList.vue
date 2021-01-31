@@ -52,7 +52,7 @@
                 <div class="bg-grey-3 text-right">
                   <span class="text-h6 text-weight-regular">
                     <small class="text-caption">price</small>
-                    Rp 30.000
+                    Rp. 30.000
                   </span>
                 </div>
               </q-card>
@@ -63,6 +63,15 @@
             <div class="text-h4 col-2">
               <q-btn-group>
                 <q-btn
+                  icon="remove"
+                  color="white"
+                  class="bg-grey-8"
+                  @click="minButton"
+                  v-if="numb >= 2"
+                />
+                <q-btn
+                  v-else
+                  disable
                   icon="remove"
                   color="white"
                   class="bg-grey-8"
@@ -77,6 +86,7 @@
                   icon="add"
                   color="white"
                   class="bg-grey-8"
+                  @click="plusButton"
                 />
               </q-btn-group>
             </div>
@@ -98,9 +108,17 @@ export default {
 
   data: () => ({
     selected: ['dsd'],
-    numb: 22,
+    numb: 1,
     select: false,
   }),
+  methods: {
+    plusButton() {
+      this.numb += 1;
+    },
+    minButton() {
+      this.numb -= 1;
+    },
+  },
 };
 </script>
 
