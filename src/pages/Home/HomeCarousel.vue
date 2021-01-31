@@ -29,8 +29,8 @@ export default defineComponent({
 
   data() {
     return {
-      slide: 'style'
-    }
-  }
+      slide: 'style',
+    };
+  },
 });
 </script>
