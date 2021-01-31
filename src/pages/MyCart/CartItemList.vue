@@ -1,9 +1,7 @@
 <template>
   <q-card>
     <q-list>
-      <q-expansion-item
-        default-opened
-      >
+      <q-expansion-item default-opened>
         <template v-slot:header>
           <q-item-section>
             <div class="flex">
@@ -11,19 +9,29 @@
                 v-model="select"
                 dense
               />
-              <span class="text-caption q-ml-md">
-                Seller:<span class="text-h6 text-grey-8"> Anonymous</span>
-              </span>
+              <div>
+                <div>
+                  <q-icon
+                    name="storefront"
+                    size="md"
+                    class="q-ml-md q-mr-sm"
+                  />
+                  <em class="text-weight-regular text-h6 vertical-middle">
+                    Destiny Music
+                  </em>
+                </div>
+              </div>
             </div>
           </q-item-section>
         </template>
 
         <q-card>
-          <q-card-section>
-            <div class="flex justify-center">
+          <q-card-section
+            class="row items-center"
+            style="height: 345.3px"
+          >
+            <div class="col-3">
               <q-card
-                v-for="i in 3"
-                :key="i"
                 class="q-ma-md"
                 style="width: 200px"
                 @click="select = !select"
@@ -38,36 +46,45 @@
                   src="https://picsum.photos/150"
                   height="150px"
                 />
+
                 <q-separator />
-                <q-list dense>
-                  <q-item>
-                    <q-item-section>
-                      <q-btn-group flat>
-                        <q-btn icon="remove" />
-                        <q-input
-                          label="qty"
-                          v-model.number="numb"
-                          input-class="text-center"
-                          dense
-                          outlined
-                        />
-                        <q-btn icon="add" />
-                      </q-btn-group>
-                    </q-item-section>
-                  </q-item>
-                </q-list>
-                <q-separator />
-                <div class="flex justify-between q-px-sm bg-grey-1">
-                  <span class="text-caption text-weight-regular">
-                    <small>price</small> Rp 10
-                  </span>
+
+                <div class="bg-grey-3 text-right">
                   <span class="text-h6 text-weight-regular">
-                    <small class="text-caption">total</small>
-                    Rp 199
+                    <small class="text-caption">price</small>
+                    Rp 30.000
                   </span>
                 </div>
               </q-card>
             </div>
+            <div class="text-h5 col text-weight-medium q-mr-xl">
+              Buku Edensor by Andrea hirata tetralogi laskar pelangi
+            </div>
+            <div class="text-h4 col-2">
+              <q-btn-group>
+                <q-btn
+                  icon="remove"
+                  color="white"
+                  class="bg-grey-8"
+                />
+                <q-input
+                  v-model.number="numb"
+                  input-class="text-center"
+                  dense
+                  outlined
+                />
+                <q-btn
+                  icon="add"
+                  color="white"
+                  class="bg-grey-8"
+                />
+              </q-btn-group>
+            </div>
+            <q-btn
+              class="col-2 q-ml-xl justify-center"
+              style="background: red; color: white"
+              label="Hapus"
+            />
           </q-card-section>
         </q-card>
       </q-expansion-item>
@@ -86,3 +103,10 @@ export default {
   }),
 };
 </script>
+
+<style lang="scss" scoped>
+  em {
+    font-style: normal;
+    text-decoration: none;
+  }
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <q-page
+  <q-page-container
     padding
     style="padding-bottom: 20vh"
   >
@@ -21,10 +21,9 @@
       <div class="col-1" />
     </div>
 
-    <transition
-      appear
-      enter-active-class="animated slideInUp"
-      leave-active-class="animated slideInDown"
+    <q-page-sticky
+      expand
+      position="bottom"
     >
       <q-card
         ref="cartPagefooter"
@@ -47,6 +46,7 @@
               Rp 0
             </span>
           </q-card-section>
+
           <template v-if="true">
             <q-separator vertical />
             <q-btn
@@ -61,8 +61,8 @@
           </template>
         </div>
       </q-card>
-    </transition>
-  </q-page>
+    </q-page-sticky>
+  </q-page-container>
 </template>
 
 <script>

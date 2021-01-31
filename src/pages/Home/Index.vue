@@ -151,29 +151,33 @@ export default {
 };
 </script>
 
-<style lang="sass">
-  .my-card
-    width: 30%
+<style lang="scss">
+  .my-card {
+    width: 30%;
+  }
+  .category-card {
+    width: 280px;
+  }
+  .danusan-card {
+    width: 200px;
+    height: 280px;
+  }
 
-  .category-card
-    width: 280px
+  .new-stuff-card {
+    width: 390px;
+  }
 
-  .danusan-card
-    width: 200px
-    height: 280px
+  .just-card {
+    width: 700px;
+    height: 300px;
+  }
 
-  .new-stuff-card
-    width: 390px
+  .separator-cus {
+    margin-right: 38px;
+  }
 
-  .just-card
-    width: 700px
-    height: 300px
-
-  .separator-cus
-    margin-right: 38px
-
-  .done
-    text-decoration: line-through
-    color: #bbb
-
+  .done {
+    text-decoration: line-through;
+    color: #bbb;
+  }
 </style>
