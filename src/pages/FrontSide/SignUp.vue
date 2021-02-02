@@ -12,7 +12,7 @@
     >
       <div class="col-6 q-ml-xl q-pl-xl">
         <img
-          :src="require('assets/images/Lakukampus_Logo.png')"
+          :src="require('assets/images/Lakukampus_logo.png')"
           style="width: 160px"
           class="q-mb-sm"
         >
