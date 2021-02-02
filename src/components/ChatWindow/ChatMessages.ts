@@ -1,6 +1,6 @@
 import { defineComponent, PropType } from '@vue/composition-api';
 import { QChatMessage, QScrollArea } from 'quasar';
-import type { Chat } from './model';
+import type { Chat } from 'components/ChatWindow/model';
 
 interface ImprovedChatMessage extends Chat {
   contents: Chat['content'][];

@@ -126,7 +126,7 @@
 
 <script lang="ts">
 import {
-  commerce, lorem, image, random,
+  commerce, image, random,
 } from 'faker';
 import productCard from 'components/ui/productCard.vue';
 import HomeCarousel from './HomeCarousel.vue';

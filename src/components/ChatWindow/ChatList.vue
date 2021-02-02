@@ -45,7 +45,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import type { Contact } from './model';
+import type { Contact } from 'components/ChatWindow/model';
 
 export default defineComponent({
   name: 'ChatList',

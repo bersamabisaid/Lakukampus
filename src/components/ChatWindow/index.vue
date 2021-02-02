@@ -53,12 +53,12 @@ import {
   lorem, internet, random, image,
 } from 'faker';
 import useChat from 'composition/useChat';
-import ChatWindowLayout from './ChatWindowLayout.vue';
-import ChatTitle from './ChatTitle.vue';
-import ChatList from './ChatList.vue';
-import ChatMessages, { IChatMessages } from './ChatMessages';
-import ChatTextInput from './ChatTextInput.vue';
-import type { Contact, Chat } from './model';
+import ChatWindowLayout from 'components/ChatWindow/ChatWindowLayout.vue';
+import ChatTitle from 'components/ChatWindow/ChatTitle.vue';
+import ChatList from 'components/ChatWindow/ChatList.vue';
+import ChatMessages, { IChatMessages } from 'components/ChatWindow/ChatMessages';
+import ChatTextInput from 'components/ChatWindow/ChatTextInput.vue';
+import type { Contact, Chat } from 'components/ChatWindow/model';
 
 export default defineComponent({
   name: 'ChatWindow',
