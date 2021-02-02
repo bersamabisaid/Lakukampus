@@ -6,9 +6,12 @@
     <div class="row">
       <div class="col-1" />
       <div class="col">
-        <h1 class="text-h3">
-          <q-icon name="shopping_cart" />
-          My Cart
+        <h1 class="text-h5 text-weight-medium">
+          <q-icon
+            name="shopping_cart"
+            size="xl"
+          />
+          Keranjang Belanja
         </h1>
         <div class="row q-col-gutter-lg">
           <div class="col row full-width q-mb-md">

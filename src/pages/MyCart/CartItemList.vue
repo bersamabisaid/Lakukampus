@@ -26,76 +26,81 @@
         </template>
 
         <q-card>
-          <q-card-section
-            class="row items-center"
-            style="height: 345.3px"
-          >
-            <div class="col-3">
-              <q-card
-                class="q-ma-md"
-                style="width: 200px"
-                @click="select = !select"
-              >
-                <q-card-section>
-                  <q-checkbox
-                    v-model="select"
-                    dense
+          <div class="q-mt-md q-mb-xl">
+            <q-card-section
+              class="row items-center q-ml-xl"
+              style="height: 180px"
+              v-for="n in 2"
+              :key="n"
+            >
+              <q-checkbox
+                v-model="select"
+                dense
+              />
+              <div class="col-3">
+                <q-card
+                  class="q-ma-md"
+                  style="width: 200px"
+                  @click="select = !select"
+                >
+                  <q-img
+                    src="https://picsum.photos/150"
+                    height="150px"
                   />
-                </q-card-section>
-                <q-img
-                  src="https://picsum.photos/150"
-                  height="150px"
-                />
-
-                <q-separator />
-
-                <div class="bg-grey-3 text-right">
+                </q-card>
+              </div>
+              <div class="text-h5 col-3 text-weight-medium q-mr-xl">
+                {{ title }}
+                <div>
                   <span class="text-h6 text-weight-regular">
-                    <small class="text-caption">price</small>
-                    Rp. 30.000
+                    Rp. {{ price }}
                   </span>
                 </div>
-              </q-card>
-            </div>
-            <div class="text-h5 col text-weight-medium q-mr-xl">
-              Buku Edensor by Andrea hirata tetralogi laskar pelangi
-            </div>
-            <div class="text-h4 col-2">
-              <q-btn-group>
-                <q-btn
-                  icon="remove"
-                  color="white"
-                  class="bg-grey-8"
-                  @click="minButton"
-                  v-if="numb >= 2"
-                />
-                <q-btn
-                  v-else
-                  disable
-                  icon="remove"
-                  color="white"
-                  class="bg-grey-8"
-                />
-                <q-input
-                  v-model.number="numb"
-                  input-class="text-center"
-                  dense
-                  outlined
-                />
-                <q-btn
-                  icon="add"
-                  color="white"
-                  class="bg-grey-8"
-                  @click="plusButton"
-                />
-              </q-btn-group>
-            </div>
-            <q-btn
-              class="col-2 q-ml-xl justify-center"
-              style="background: red; color: white"
-              label="Hapus"
-            />
-          </q-card-section>
+              </div>
+              <div class="text-h4 col-2 q-mr-xl">
+                <q-btn-group>
+                  <q-btn
+                    icon="remove"
+                    color="white"
+                    class="bg-grey-8"
+                    @click="minButton"
+                    v-if="numb >= 2"
+                  />
+                  <q-btn
+                    v-else
+                    disable
+                    icon="remove"
+                    color="grey"
+                    text-color="white"
+                  />
+                  <q-input
+                    v-model.number="numb"
+                    input-class="text-center"
+                    dense
+                    outlined
+                  />
+                  <q-btn
+                    icon="add"
+                    color="primary"
+                    text-color="white"
+                    @click="plusButton"
+                  />
+                </q-btn-group>
+                <div>
+                  <span class="text-h6 text-weight-regular">
+                    <small class="text-caption">total/item</small>
+                    Rp. {{ pricePerItemTotal }}
+                  </span>
+                </div>
+              </div>
+              <q-btn
+                class="col-2 q-ml-xl"
+                color="red"
+                text-color="white"
+                label="Hapus"
+              />
+            </q-card-section>
+          </div>
         </q-card>
       </q-expansion-item>
     </q-list>
@@ -103,6 +108,9 @@
 </template>
 
 <script>
+import { random, commerce } from 'faker';
+// import { uid } from 'quasar';
+
 export default {
   name: 'CartItemList',
 
@@ -110,7 +118,27 @@ export default {
     selected: ['dsd'],
     numb: 1,
     select: false,
+    // myCart: [
+    //   {
+    //     id: uid(),
+    //     title: commerce.productName(),
+    //     price: random.number({
+    //       min: 12000,
+    //       precision: 1000,
+    //     }),
+    //   },
+    // ],
+    price: random.number({
+      min: 12000,
+      precision: 1000,
+    }),
+    title: commerce.productName(),
   }),
+  computed: {
+    pricePerItemTotal() {
+      return this.price * this.numb;
+    },
+  },
   methods: {
     plusButton() {
       this.numb += 1;
