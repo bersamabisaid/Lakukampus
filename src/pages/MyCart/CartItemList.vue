@@ -109,25 +109,14 @@
 
 <script>
 import { random, commerce } from 'faker';
-// import { uid } from 'quasar';
 
 export default {
   name: 'CartItemList',
 
   data: () => ({
     selected: ['dsd'],
-    numb: 1,
     select: false,
-    // myCart: [
-    //   {
-    //     id: uid(),
-    //     title: commerce.productName(),
-    //     price: random.number({
-    //       min: 12000,
-    //       precision: 1000,
-    //     }),
-    //   },
-    // ],
+    numb: 1,
     price: random.number({
       min: 12000,
       precision: 1000,
