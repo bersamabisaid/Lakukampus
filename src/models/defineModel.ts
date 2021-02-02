@@ -2,7 +2,7 @@ import { db, fireUtils } from 'src/firebase';
 import { cloneObject, copyObjectProperties } from 'utils/Object';
 import { ConverterV2 } from 'models/ModelFactory/Converter';
 import Create from 'models/ModelFactory/Create';
-import Find from 'models/ModelFactory/find';
+import Find from 'models/ModelFactory/Find';
 import type fb from 'firebase';
 
 interface ModelTimestamp {

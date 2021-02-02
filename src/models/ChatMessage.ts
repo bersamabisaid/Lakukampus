@@ -1,4 +1,4 @@
-import SubModel from 'models/Submodel';
+import SubModel from 'models/SubModel';
 import Chat from 'models/Chat';
 import User from 'models/User';
 import Item from 'models/Item';

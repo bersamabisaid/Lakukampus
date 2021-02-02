@@ -1,7 +1,7 @@
 import { db } from 'src/firebase';
 import Constructor, { BaseModelCtor, ModelData } from 'models/ModelFactory/Constructor';
 import Converter from 'models/ModelFactory/Converter';
-import Find from 'models/ModelFactory/find';
+import Find from 'models/ModelFactory/Find';
 import Create from 'models/ModelFactory/Create';
 import type fb from 'firebase';
 

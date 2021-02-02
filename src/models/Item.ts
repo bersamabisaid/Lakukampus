@@ -1,4 +1,4 @@
-import SubModel from 'models/Submodel';
+import SubModel from 'models/SubModel';
 import Shop from 'models/Shop';
 import Category from 'models/Category';
 import { repeatedPromises } from 'src/utils/Promises';

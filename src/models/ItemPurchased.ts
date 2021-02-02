@@ -1,5 +1,5 @@
 import Item from 'models/Item';
-import SubModel from 'models/Submodel';
+import SubModel from 'models/SubModel';
 import Transaction from 'models/Transaction';
 
 interface IItemPurchased {
