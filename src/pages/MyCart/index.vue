@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import CartItemList from './CartItemList.vue';
+import CartItemList from 'pages/MyCart/CartItemList.vue';
 
 export default {
   name: 'CartIndex',
