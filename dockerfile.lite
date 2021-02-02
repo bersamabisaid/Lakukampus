@@ -1,0 +1,11 @@
+FROM node:14.15-alpine
+
+EXPOSE 8000:8000
+
+WORKDIR /Lakukampus-TS
+
+COPY ./dist .
+
+RUN npm i -g @quasar/cli
+
+CMD ["quasar", "serve", "spa", "-p", "8000"]
