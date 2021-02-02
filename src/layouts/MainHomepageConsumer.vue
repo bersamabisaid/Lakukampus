@@ -10,7 +10,7 @@
           :to="{name: 'Home'}"
         >
           <img
-            src="~assets/images/Lakukampus_Logo.png"
+            :src="require('assets/images/Lakukampus_Logo.png')"
             style="width: 190px"
             class="q-pa-sm q-pl-lg"
           >
@@ -129,7 +129,7 @@
   </q-layout>
 </template>
 
-<script lang="ts">
+<script>
 import { defineComponent } from '@vue/composition-api';
 import useChat from 'composition/useChat';
 

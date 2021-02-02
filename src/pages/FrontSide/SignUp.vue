@@ -1,11 +1,11 @@
 <template>
   <q-page class="flex flex-center">
     <div class="q-mr-xl">
-      <img src="~assets/images/shopping/bro.png">
+      <img :src="require('assets/images/shopping/bro.png')">
     </div>
     <div>
       <img
-        src="~assets/images/Lakukampus_Logo.png"
+        :src="require('assets/images/Lakukampus_Logo.png')"
         style="width: 190px"
         class="q-pa-sm q-pl-lg"
       >
@@ -21,7 +21,7 @@
             class="q-mr-md"
             size="20px"
           >
-            <img src="~assets/images/Google_Logo.png">
+            <img :src="require('assets/images/Google_Logo.png')">
           </q-avatar>
           <div>daftar dengan google</div>
         </q-btn>

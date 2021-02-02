@@ -8,7 +8,7 @@
         style="margin-left: 70px"
       >
         <q-img
-          src="~assets/images/lakukampus-channel-art_sm.jpg"
+          :src="require('assets/images/lakukampus-channel-art_sm.jpg')"
           style="height: 100%"
         />
       </q-card>

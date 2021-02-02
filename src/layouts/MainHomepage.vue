@@ -7,7 +7,7 @@
       >
         <q-toolbar>
           <img
-            src="~assets/images/Lakukampus_Logo.png"
+            :src="require('assets/images/Lakukampus_Logo.png')"
             style="width: 190px"
             class="q-pa-sm q-pl-lg"
           >
@@ -107,9 +107,7 @@
   </div>
 </template>
 
-<script lang="ts">
-// import { defineComponent, ref } from '@vue/composition-api';
-
+<script>
 export default {
   name: 'MainHomepage',
   data() {
@@ -118,11 +116,6 @@ export default {
       dense: false,
     };
   },
-
-  // setup(props, ctx) {
-  // useAuthGuard(props, ctx);
-  // return { ...useAuth() };
-  // },
 };
 </script>
 
