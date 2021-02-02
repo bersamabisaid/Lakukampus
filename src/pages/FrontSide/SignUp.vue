@@ -5,7 +5,7 @@
     </div>
     <div>
       <img
-        :src="require('assets/images/Lakukampus_Logo.png')"
+        :src="require('assets/images/Lakukampus_logo.png')"
         style="width: 190px"
         class="q-pa-sm q-pl-lg"
       >
