@@ -68,7 +68,7 @@
 
 <script>
 export default {
-  name: 'PageIndex',
+  name: 'SignUpPage',
 };
 </script>
 

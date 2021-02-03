@@ -11,7 +11,6 @@
     arrows
     height="300px"
     class="bg-grey-6 text-white shadow-1 rounded-borders"
-    style="width: 60%"
   >
     <q-carousel-slide
       name="style"

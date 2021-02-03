@@ -72,7 +72,7 @@
 import CartItemList from 'pages/MyCart/CartItemList.vue';
 
 export default {
-  name: 'CartIndex',
+  name: 'MyCartPage',
 
   data: () => ({
     selected: [],

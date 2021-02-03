@@ -1,75 +1,58 @@
 <template>
-  <q-card class="danusan-card q-ma-xs q-mt-md q-mx-xs">
-    <q-img :src="photo" />
+  <q-card>
+    <q-img
+      height="150px"
+      :src="photo"
+    />
 
     <q-card-section>
       <div class="row no-wrap items-center">
-        <div class="col text-h6 ellipsis">
+        <h6 class="col q-my-none text-h6 ellipsis">
           {{ name }}
-        </div>
+        </h6>
       </div>
 
-      <!-- <q-rating
-        v-model="stars"
-        :max="5"
-        size="32px"
-      /> -->
-      <div
-        class="text-negative float-right"
-        style="margin-right: 80px"
-      >
-        -33%
+      <div class="relative-position">
+        <span class="text-grey text-strike">
+          Rp. {{ price }}
+        </span>
+        <span class="absolute-top-right text-negative">
+          -33%
+        </span>
       </div>
-      <div
-        class="done"
-        style="font-size: 12px"
-      >
-        Rp. {{ price }}
-      </div>
+
       <div class="text-weight-bolder">
         Rp. 999
       </div>
     </q-card-section>
 
-    <q-card-section
-      class="q-pt-none q-pl-xs"
-    >
-      <q-badge
-        color="white"
-        flat
-      >
+    <q-card-section class="q-pt-none row justify-between items-center">
+      <div>
         <q-icon
           :name="outlinedLocationOn"
           color="teal-7"
-          class="q-mr-xs"
         />
-        <div
-          class="text-subtitle-2 text-teal-7"
-        >
+
+        <small class="text-subtitle-2 text-teal-7">
           FMIPA
-        </div>
-      </q-badge>
-      <q-badge
-        color="white"
-        flat
-      >
+        </small>
+      </div>
+
+      <div>
         <q-icon
           :name="outlinedMoped"
           color="teal-7"
-          class="q-mr-xs"
         />
-        <div
-          class="text-subtitle-2 text-teal-7"
-        >
+
+        <small class="text-subtitle-2 text-teal-7">
           Bisa Antar
-        </div>
-      </q-badge>
+        </small>
+      </div>
+
       <q-icon
         v-if="bestChoice"
         name="stars"
         color="warning"
-        class="q-ml-sm"
-        style="font-size: 20px"
       />
     </q-card-section>
   </q-card>

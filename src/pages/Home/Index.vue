@@ -1,126 +1,142 @@
 <template>
-  <q-page padding>
-    <div class="row q-pa-md q-ml-md self-center">
-      <home-carousel />
+  <q-page
+    padding
+    class="fit column"
+  >
+    <header class="row q-gutter-x-lg">
+      <home-carousel class="col" />
 
-      <q-card
-        class="my-card"
-        style="margin-left: 70px"
-      >
+      <q-card class="col-4">
         <q-img
           :src="require('assets/images/lakukampus-channel-art_sm.jpg')"
-          style="height: 100%"
+          width="100%"
+          height="100%"
         />
       </q-card>
+    </header>
 
-      <!-- KATEGORI PILIHAN -->
-      <div class="text-h6 text-bold q-pt-xl">
-        Kategori pilihan
-      </div>
+    <main class="column q-pa-xl q-gutter-y-xl">
+      <section class="column">
+        <h2 class="text-h4 q-my-none">
+          Kategori Pilihan
+        </h2>
 
-      <q-separator
-        class="separator-cus"
-        color="black"
-      />
+        <q-separator spaced="lg" />
 
-      <div
-        v-for="n in 8"
-        :key="n"
-      >
-        <q-card class="category-card q-ma-xs q-mt-md q-mx-md">
-          <q-img
-            src="https://picsum.photos/seed/picsum/280/175"
-          />
-        </q-card>
+        <div class="row q-col-gutter-md">
+          <div
+            v-for="n in 12"
+            :key="n"
+            class="col-2"
+          >
+            <q-img
+              src="https://picsum.photos/seed/picsum/280/175"
+              height="100px"
+              class="rounded-borders shadow-2"
+            />
 
-        <div
-          class="text-h6"
-          style="margin-left: 130px"
-        >
-          Title
-        </div>
-      </div>
-
-      <!-- KHUSUS DANUSAN -->
-      <div class="text-h6 text-bold q-pt-xl">
-        Khusus Danusan
-      </div>
-
-      <q-separator color="black" />
-
-      <product-card
-        v-for="product in products"
-        :key="product.name"
-        v-bind="product"
-      />
-
-      <!-- BARANG BARU -->
-      <div class="text-h6 text-bold q-pt-xl">
-        Barang Baru
-      </div>
-
-      <q-separator color="black" />
-
-      <q-card
-        v-for="n in 3"
-        :key="n"
-        class="new-stuff-card q-ma-xs q-mt-md q-mx-md"
-      >
-        <q-img src="https://picsum.photos/390/243" />
-      </q-card>
-
-      <!-- SPECIAL FOR YOUUU -->
-      <div class="text-h6 text-bold q-pt-xl">
-        Spesial Untuk Kamu
-      </div>
-
-      <q-separator
-        class="separator-cus"
-        color="black"
-      />
-
-      <q-card
-        v-for="n in 12"
-        :key="n"
-        class="danusan-card q-ma-xs q-mt-md q-mx-xs"
-      >
-        <q-img />
-      </q-card>
-
-      <!-- JUST CARD -->
-      <div class="q-pt-xl">
-        <q-card class="just-card bg-grey-6">
-          <q-card-section />
-        </q-card>
-      </div>
-      <div
-        class="q-ma-md"
-        style="margin-top: 55px; margin-left: 80px"
-      >
-        <h4 class="text-bold">
-          Yuk mulai jualan<br>
-          di Lakukampus !
-          <div class="text-h6">
-            Mudah, nyaman, dan eksklusif<br>
-            khusus anak yu-en-es!
+            <h5 class="text-h6 text-center q-ma-none">
+              Title
+            </h5>
           </div>
-        </h4>
-        <q-btn
-          push
-          class="q-mr-md"
-          color="warning"
-          label="Gabung Sekarang!"
-          size="md"
+        </div>
+      </section>
+
+      <section class="column">
+        <h2 class="text-h4 q-my-none">
+          Khusus Danusan
+        </h2>
+
+        <q-separator spaced="lg" />
+
+        <div class="row q-col-gutter-md">
+          <div
+            v-for="product in products"
+            :key="product.name"
+            class="col-2"
+          >
+            <product-card v-bind="product" />
+          </div>
+        </div>
+      </section>
+
+      <section class="column">
+        <h2 class="text-h4 q-my-none">
+          Barang Baru
+        </h2>
+
+        <q-separator spaced="lg" />
+
+        <div class="row q-col-gutter-md">
+          <div
+            v-for="n in 3"
+            :key="n"
+            class="col-4"
+          >
+            <q-card>
+              <q-img
+                src="https://picsum.photos/390/243"
+                height="200px"
+              />
+            </q-card>
+          </div>
+        </div>
+      </section>
+
+      <section class="column">
+        <h2 class="text-h4 q-my-none">
+          Spesial Untuk Kamu
+        </h2>
+
+        <q-separator spaced="lg" />
+
+        <div class="row q-col-gutter-md">
+          <div
+            class="col-2"
+            v-for="product in products"
+            :key="`${product.name}-(2)`"
+          >
+            <product-card v-bind="product" />
+          </div>
+        </div>
+      </section>
+
+      <section class="row items-center">
+        <q-card
+          class="col bg-grey"
+          style="height: 350px;"
         />
-        <q-btn
-          outline
-          class="q-mr-md"
-          color="warning"
-          label="Pelajari"
-          size="md"
-        />
-      </div>
-    </div>
+
+        <div class="col-5 column justify-center items-center">
+          <article class="q-my-lg">
+            <h6 class="text-h4 text-bold q-ma-none">
+              Yuk mulai jualan<br>
+              di Lakukampus !
+            </h6>
+            <h6 class="text-h6 q-ma-none">
+              Mudah, nyaman, dan eksklusif<br>
+              khusus anak yu-en-es!
+            </h6>
+          </article>
+          <div>
+            <q-btn
+              label="Gabung Sekarang!"
+              push
+              color="warning"
+              size="md"
+              class="q-mr-md"
+            />
+            <q-btn
+              label="Pelajari"
+              outline
+              color="warning"
+              size="md"
+              class="q-mr-md"
+            />
+          </div>
+        </div>
+      </section>
+    </main>
   </q-page>
 </template>
 
@@ -132,7 +148,7 @@ import productCard from 'components/ui/productCard.vue';
 import HomeCarousel from './HomeCarousel.vue';
 
 export default {
-  name: 'Home',
+  name: 'HomePage',
 
   components: {
     productCard, HomeCarousel,
@@ -150,34 +166,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-  .my-card {
-    width: 30%;
-  }
-  .category-card {
-    width: 280px;
-  }
-  .danusan-card {
-    width: 200px;
-    height: 280px;
-  }
-
-  .new-stuff-card {
-    width: 390px;
-  }
-
-  .just-card {
-    width: 700px;
-    height: 300px;
-  }
-
-  .separator-cus {
-    margin-right: 38px;
-  }
-
-  .done {
-    text-decoration: line-through;
-    color: #bbb;
-  }
-</style>
