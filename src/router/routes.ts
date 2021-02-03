@@ -49,7 +49,12 @@ const routes: RouteConfig[] = [
       {
         name: 'CartIndex',
         path: '/my-cart',
-        component: () => import('pages/MyCart/index.vue'),
+        component: () => import('pages/MyCart/Index.vue'),
+      },
+      {
+        name: 'DetailProduct',
+        path: '/my-cart/detail-product',
+        component: () => import('pages/MyCart/DetailProduct/Index.vue'),
       },
     ],
   },
