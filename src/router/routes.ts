@@ -1,33 +1,24 @@
 import { RouteConfig } from 'vue-router';
 
 const routes: RouteConfig[] = [
-  // {
-  //   path: '/',
-  //   component: () => import('layouts/MainLayout.vue'),
-  //   children: [
-  //     {
-  //       name: 'Auth',
-  //       path: '',
-  //       component: () => import('pages/Index.vue'),
-  //     },
-  //     {
-  //       name: 'Dashboard',
-  //       path: '/dashboard',
-  //       component: () => import('pages/Dashboard.vue'),
-  //       meta: {
-  //         requiresAuth: true,
-  //       },
-  //     },
-  //   ],
-  // },
   {
     path: '/',
-    component: () => import('layouts/MainHomepageConsumer.vue'),
+    component: () => import('layouts/MainLayout.vue'),
     children: [
       {
         name: 'Home',
         path: '',
         component: () => import('pages/Home/Index.vue'),
+      },
+      {
+        name: 'CartIndex',
+        path: '/my-cart',
+        component: () => import('pages/MyCart/Index.vue'),
+      },
+      {
+        name: 'DetailProduct',
+        path: '/my-cart/detail-product',
+        component: () => import('pages/MyCart/DetailProduct/Index.vue'),
       },
     ],
   },
@@ -39,22 +30,6 @@ const routes: RouteConfig[] = [
         name: 'SignUp',
         path: '/lakukampus/signup',
         component: () => import('pages/FrontSide/SignUp.vue'),
-      },
-    ],
-  },
-  {
-    path: '/my-cart',
-    component: () => import('layouts/MainHomepage.vue'),
-    children: [
-      {
-        name: 'CartIndex',
-        path: '/my-cart',
-        component: () => import('pages/MyCart/Index.vue'),
-      },
-      {
-        name: 'DetailProduct',
-        path: '/my-cart/detail-product',
-        component: () => import('pages/MyCart/DetailProduct/Index.vue'),
       },
     ],
   },
