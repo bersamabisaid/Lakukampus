@@ -26,18 +26,7 @@ export default {
   data: () => ({
     selected: [],
     data: [
-      {
-        item: 'dsaddsad',
-        qty: 1,
-        price: 10,
-      },
-      {
-        item: 'item',
-        qty: 1,
-        price: 10,
-      },
     ],
-    footerTransition: false,
   }),
 
   components: {
@@ -46,10 +35,14 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-.cart-total-card {
-    position: sticky;
-    top: 12vh;
-    width: 100%;
-}
+<style lang="scss">
+  .done {
+    text-decoration: line-through;
+    color: #bbb;
+  }
+
+  em {
+  font-style: normal;
+  text-decoration: none;
+  }
 </style>
