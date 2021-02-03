@@ -1,66 +1,61 @@
 <template>
-  <q-card>
+  <q-card class="product-card">
     <q-img
       height="150px"
       :src="photo"
     />
 
     <q-card-section>
-      <div class="row no-wrap items-center">
-        <h6 class="col q-my-none text-h6 ellipsis">
+      <div class="q-mb-sm">
+        <h6
+          class="q-my-none text-body1 text-weight-regular ellipsis"
+          style="line-height: 1.1;"
+        >
           {{ name }}
         </h6>
       </div>
 
-      <div class="relative-position">
-        <span class="text-grey text-strike">
+      <div class="column">
+        <small class="text-grey text-strike">
           Rp. {{ price }}
-        </span>
-        <span class="absolute-top-right text-negative">
-          -33%
-        </span>
-      </div>
+        </small>
 
-      <div class="text-weight-bolder">
-        Rp. 999
+        <span class="text-body2 text-weight-medium">
+          Rp. 99.999.999
+        </span>
       </div>
     </q-card-section>
 
-    <q-card-section class="q-pt-none row justify-between items-center">
-      <div>
+    <q-separator />
+
+    <div class="q-mx-sm row justify-evenly">
+      <a
+        href="#"
+        class="text-grey"
+      >
+        <small>Toko bagus</small>
+      </a>
+
+      <a
+        href="#"
+        class="text-grey"
+      >
+        <small>FMIPA</small>
+      </a>
+
+      <div class="text-grey-7">
         <q-icon
-          :name="outlinedLocationOn"
-          color="teal-7"
+          name="star_rate"
+          color="amber"
         />
-
-        <small class="text-subtitle-2 text-teal-7">
-          FMIPA
-        </small>
+        <small> 4.9</small>
       </div>
-
-      <div>
-        <q-icon
-          :name="outlinedMoped"
-          color="teal-7"
-        />
-
-        <small class="text-subtitle-2 text-teal-7">
-          Bisa Antar
-        </small>
-      </div>
-
-      <q-icon
-        v-if="bestChoice"
-        name="stars"
-        color="warning"
-      />
-    </q-card-section>
+    </div>
   </q-card>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import { outlinedLocationOn, outlinedMoped } from '@quasar/extras/material-icons-outlined';
 
 export default defineComponent({
   name: 'productCard',
@@ -74,11 +69,12 @@ export default defineComponent({
       default: false,
     },
   },
-
-  data() {
-    return {
-      outlinedLocationOn, outlinedMoped,
-    };
-  },
 });
 </script>
+
+<style lang="scss">
+.product-card {
+  min-width: 180px;
+  max-width: 250px !important;
+}
+</style>

@@ -15,58 +15,19 @@
       </q-card>
     </header>
 
-    <main class="column q-pa-xl q-gutter-y-xl">
-      <section class="column">
-        <h2 class="text-h4 q-my-none">
-          Kategori Pilihan
-        </h2>
+    <main class="column q-py-xl q-px-md q-px-md-xl q-gutter-y-xl">
+      <category-list-section :categories="categories" />
 
-        <q-separator spaced="lg" />
+      <product-list-section
+        title="Spesial Untuk Kamu"
+        class="column"
+        :products="products"
+      />
 
-        <div class="row q-col-gutter-md">
-          <div
-            v-for="n in 12"
-            :key="n"
-            class="col-2"
-          >
-            <q-img
-              src="https://picsum.photos/seed/picsum/280/175"
-              height="100px"
-              class="rounded-borders shadow-2"
-            />
-
-            <h5 class="text-h6 text-center q-ma-none">
-              Title
-            </h5>
-          </div>
-        </div>
-      </section>
-
-      <section class="column">
-        <h2 class="text-h4 q-my-none">
-          Khusus Danusan
-        </h2>
-
-        <q-separator spaced="lg" />
-
-        <div class="row q-col-gutter-md">
-          <div
-            v-for="product in products"
-            :key="product.name"
-            class="col-2"
-          >
-            <product-card v-bind="product" />
-          </div>
-        </div>
-      </section>
-
-      <section class="column">
-        <h2 class="text-h4 q-my-none">
-          Barang Baru
-        </h2>
-
-        <q-separator spaced="lg" />
-
+      <section-layout
+        title="Barang Baru"
+        class="column"
+      >
         <div class="row q-col-gutter-md">
           <div
             v-for="n in 3"
@@ -81,27 +42,15 @@
             </q-card>
           </div>
         </div>
-      </section>
+      </section-layout>
 
-      <section class="column">
-        <h2 class="text-h4 q-my-none">
-          Spesial Untuk Kamu
-        </h2>
+      <product-list-section
+        title="Khusus Danusan"
+        class="column"
+        :products="products"
+      />
 
-        <q-separator spaced="lg" />
-
-        <div class="row q-col-gutter-md">
-          <div
-            class="col-2"
-            v-for="product in products"
-            :key="`${product.name}-(2)`"
-          >
-            <product-card v-bind="product" />
-          </div>
-        </div>
-      </section>
-
-      <section class="row items-center">
+      <section-layout class="row items-center">
         <q-card
           class="col bg-grey"
           style="height: 350px;"
@@ -135,7 +84,7 @@
             />
           </div>
         </div>
-      </section>
+      </section-layout>
     </main>
   </q-page>
 </template>
@@ -144,14 +93,16 @@
 import {
   commerce, image, random,
 } from 'faker';
-import productCard from 'components/ui/productCard.vue';
 import HomeCarousel from './HomeCarousel.vue';
+import SectionLayout from './SectionLayout.vue';
+import CategoryListSection, { Category } from './CategoryListSection.vue';
+import ProductListSection, { Product } from './ProductListSection.vue';
 
 export default {
   name: 'HomePage',
 
   components: {
-    productCard, HomeCarousel,
+    HomeCarousel, SectionLayout, CategoryListSection, ProductListSection,
   },
 
   data() {
@@ -161,7 +112,12 @@ export default {
         price: random.number({ min: 1000, max: 100000, precision: 1000 }),
         photo: image.food(),
         bestChoice: random.boolean(),
-      })),
+      })) as Product[],
+
+      categories: Array.from(Array(10)).map(() => ({
+        name: commerce.department(),
+        thumbnail: random.image(),
+      })) as Category[],
     };
   },
 };
