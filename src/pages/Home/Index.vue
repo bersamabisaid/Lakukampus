@@ -3,16 +3,16 @@
     padding
     class="fit column"
   >
-    <header class="row q-gutter-x-lg">
-      <home-carousel class="col" />
-
-      <q-card class="col-4">
+    <header class="row q-gutter-x-lg q-gutter-y-md">
+      <q-card class="col-12 col-md-4 order-last-md">
         <q-img
           :src="require('assets/images/lakukampus-channel-art_sm.jpg')"
           width="100%"
-          height="100%"
+          height="300px"
         />
       </q-card>
+
+      <home-carousel class="col" />
     </header>
 
     <main class="column q-py-xl q-px-md q-px-md-xl q-gutter-y-xl">
@@ -20,7 +20,6 @@
 
       <product-list-section
         title="Spesial Untuk Kamu"
-        class="column"
         :products="products"
       />
 
@@ -46,7 +45,6 @@
 
       <product-list-section
         title="Khusus Danusan"
-        class="column"
         :products="products"
       />
 
@@ -56,7 +54,7 @@
           style="height: 350px;"
         />
 
-        <div class="col-5 column justify-center items-center">
+        <div class="col-12 col-md-5 column justify-center items-center">
           <article class="q-my-lg">
             <h6 class="text-h4 text-bold q-ma-none">
               Yuk mulai jualan<br>

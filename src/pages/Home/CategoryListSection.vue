@@ -3,11 +3,11 @@
     title="Kategori Pilihan"
     class="column"
   >
-    <div class="row q-col-gutter-lg">
+    <div class="row q-col-gutter-md q-col-gutter-md-lg">
       <div
         v-for="category in TrimmedCategories"
         :key="category.name"
-        class="col-2"
+        class="col-12 col-sm-4 col-md-2"
       >
         <q-img
           :src="category.thumbnail"
