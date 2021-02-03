@@ -121,7 +121,7 @@
 
 <script>
 import { random, commerce } from 'faker';
-import ImageSlideDetailCard from 'components/ui/ImageSlideDetailCard';
+import ImageSlideDetailCard from 'components/ui/ImageSlideDetailCard.vue';
 
 export default {
   name: 'DetailCard',
