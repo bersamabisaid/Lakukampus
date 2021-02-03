@@ -1,80 +1,124 @@
 <template>
-  <q-layout view="hHh Lpr lff">
+  <q-layout view="hHr lpR lfr">
     <q-header
       elevated
       class="bg-white"
     >
-      <q-toolbar>
+      <q-toolbar class="q-py-sm">
         <q-btn
           flat
           :to="{name: 'Home'}"
         >
-          <img
+          <q-img
+            v-if="isUnderMd"
+            :src="require('assets/images/lakukampus-no-text.png')"
+            width="50px"
+          />
+          <q-img
+            v-else
             :src="require('assets/images/Lakukampus_logo.png')"
-            class="q-pa-sm q-pl-lg"
-          >
+            width="180px"
+          />
         </q-btn>
 
-        <q-toolbar-title class="text-grey-10">
+        <q-toolbar-title>
           <q-input
             v-model="search"
-            debounce="500"
-            class="q-ml-lg q-my-sm full-width"
-            filled
             placeholder="Search"
-            :dense="true"
+            filled
+            dense
           >
-            <template v-slot:append>
-              <q-icon name="search" />
+            <template #append>
+              <q-btn
+                v-if="search"
+                icon="cancel"
+                round
+                flat
+                @click="search = ''"
+              />
+              <q-icon
+                v-else
+                name="search"
+              />
             </template>
           </q-input>
         </q-toolbar-title>
-        <div>
-          <q-btn
-            label="Kategori"
-            flat
-            color="black"
-            icon="view_list"
-            size="sm"
-          />
-          <q-btn
-            label="Keranjang"
-            flat
-            color="black"
-            icon="shopping_cart"
-            size="sm"
-          />
-          <q-btn
-            label="Chat"
-            flat
-            color="black"
-            icon="chat_bubble"
-            size="sm"
-            @click="setChatWindowOpen(state => !state)"
+
+        <q-btn
+          v-show="!isUnderMd"
+          label="Kategori"
+          icon="view_list"
+          size="sm"
+          color="grey-10"
+          flat
+        />
+        <q-btn
+          v-show="!isUnderMd"
+          label="Keranjang"
+          icon="shopping_cart"
+          :to="{name: 'MyCart'}"
+          size="sm"
+          color="grey-10"
+          flat
+        />
+        <q-btn
+          v-show="!isUnderMd"
+          label="Chat"
+          icon="chat_bubble"
+          size="sm"
+          color="grey-10"
+          flat
+          @click="setChatWindowOpen(state => !state)"
+        >
+          <q-badge
+            color="orange"
+            floating
           >
-            <q-badge
-              color="orange"
-              floating
-            >
-              4
-            </q-badge>
-          </q-btn>
-          <q-btn
-            flat
-            color="black"
-            size="sm"
-            class="q-ml-md on-right"
-          >
-            <q-avatar>
-              <img src="https://cdn.quasar.dev/img/avatar.png">
-            </q-avatar>
-            <div class="q-ml-sm text-capitalize">
-              Halo <em class="text-weight-bold">Shabi</em>
-            </div>
-          </q-btn>
-        </div>
+            4
+          </q-badge>
+        </q-btn>
+        <q-btn
+          v-show="!isUnderMd"
+          size="sm"
+          flat
+        >
+          <q-avatar>
+            <q-img src="https://cdn.quasar.dev/img/avatar.png" />
+          </q-avatar>
+        </q-btn>
+        <q-btn
+          v-show="isUnderMd"
+          icon="menu"
+          color="grey-10"
+          round
+          flat
+          @click="isDrawerOpen = !isDrawerOpen"
+        />
       </q-toolbar>
     </q-header>
+
+    <q-drawer
+      v-model="isDrawerOpen"
+      side="right"
+      overlay
+      bordered
+    >
+      <q-scroll-area class="fit">
+        <q-list>
+          <q-item
+            clickable
+            v-ripple
+            class="text-grey-10"
+            @click="setChatWindowOpen(state => !state)"
+          >
+            <q-item-section avatar>
+              <q-icon name="chat" />
+            </q-item-section>
+            <q-item-section>Chat</q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
+    </q-drawer>
 
     <q-page-container>
       <router-view />
@@ -82,45 +126,87 @@
 
     <q-footer
       elevated
-      class="footer-cus bg-grey-1"
+      class="bg-grey-1"
     >
-      <q-toolbar class="q-mt-md justify-start">
-        <div class="col-cus text-dark">
-          <ul class="ul-cus">
-            <div class="text-h6 text-weight-bold q-my-md">
-              Lakukampus
-            </div>
-            <div class="q-gutter-md q-mt-md">
-              <li>Tentang Kami</li>
-              <li>Karir</li>
-            </div>
+      <q-toolbar
+        class="q-pt-md q-pb-xl text-grey-10 row items-baseline"
+        style="flex-wrap: wrap;"
+      >
+        <div class="col-12 col-sm q-px-lg q-py-md">
+          <h6 class="text-h6 text-weight-bold q-mt-sm q-mb-md">
+            Lakukampus
+          </h6>
+          <ul class="normalize-list q-gutter-y-md">
+            <li>
+              <a
+                href="#"
+                class="normalize-anchor"
+              >Tentang Kami</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="normalize-anchor"
+              >Karir</a>
+            </li>
           </ul>
         </div>
 
-        <div class="col-cus text-dark">
-          <ul class="q-mt-md ul-cus">
-            <div class="text-h6 text-weight-bold q-my-md">
+        <div class="col-12 col-sm q-px-lg q-py-md">
+          <ul class="normalize-list q-gutter-y-md">
+            <h6 class="text-h6 text-weight-bold q-mt-sm q-mb-md">
               Pusat Bantuan
-            </div>
-            <div class="q-gutter-md q-mt-md">
-              <li>Syarat dan Ketentuan</li>
-              <li>Kebijakan Privasi</li>
-              <li>Jaminan Keamanan</li>
-            </div>
+            </h6>
+            <li>
+              <a
+                href="#"
+                class="normalize-anchor"
+              >Syarat dan Ketentuan</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="normalize-anchor"
+              >Kebijakan Privasi</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="normalize-anchor"
+              >Jaminan Keamanan</a>
+            </li>
           </ul>
         </div>
 
-        <div class="col-cus text-dark">
-          <ul class="q-mt-md ul-cus">
-            <div class="text-h6 text-weight-bold q-my-md">
-              Kanal
-            </div>
-            <div class="q-gutter-md q-mt-md">
-              <li>BersamaBisa</li>
-              <li>Instagram</li>
-              <li>Facebook</li>
-              <li>Youtube</li>
-            </div>
+        <div class="col-12 col-sm q-px-lg q-py-md">
+          <h6 class="text-h6 text-weight-bold q-mt-sm q-mb-md">
+            Kanal
+          </h6>
+          <ul class="normalize-list q-gutter-y-md">
+            <li>
+              <a
+                href="#"
+                class="normalize-anchor"
+              >BersamaBisa</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="normalize-anchor"
+              >Instagram</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="normalize-anchor"
+              >Facebook</a>
+            </li>
+            <li>
+              <a
+                href="#"
+                class="normalize-anchor"
+              >Youtube</a>
+            </li>
           </ul>
         </div>
       </q-toolbar>
@@ -128,7 +214,7 @@
   </q-layout>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import useChat from 'composition/useChat';
 
@@ -146,29 +232,14 @@ export default defineComponent({
   data() {
     return {
       search: '',
-      dense: false,
+      isDrawerOpen: false,
     };
+  },
+
+  computed: {
+    isUnderMd(): boolean {
+      return this.$q.screen.width < this.$q.screen.sizes.md;
+    },
   },
 });
 </script>
-
-<style lang="scss">
-  .footer-cus {
-    height: 250px;
-    width: 100%;
-  }
-
-  .ul-cus {
-    list-style-type: none;
-  }
-
-  .col-cus {
-    height: 230px;
-    width: 220px ;
-  }
-
-  em {
-     font-style: normal;
-     text-decoration: none;
-  }
-</style>

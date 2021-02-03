@@ -7,7 +7,7 @@
       <div
         v-for="product in products"
         :key="product.name"
-        class="col-12 col-sm-4 col-md-2"
+        class="col-6 col-sm-4 col-md-2"
       >
         <product-card v-bind="product" />
       </div>

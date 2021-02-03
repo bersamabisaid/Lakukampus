@@ -124,6 +124,8 @@ module.exports = configure((ctx) => ({
     plugins: [
       'SessionStorage', 'Loading', 'Notify',
     ],
+
+    cssAddon: true,
   },
 
   // animations: 'all', // --- includes all animations

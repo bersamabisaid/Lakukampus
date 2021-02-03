@@ -11,7 +11,7 @@ const routes: RouteConfig[] = [
         component: () => import('pages/Home/Index.vue'),
       },
       {
-        name: 'CartIndex',
+        name: 'MyCart',
         path: '/my-cart',
         component: () => import('pages/MyCart/Index.vue'),
       },
@@ -28,7 +28,7 @@ const routes: RouteConfig[] = [
     children: [
       {
         name: 'SignUp',
-        path: '/lakukampus/signup',
+        path: '/signup',
         component: () => import('pages/FrontSide/SignUp.vue'),
       },
     ],

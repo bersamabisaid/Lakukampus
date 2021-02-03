@@ -4,7 +4,7 @@
     class="fit column"
   >
     <header class="row q-gutter-x-lg q-gutter-y-md">
-      <q-card class="col-12 col-md-4 order-last-md">
+      <q-card class="col-12 col-md-4 order-md-last">
         <q-img
           :src="require('assets/images/lakukampus-channel-art_sm.jpg')"
           width="100%"
@@ -44,7 +44,7 @@
       </section-layout>
 
       <product-list-section
-        title="Khusus Danusan"
+        title="Danusan"
         :products="products"
       />
 
