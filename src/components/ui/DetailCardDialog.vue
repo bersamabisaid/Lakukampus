@@ -1,15 +1,11 @@
 <template>
-  <div
-    @click="dialogClick"
-    class="cursor-pointer"
-  >
+  <q-dialog :value="value">
     <q-carousel
       swipeable
       animated
       v-model="slide"
-      thumbnails
-      infinite
       arrows
+      class="full-width"
     >
       <q-carousel-slide
         :name="1"
@@ -35,31 +31,27 @@
         :name="6"
         img-src="https://cdn.quasar.dev/img/parallax2.jpg"
       />
+      <q-carousel-slide
+        :name="6"
+        img-src="https://cdn.quasar.dev/img/parallax2.jpg"
+      />
     </q-carousel>
-    <detail-card-dialog v-model="dialog" />
-  </div>
+  </q-dialog>
 </template>
 
 <script>
-import DetailCardDialog from 'components/ui/DetailCardDialog.vue';
-
 export default {
-  name: 'ImageSlideDetailCard',
-
-  data: () => ({
-    slide: 1,
-    fullscreen: false,
-    dialog: false,
-  }),
-
-  methods: {
-    dialogClick() {
-      this.dialog = !this.dialog;
+  name: 'DetailCardDialog',
+  props: {
+    value: {
+      type: Boolean,
+      required: true,
     },
   },
 
-  components: {
-    DetailCardDialog,
-  },
+  data: () => ({
+    slide: 1,
+    lorem: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
+  }),
 };
 </script>
