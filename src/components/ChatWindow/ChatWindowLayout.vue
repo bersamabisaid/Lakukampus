@@ -14,7 +14,7 @@
 
     <q-drawer
       v-model="contactListOpen"
-      side="right"
+      :side="sideBarPosition"
       :breakpoint="200"
       :width="220"
       bordered
@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, PropType } from '@vue/composition-api';
 
 export default defineComponent({
   name: 'ChatWindowLayout',
@@ -48,6 +48,10 @@ export default defineComponent({
     noHeaderBar: {
       type: Boolean,
       default: false,
+    },
+    sideBarPosition: {
+      required: true,
+      type: String as PropType<'right' | 'left'>,
     },
   },
 

@@ -46,7 +46,7 @@ export default defineComponent({
 
   methods: {
     scrollToLastMessage() {
-      (this.$refs.scrollArea as QScrollArea).setScrollPercentage(1.1, 400);
+      (this.$refs.scrollArea as QScrollArea).setScrollPercentage(1.2, 250);
     },
   },
 
@@ -63,6 +63,7 @@ export default defineComponent({
         size: '11',
         stamp: '17 seconds ago',
         text: contents,
+        textSanitize: true,
       } as unknown as QChatMessage,
     });
 

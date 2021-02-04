@@ -1,5 +1,8 @@
 <template>
-  <chat-window-layout v-bind="$attrs">
+  <chat-window-layout
+    v-bind="$attrs"
+    side-bar-position="right"
+  >
     <template #header-bar>
       <div
         @click="setChatWindowOpen(false)"

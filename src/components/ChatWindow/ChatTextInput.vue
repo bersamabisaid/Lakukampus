@@ -33,9 +33,17 @@ export default defineComponent({
 
   methods: {
     sendMessage() {
-      this.$emit('message-entered', this.value);
-      // reset value
-      this.$emit('input', '');
+      const message = this.filteredMessage();
+
+      if (message) {
+        this.$emit('message-entered', message);
+        // reset value
+        this.$emit('input', '');
+      }
+    },
+
+    filteredMessage() {
+      return this.value?.trim();
     },
   },
 });

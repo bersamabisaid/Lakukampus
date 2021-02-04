@@ -5,6 +5,7 @@
   >
     <chat-window-layout
       class="fit"
+      side-bar-position="left"
       no-header-bar
     >
       <chat-list
