@@ -10,6 +10,7 @@ const routes: RouteConfig[] = [
         path: '',
         component: () => import('pages/Home/Index.vue'),
       },
+
       {
         name: 'MyCart',
         path: '/my-cart',
@@ -19,6 +20,12 @@ const routes: RouteConfig[] = [
         name: 'DetailProduct',
         path: '/my-cart/detail-product',
         component: () => import('pages/MyCart/DetailProduct/Index.vue'),
+      },
+
+      {
+        name: 'Chat',
+        path: '/chat/:id?',
+        component: () => import('pages/Chat/index.vue'),
       },
     ],
   },

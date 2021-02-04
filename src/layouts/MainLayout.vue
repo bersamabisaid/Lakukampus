@@ -216,13 +216,13 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import useChat from 'composition/useChat';
+import useChatUI from 'composition/useChatUI';
 
 export default defineComponent({
   name: 'MainLayout',
 
   setup() {
-    const { setChatWindowOpen } = useChat();
+    const { setChatWindowOpen } = useChatUI();
 
     return {
       setChatWindowOpen,

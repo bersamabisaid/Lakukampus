@@ -1,63 +1,51 @@
 <template>
-  <chat-window-layout v-bind="$attrs">
-    <template #header-bar>
-      <div
-        @click="setChatWindowOpen(false)"
-        class="non-selectable"
-      >
-        Chats ({{ unreadMessages }})
-      </div>
-
-      <q-space />
-
-      <q-btn
-        dense
-        flat
-        icon="close"
-        @click="setChatWindowOpen(false)"
-        title="hide chat window"
+  <q-page
+    padding
+    style="height: 90vh"
+  >
+    <chat-window-layout
+      class="fit"
+      no-header-bar
+    >
+      <chat-list
+        slot="side-bar"
+        :contacts="contacts"
       />
-    </template>
 
-    <template #side-bar>
-      <chat-list :contacts="contacts" />
-    </template>
-
-    <template #bottom>
       <chat-text-input
+        slot="bottom"
         v-model="chatTextInput"
         @message-entered="sendMessage"
       />
-    </template>
 
-    <template #default>
-      <chat-messages
-        ref="chats"
-        :chat-messages="chatMessages"
-      />
+      <template>
+        <chat-messages
+          ref="chats"
+          :chat-messages="chatMessages"
+        />
 
-      <chat-title
-        :photo="chatThumbnail"
-        :title="chatTitle"
-        status="online"
-      />
-    </template>
-  </chat-window-layout>
+        <chat-title
+          :title="chatTitle"
+          :photo="chatThumbnail"
+        />
+      </template>
+    </chat-window-layout>
+  </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import useChatUI from 'composition/useChatUI';
 import ChatWindowLayout from 'components/ChatWindow/ChatWindowLayout.vue';
 import ChatTitle from 'components/ChatWindow/ChatTitle.vue';
 import ChatList from 'components/ChatWindow/ChatList.vue';
 import ChatMessages, { IChatMessages } from 'components/ChatWindow/ChatMessages';
 import ChatTextInput from 'components/ChatWindow/ChatTextInput.vue';
+import useChatUI from 'composition/useChatUI';
 import useChat from 'composition/useChat';
-import type { Contact } from 'components/ChatWindow/model';
+import { Contact } from 'components/ChatWindow/model';
 
 export default defineComponent({
-  name: 'ChatWindow',
+  name: 'ChatPage',
 
   components: {
     ChatWindowLayout, ChatTitle, ChatList, ChatMessages, ChatTextInput,
@@ -69,7 +57,6 @@ export default defineComponent({
       chatThumbnail,
       chatTextInput,
       chatMessages,
-      setChatWindowOpen,
     } = useChatUI();
 
     return {
@@ -77,7 +64,6 @@ export default defineComponent({
       chatThumbnail,
       chatTextInput,
       chatMessages,
-      setChatWindowOpen,
       ...useChat(),
     };
   },
@@ -86,15 +72,6 @@ export default defineComponent({
     return {
       contacts: [] as Contact[],
     };
-  },
-
-  computed: {
-    unreadMessages(): number {
-      return this.contacts.reduce(
-        (total: number, { unreadMessages }: Contact) => total + unreadMessages,
-        0,
-      );
-    },
   },
 
   methods: {

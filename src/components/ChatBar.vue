@@ -18,13 +18,13 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import useChat from 'composition/useChat';
+import useChatUI from 'composition/useChatUI';
 
 export default defineComponent({
   name: 'ChatBar',
 
   setup() {
-    return useChat();
+    return useChatUI();
   },
 
   methods: {

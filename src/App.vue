@@ -15,7 +15,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import ChatWindow from 'components/ChatWindow/index.vue';
-import useChat from 'composition/useChat';
+import useChatUI from 'composition/useChatUI';
 
 export default defineComponent({
   name: 'App',
@@ -25,7 +25,7 @@ export default defineComponent({
   },
 
   setup() {
-    const { chatState } = useChat();
+    const { chatState } = useChatUI();
 
     return { chatState };
   },
