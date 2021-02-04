@@ -12,7 +12,7 @@
         <q-img
           :src="category.thumbnail"
           height="100px"
-          class="rounded-borders shadow-2"
+          class="rounded-borders shadow-1"
         />
 
         <h5 class="text-h6 text-center q-ma-none">

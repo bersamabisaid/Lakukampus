@@ -2,6 +2,7 @@
   <chat-window-layout
     v-bind="$attrs"
     side-bar-position="right"
+    class="shadow-24"
   >
     <template #header-bar>
       <div

@@ -4,7 +4,7 @@
     class="fit column"
   >
     <header class="row q-gutter-x-lg q-gutter-y-md">
-      <q-card class="col-12 col-md-4 order-md-last">
+      <q-card class="col-12 col-md-4 order-md-last shadow-1">
         <q-img
           :src="require('assets/images/lakukampus-channel-art_sm.jpg')"
           width="100%"
@@ -33,12 +33,11 @@
             :key="n"
             class="col-4"
           >
-            <q-card>
-              <q-img
-                src="https://picsum.photos/390/243"
-                height="200px"
-              />
-            </q-card>
+            <q-img
+              src="https://picsum.photos/390/243"
+              height="200px"
+              class="rounded-borders shadow-1"
+            />
           </div>
         </div>
       </section-layout>
@@ -50,7 +49,7 @@
 
       <section-layout class="row items-center">
         <q-card
-          class="col bg-grey"
+          class="col bg-grey shadow-1"
           style="height: 350px;"
         />
 
