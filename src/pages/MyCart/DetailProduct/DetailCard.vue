@@ -4,7 +4,7 @@
       <q-card>
         <q-card-section class="row q-ml-md">
           <div class="col-4">
-            <image-slide-detail-card />
+            <image-detail-carousel />
           </div>
 
           <div class="col q-mx-lg">
@@ -94,7 +94,7 @@
 
 <script>
 import { random, commerce } from 'faker';
-import ImageSlideDetailCard from 'components/ui/ImageSlideDetailCard.vue';
+import ImageDetailCarousel from 'components/ui/ImageDetailCarousel.vue';
 
 export default {
   name: 'DetailCard',
@@ -113,7 +113,7 @@ export default {
   }),
 
   components: {
-    ImageSlideDetailCard,
+    ImageDetailCarousel,
   },
 
   computed: {

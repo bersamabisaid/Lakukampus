@@ -31,10 +31,6 @@
         :name="6"
         img-src="https://cdn.quasar.dev/img/parallax2.jpg"
       />
-      <q-carousel-slide
-        :name="6"
-        img-src="https://cdn.quasar.dev/img/parallax2.jpg"
-      />
     </q-carousel>
   </q-dialog>
 </template>

@@ -1,38 +1,37 @@
 <template>
-  <div
-    @click="dialogClick"
-    class="cursor-pointer"
-  >
+  <div class="cursor-pointer q-gutter-sm">
     <q-carousel
       swipeable
       animated
       v-model="slide"
-      thumbnails
       infinite
+      thumbnails
+      @click="dialogClick"
       arrows
+      class="scroll oveflow-hidden"
     >
       <q-carousel-slide
-        :name="1"
+        name="1"
         img-src="https://cdn.quasar.dev/img/mountains.jpg"
       />
       <q-carousel-slide
-        :name="2"
+        name="2"
         img-src="https://cdn.quasar.dev/img/parallax1.jpg"
       />
       <q-carousel-slide
-        :name="3"
+        name="3"
         img-src="https://cdn.quasar.dev/img/parallax2.jpg"
       />
       <q-carousel-slide
-        :name="4"
+        name="4"
         img-src="https://cdn.quasar.dev/img/quasar.jpg"
       />
       <q-carousel-slide
-        :name="5"
+        name="5"
         img-src="https://cdn.quasar.dev/img/quasar.jpg"
       />
       <q-carousel-slide
-        :name="6"
+        name="6"
         img-src="https://cdn.quasar.dev/img/parallax2.jpg"
       />
     </q-carousel>
@@ -44,10 +43,10 @@
 import DetailCardDialog from 'components/ui/DetailCardDialog.vue';
 
 export default {
-  name: 'ImageSlideDetailCard',
+  name: 'ImageDetailCarousel',
 
   data: () => ({
-    slide: 1,
+    slide: '1',
     fullscreen: false,
     dialog: false,
   }),
