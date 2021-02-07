@@ -66,7 +66,8 @@ export default defineComponent({
 <style lang="scss">
 .chat-window {
   min-width: $breakpoint-xs;
-  max-width: 80vw;
+  width: 90vw;
+  max-width: 900px;
   min-height: 500px;
   max-height: calc(100vh - 2rem);
   border-radius: $generic-border-radius;

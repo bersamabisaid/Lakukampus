@@ -17,15 +17,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import productCard from 'components/ui/productCard.vue';
+import productCard, { Product } from 'components/ui/ProductCard.vue';
 import SectionLayout from './SectionLayout.vue';
-
-export interface Product {
-  name: string;
-  price: number;
-  photo: string;
-  bestChoice: boolean;
-}
 
 export default defineComponent({
   name: 'HomePageProductListSection',
@@ -35,8 +28,14 @@ export default defineComponent({
   },
 
   props: {
-    title: String,
-    products: Array as PropType<Product[]>,
+    title: {
+      type: String,
+      required: true,
+    },
+    products: {
+      type: Array as PropType<Product[]>,
+      required: true,
+    },
   },
 });
 </script>

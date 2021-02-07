@@ -4,3 +4,15 @@ declare module '*.vue' {
 
   export default Vue;
 }
+
+declare module '*.jpg' {
+  export default String;
+}
+
+declare module '*.png' {
+  export default String;
+}
+
+declare module '*.svg' {
+  export default String;
+}
