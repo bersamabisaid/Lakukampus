@@ -17,14 +17,14 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import productCard, { Product } from 'components/ui/ProductCard.vue';
-import SectionLayout from './SectionLayout.vue';
+import ProductCard, { Product } from 'components/ui/ProductCard.vue';
+import SectionLayout from 'layouts/SectionLayout.vue';
 
 export default defineComponent({
   name: 'HomePageProductListSection',
 
   components: {
-    SectionLayout, productCard,
+    SectionLayout, ProductCard,
   },
 
   props: {

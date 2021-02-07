@@ -25,7 +25,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import SectionLayout from './SectionLayout.vue';
+import SectionLayout from 'layouts/SectionLayout.vue';
 
 export interface Category {
   name: string;

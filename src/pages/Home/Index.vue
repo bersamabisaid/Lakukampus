@@ -18,7 +18,7 @@
     <main class="column q-py-xl q-px-md q-px-md-xl q-gutter-y-xl">
       <category-list-section :categories="categories" />
 
-      <product-list-section
+      <product-list
         title="Spesial Untuk Kamu"
         :products="products"
       />
@@ -42,7 +42,7 @@
         </div>
       </section-layout>
 
-      <product-list-section
+      <product-list
         title="Danusan"
         :products="products"
       />
@@ -91,16 +91,16 @@ import {
   commerce, image, random, company,
 } from 'faker';
 import type { Product } from 'components/ui/ProductCard.vue';
+import SectionLayout from 'layouts/SectionLayout.vue';
+import ProductList from 'components/modules/ProductList.vue';
 import HomeCarousel from './HomeCarousel.vue';
-import SectionLayout from './SectionLayout.vue';
 import CategoryListSection, { Category } from './CategoryListSection.vue';
-import ProductListSection from './ProductListSection.vue';
 
 export default {
   name: 'HomePage',
 
   components: {
-    HomeCarousel, SectionLayout, CategoryListSection, ProductListSection,
+    HomeCarousel, SectionLayout, CategoryListSection, ProductList,
   },
 
   data() {
