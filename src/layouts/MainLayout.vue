@@ -189,7 +189,9 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <transition enter-active-class="animated slideInUp">
+        <router-view />
+      </transition>
     </q-page-container>
 
     <q-footer
