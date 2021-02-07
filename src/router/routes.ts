@@ -16,10 +16,17 @@ const routes: RouteConfig[] = [
         path: '/my-cart',
         component: () => import('pages/MyCart/Index.vue'),
       },
+
       {
         name: 'DetailProduct',
         path: '/my-cart/detail-product',
         component: () => import('pages/MyCart/DetailProduct/Index.vue'),
+      },
+
+      {
+        name: 'Search',
+        path: '/search',
+        component: () => import('pages/Search/Index.vue'),
       },
 
       {

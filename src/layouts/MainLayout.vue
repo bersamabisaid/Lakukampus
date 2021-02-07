@@ -1,7 +1,8 @@
 <template>
-  <q-layout view="hHr lpR lfr">
+  <q-layout view="hHh LpR fff">
     <q-header
       elevated
+      reveal
       class="bg-white"
     >
       <q-toolbar class="q-py-sm">
@@ -27,20 +28,26 @@
             placeholder="Search"
             filled
             dense
+            required
+            clearable
+            @keypress.enter="$refs.searchForm.submit()"
           >
-            <template #append>
-              <q-btn
-                v-if="search"
-                icon="cancel"
-                round
-                flat
-                @click="search = ''"
-              />
-              <q-icon
-                v-else
-                name="search"
-              />
-            </template>
+            <q-btn
+              slot="prepend"
+              icon="tune"
+              unelevated
+              round
+              @click="isFilterDrawerOpen = !isFilterDrawerOpen"
+            />
+
+            <q-btn
+              v-if="!search"
+              slot="append"
+              icon="search"
+              round
+              unelevated
+              @click="$refs.searchForm.submit()"
+            />
           </q-input>
         </q-toolbar-title>
 
@@ -92,13 +99,13 @@
           color="grey-10"
           round
           flat
-          @click="isDrawerOpen = !isDrawerOpen"
+          @click="isMainDrawerOpen = !isMainDrawerOpen"
         />
       </q-toolbar>
     </q-header>
 
     <q-drawer
-      v-model="isDrawerOpen"
+      v-model="isMainDrawerOpen"
       side="right"
       overlay
       bordered
@@ -118,6 +125,68 @@
           </q-item>
         </q-list>
       </q-scroll-area>
+    </q-drawer>
+
+    <q-drawer
+      v-model="isFilterDrawerOpen"
+      side="left"
+      bordered
+      persistent
+      show-if-above
+    >
+      <q-form
+        ref="searchForm"
+        @submit="onSearch"
+        class="full-height column"
+      >
+        <q-bar class="bg-blue">
+          <h6 class="q-mx-md q-my-sm text-body1 text-weight-medium text-white">
+            Search and Filter
+          </h6>
+        </q-bar>
+
+        <q-scroll-area class="col full-width q-py-sm">
+          <q-list>
+            <q-item dense>
+              <q-item-section>
+                <q-input
+                  v-model="search"
+                  label="Cari disini..."
+                  clearable
+                  dense
+                  outlined
+                  required
+                />
+              </q-item-section>
+            </q-item>
+
+            <q-item-label header>
+              Category
+            </q-item-label>
+
+            <q-item dense>
+              <q-item-section>
+                <q-option-group
+                  v-model="category"
+                  :options="categoryOptions"
+                  dense
+                  inline
+                />
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-scroll-area>
+
+        <q-separator />
+
+        <q-toolbar class="row justify-end">
+          <q-btn
+            label="Go"
+            type="submit"
+            color="primary"
+          />
+        </q-toolbar>
+      </q-form>
     </q-drawer>
 
     <q-page-container>
@@ -217,6 +286,8 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import useChatUI from 'composition/useChatUI';
+import { SearchQuery } from 'pages/Search/Index.vue';
+import { compactObject } from 'utils/Object';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -232,13 +303,41 @@ export default defineComponent({
   data() {
     return {
       search: '',
-      isDrawerOpen: false,
+      category: '',
+      isMainDrawerOpen: false,
+      isFilterDrawerOpen: false,
+
+      categoryOptions: [
+        {
+          label: 'Mainan',
+          value: 'mainan',
+        },
+        {
+          label: 'ATK',
+          value: 'atk',
+        },
+      ],
     };
   },
 
   computed: {
     isUnderMd(): boolean {
       return this.$q.screen.width < this.$q.screen.sizes.md;
+    },
+  },
+
+  methods: {
+    async onSearch() {
+      const searchQuery: SearchQuery = compactObject({
+        q: this.search,
+        category: this.category,
+      });
+
+      await this.$router.push({
+        name: 'Search',
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        query: { ...searchQuery },
+      });
     },
   },
 });
