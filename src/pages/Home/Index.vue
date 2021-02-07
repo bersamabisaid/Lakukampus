@@ -88,12 +88,13 @@
 
 <script lang="ts">
 import {
-  commerce, image, random,
+  commerce, image, random, company,
 } from 'faker';
+import type { Product } from 'components/ui/ProductCard.vue';
 import HomeCarousel from './HomeCarousel.vue';
 import SectionLayout from './SectionLayout.vue';
 import CategoryListSection, { Category } from './CategoryListSection.vue';
-import ProductListSection, { Product } from './ProductListSection.vue';
+import ProductListSection from './ProductListSection.vue';
 
 export default {
   name: 'HomePage',
@@ -109,6 +110,9 @@ export default {
         price: random.number({ min: 1000, max: 100000, precision: 1000 }),
         photo: image.food(),
         bestChoice: random.boolean(),
+        facultyName: random.word(),
+        shopName: company.companyName(),
+        rating: 9 / 10,
       })) as Product[],
 
       categories: Array.from(Array(10)).map(() => ({

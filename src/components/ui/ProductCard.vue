@@ -28,27 +28,27 @@
 
     <q-separator />
 
-    <div class="q-mx-sm row justify-evenly">
+    <div class="q-mx-sm overflow-hidden row no-wrap">
       <a
         href="#"
-        class="text-grey"
+        class="col text-grey truncate"
       >
-        <small>Toko bagus</small>
+        <small>{{ shopName }}</small>
       </a>
 
       <a
         href="#"
-        class="text-grey"
+        class="col-4 text-grey truncate text-center"
       >
-        <small>FMIPA</small>
+        <small>{{ facultyName }}</small>
       </a>
 
-      <div class="text-grey-7">
+      <div class="text-grey-7 col-shrink text-right">
         <q-icon
           name="star_rate"
           color="amber"
         />
-        <small> 4.9</small>
+        <small> {{ precisionedRating }}</small>
       </div>
     </div>
   </q-card>
@@ -57,16 +57,53 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 
+export interface Product {
+  name: string;
+  price: number;
+  photo: string;
+  shopName: string;
+  facultyName: string;
+  rating: number;
+  bestChoice: boolean;
+}
+
 export default defineComponent({
   name: 'productCard',
 
   props: {
-    name: String,
-    photo: String,
-    price: Number,
+    name: {
+      type: String,
+      required: true,
+    },
+    photo: {
+      type: String,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    shopName: {
+      type: String,
+      required: true,
+    },
+    facultyName: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
     bestChoice: {
       type: Boolean,
       default: false,
+    },
+  },
+
+  computed: {
+    precisionedRating(): string {
+      return this.rating.toPrecision(1);
     },
   },
 });
