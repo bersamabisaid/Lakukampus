@@ -36,9 +36,9 @@ import DetailContent from './DetailContent.vue';
 export default {
   name: 'DetailProduct',
 
-    components: {
-      DetailCard, DetailContent,
-    },
+  components: {
+    DetailCard, DetailContent,
+  },
 
   data: () => ({
     selected: [],

@@ -29,7 +29,7 @@ export default defineComponent({
 
   computed: {
     searchQuery(): SearchQuery {
-      return this.$route.query as unknown as SearchQuery;
+      return this.$route.query;
     },
 
     itemNameSearch() {

@@ -131,8 +131,7 @@
       v-model="isFilterDrawerOpen"
       side="left"
       bordered
-      persistent
-      show-if-above
+      :show-if-above="filterDrawerShowIfAbove"
     >
       <q-form
         ref="searchForm"
@@ -288,6 +287,7 @@ import { defineComponent } from '@vue/composition-api';
 import useChatUI from 'composition/useChatUI';
 import { SearchQuery } from 'pages/Search/Index.vue';
 import { compactObject } from 'utils/Object';
+import type { Route } from 'vue-router';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -324,6 +324,9 @@ export default defineComponent({
     isUnderMd(): boolean {
       return this.$q.screen.width < this.$q.screen.sizes.md;
     },
+    filterDrawerShowIfAbove() {
+      return this.$route.name === 'Search';
+    },
   },
 
   methods: {
@@ -338,6 +341,12 @@ export default defineComponent({
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         query: { ...searchQuery },
       });
+    },
+  },
+
+  watch: {
+    $route(val: Route) {
+      this.isFilterDrawerOpen = val.name === 'Search';
     },
   },
 });
