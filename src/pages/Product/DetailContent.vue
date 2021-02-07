@@ -55,14 +55,14 @@
             <div class="col-6 q-gutter-md">
               <q-btn
                 v-for="n in 4"
-                :key="n"
+                :key="`${n}_1`"
                 outline
                 style="color: goldenrod;"
                 label="Goldenrod"
               />
               <q-btn
                 v-for="n in 5"
-                :key="n"
+                :key="`${n}_2`"
                 icon="star"
                 label="4"
                 text-color="primary"

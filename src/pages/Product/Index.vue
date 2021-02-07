@@ -30,11 +30,15 @@
 </template>
 
 <script>
-import DetailCard from 'pages/MyCart/DetailProduct/DetailCard.vue';
-import DetailContent from 'pages/MyCart/DetailProduct/DetailContent.vue';
+import DetailCard from './DetailCard.vue';
+import DetailContent from './DetailContent.vue';
 
 export default {
   name: 'DetailProduct',
+
+    components: {
+      DetailCard, DetailContent,
+    },
 
   data: () => ({
     selected: [],
@@ -42,9 +46,13 @@ export default {
     ],
   }),
 
-  components: {
-    DetailCard,
-    DetailContent,
+  computed: {
+    shopName() {
+      return this.$route.params.shopName;
+    },
+    productId() {
+      return this.$route.params.id;
+    },
   },
 };
 </script>

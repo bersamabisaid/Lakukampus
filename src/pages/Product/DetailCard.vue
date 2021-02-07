@@ -101,7 +101,7 @@ export default {
 
   data: () => ({
     selected: ['dsd'],
-    stars: '4',
+    stars: 4,
     select: false,
     numb: 1,
     price: random.number({

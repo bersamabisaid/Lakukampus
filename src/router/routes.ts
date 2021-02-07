@@ -10,29 +10,36 @@ const routes: RouteConfig[] = [
         path: '',
         component: () => import('pages/Home/Index.vue'),
       },
-
       {
         name: 'MyCart',
         path: '/my-cart',
         component: () => import('pages/MyCart/Index.vue'),
       },
-
-      {
-        name: 'DetailProduct',
-        path: '/my-cart/detail-product',
-        component: () => import('pages/MyCart/DetailProduct/Index.vue'),
-      },
-
       {
         name: 'Search',
         path: '/search',
         component: () => import('pages/Search/Index.vue'),
       },
-
       {
         name: 'Chat',
         path: '/chat/:id?',
-        component: () => import('pages/Chat/index.vue'),
+        component: () => import('pages/Chat/Index.vue'),
+      },
+      {
+        path: '/:shopName',
+        component: { render: (e) => e('router-view') },
+        children: [
+          {
+            name: 'Shop',
+            path: '',
+            component: () => import('pages/Shop/Index.vue'),
+          },
+          {
+            name: 'Product',
+            path: ':id/:prodName?',
+            component: () => import('pages/Product/Index.vue'),
+          },
+        ],
       },
     ],
   },
