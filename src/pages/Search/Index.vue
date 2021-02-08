@@ -18,6 +18,10 @@ import ProductList from 'components/modules/ProductList.vue';
 export interface SearchQuery {
   q?: string;
   category?: string;
+  faculty?: string;
+  sortBy?: string;
+  priceMin?: number;
+  priceMax?: number;
 }
 
 export default defineComponent({
