@@ -1,11 +1,17 @@
 <template>
   <section>
-    <h2
-      v-if="title"
-      class="text-h5 text-weight-medium q-my-none"
-    >
-      {{ title }}
-    </h2>
+    <div class="row">
+      <h2
+        v-if="title"
+        class="text-h5 text-weight-medium q-my-none"
+      >
+        {{ title }}
+      </h2>
+
+      <q-space />
+
+      <slot name="right-header" />
+    </div>
 
     <q-separator
       v-if="title"

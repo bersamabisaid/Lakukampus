@@ -19,12 +19,13 @@
       <category-list-section :categories="categories" />
 
       <product-list
-        title="Spesial Untuk Kamu"
-        :products="products"
+        title="Spesial untuk kamu"
+        more-action-label="Lihat rekomendasi lainnya"
+        :products="products.slice(0, 6)"
       />
 
       <section-layout
-        title="Barang Baru"
+        title="Barang baru"
         class="column"
       >
         <div class="row q-col-gutter-md">
@@ -44,8 +45,19 @@
 
       <product-list
         title="Danusan"
+        more-action-label="Lihat barang danusan lainnya"
         :products="products"
-      />
+      >
+        <div
+          slot="bottom"
+          class="self-center q-pt-xl"
+        >
+          <q-btn
+            label="Tampilkan lebih banyak"
+            color="primary"
+          />
+        </div>
+      </product-list>
 
       <section-layout class="row items-center">
         <q-card
@@ -105,7 +117,7 @@ export default {
 
   data() {
     return {
-      products: Array.from(Array(12)).map(() => ({
+      products: Array.from(Array(12), () => ({
         name: commerce.productName(),
         price: random.number({ min: 1000, max: 100000, precision: 1000 }),
         photo: image.food(),
@@ -113,9 +125,10 @@ export default {
         facultyName: random.word(),
         shopName: company.companyName(),
         rating: 9 / 10,
+        discount: random.arrayElement([[], [1000], [1000, 50]]),
       })) as Product[],
 
-      categories: Array.from(Array(10)).map(() => ({
+      categories: Array.from(Array(6)).map(() => ({
         name: commerce.department(),
         thumbnail: random.image(),
       })) as Category[],

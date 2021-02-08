@@ -17,6 +17,7 @@
     "core-js": "^3.6.5",
     "firebase": "^8.1.2",
     "quasar": "^1.0.0",
+    "slugify": "^1.4.6",
     "vuex-composition-helpers": "^1.0.22"
   },
   "devDependencies": {

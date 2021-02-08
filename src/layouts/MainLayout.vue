@@ -154,13 +154,12 @@
                   clearable
                   dense
                   outlined
-                  required
                 />
               </q-item-section>
             </q-item>
 
             <q-item-label header>
-              Category
+              Kategori
             </q-item-label>
 
             <q-item dense>
@@ -170,6 +169,63 @@
                   :options="categoryOptions"
                   dense
                   inline
+                />
+              </q-item-section>
+            </q-item>
+
+            <q-item-label header>
+              Fakultas
+            </q-item-label>
+
+            <q-item dense>
+              <q-item-section>
+                <q-option-group
+                  v-model="faculty"
+                  :options="facultyOptions"
+                  dense
+                  inline
+                />
+              </q-item-section>
+            </q-item>
+
+            <q-item-label header>
+              Urutkan berdasarkan
+            </q-item-label>
+
+            <q-item dense>
+              <q-item-section>
+                <q-select
+                  v-model="sortBy"
+                  :options="sortByOptions"
+                  outlined
+                  dense
+                  clearable
+                />
+              </q-item-section>
+            </q-item>
+
+            <q-item-label header>
+              Range Harga
+            </q-item-label>
+
+            <q-item dense>
+              <q-item-section>
+                <q-input
+                  label="Min"
+                  v-model="priceMin"
+                  type="number"
+                  dense
+                  outlined
+                />
+              </q-item-section>
+
+              <q-item-section>
+                <q-input
+                  label="Max"
+                  v-model="priceMax"
+                  type="number"
+                  dense
+                  outlined
                 />
               </q-item-section>
             </q-item>
@@ -304,8 +360,12 @@ export default defineComponent({
 
   data() {
     return {
-      search: '',
-      category: '',
+      search: null as (null | string),
+      category: null as (null | string),
+      faculty: null as (null | string),
+      sortBy: null as (null | string),
+      priceMin: null as (null | number),
+      priceMax: null as (null | number),
       isMainDrawerOpen: false,
       isFilterDrawerOpen: false,
 
@@ -318,6 +378,45 @@ export default defineComponent({
           label: 'ATK',
           value: 'atk',
         },
+      ],
+
+      facultyOptions: [
+        {
+          label: 'FMIPA',
+          value: 'fmipa',
+        },
+        {
+          label: 'FKIP',
+          value: 'fkip',
+        },
+        {
+          label: 'FEB',
+          value: 'feb',
+        },
+        {
+          label: 'FT',
+          value: 'ft',
+        },
+        {
+          label: 'FK',
+          value: 'fk',
+        },
+        {
+          label: 'FH',
+          value: 'fh',
+        },
+        {
+          label: 'FH',
+          value: 'fh',
+        },
+        {
+          label: 'FISIP',
+          value: 'fisip',
+        },
+      ],
+
+      sortByOptions: [
+        'Terbaru', 'Rating Tertinggi', 'Banyak penjualan',
       ],
     };
   },
@@ -333,14 +432,17 @@ export default defineComponent({
 
   methods: {
     async onSearch() {
-      const searchQuery: SearchQuery = compactObject({
+      const searchQuery = compactObject({
         q: this.search,
         category: this.category,
-      });
+        faculty: this.faculty,
+        sortBy: this.sortBy,
+        priceMin: this.priceMin,
+        priceMax: this.priceMax,
+      } as SearchQuery) as Record<string, string>;
 
       await this.$router.push({
         name: 'Search',
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         query: { ...searchQuery },
       });
     },
