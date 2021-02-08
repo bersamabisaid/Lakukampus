@@ -7,6 +7,7 @@
   "conventionalCommits.scopes": [
     "model",
     "functions",
-    "page"
+    "page",
+    "ui"
   ]
 }
