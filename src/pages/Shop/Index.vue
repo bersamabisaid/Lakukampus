@@ -12,7 +12,7 @@ export default defineComponent({
 
   computed: {
     shopName(): string {
-      return this.$route.params.name;
+      return this.$route.params.shopName;
     },
   },
 });
