@@ -1,5 +1,9 @@
 <template>
-  <q-dialog :value="value">
+  <q-dialog
+    :value="value"
+    @keyup.37="arrowLeft"
+    @keyup.39="arrowRight"
+  >
     <q-carousel
       ref="myCarousel"
       swipeable
@@ -8,8 +12,6 @@
       v-model="slide"
       arrows
       class="full-width"
-      @keyup.37="arrowLeft"
-      @keyup.39="arrowRight"
     >
       <q-carousel-slide
         :name="1"
