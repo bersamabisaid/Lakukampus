@@ -1,5 +1,5 @@
 <template>
-  <q-card class="product-card">
+  <q-card class="product-card shadow-1">
     <router-link
       :to="productLink"
       class="normalize-anchor text-black"
@@ -7,28 +7,39 @@
       <q-img
         height="150px"
         :src="photo"
+        img-class="product-card__img"
+        :placeholder-src="require('assets/images/lakukampus-no-text.png')"
       />
 
-      <q-card-section>
-        <div class="q-mb-sm">
-          <h6
-            class="q-my-none text-body1 text-weight-regular ellipsis"
-            style="line-height: 1.1;"
-          >
-            {{ name }}
-          </h6>
-        </div>
+      <q-card-section
+        class="column items-baseline"
+        style="height: 6rem;"
+      >
+        <h6
+          class="q-mt-none q-mb-sm full-width text-body1 text-weight-regular ellipsis"
+          style="line-height: 1.1;"
+        >
+          {{ name }}
+        </h6>
 
-        <div class="column">
-          <small class="text-grey text-strike">
-            Rp. {{ price }}
-          </small>
+        <small
+          v-if="isDiscount"
+          class="text-grey text-strike"
+        >
+          Rp. {{ price }}
+        </small>
 
-          <span class="text-body2 text-weight-medium">
-            Rp. 99.999.999
-          </span>
-        </div>
+        <span class="text-body2 text-weight-medium">
+          Rp. {{ isDiscount ? discount[0] : price }}
+        </span>
       </q-card-section>
+
+      <q-badge
+        v-if="discount[1]"
+        :label="`${discount[1]}%`"
+        floating
+        class="z-index-10"
+      />
     </router-link>
 
     <q-separator />
@@ -60,7 +71,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, PropType } from '@vue/composition-api';
 import slugify from 'slugify';
 import { uid } from 'quasar';
 import type { RawLocation } from 'vue-router';
@@ -73,6 +84,7 @@ export interface Product {
   facultyName: string;
   rating: number;
   bestChoice: boolean;
+  discount: number[];
 }
 
 export default defineComponent({
@@ -107,6 +119,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    discount: {
+      type: Array as PropType<number[]>,
+      default: [],
+    },
   },
 
   computed: {
@@ -138,6 +154,10 @@ export default defineComponent({
         },
       };
     },
+
+    isDiscount(): boolean {
+      return Boolean(this.discount.length);
+    },
   },
 });
 </script>
@@ -146,5 +166,9 @@ export default defineComponent({
 .product-card {
   min-width: 180px;
   max-width: 250px !important;
+
+  &__img {
+    border-radius: $generic-border-radius $generic-border-radius 0 0;
+  }
 }
 </style>

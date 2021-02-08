@@ -3,9 +3,16 @@
     title="Kategori Pilihan"
     class="column"
   >
+    <q-btn
+      slot="right-header"
+      label="Lihat semua kategori"
+      color="primary"
+      flat
+    />
+
     <div class="row q-col-gutter-md q-col-gutter-md-lg">
       <div
-        v-for="category in TrimmedCategories"
+        v-for="category in categories"
         :key="category.name"
         class="col-12 col-sm-4 col-md-2"
       >
@@ -41,12 +48,6 @@ export default defineComponent({
 
   props: {
     categories: Array as PropType<Category[]>,
-  },
-
-  computed: {
-    TrimmedCategories(): Category[] {
-      return this.categories!.slice(0, 6);
-    },
   },
 });
 </script>
