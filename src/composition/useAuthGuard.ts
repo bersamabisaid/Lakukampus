@@ -1,27 +1,25 @@
 import { SetupContext, watch } from '@vue/composition-api';
-import { signedInUser, authState } from 'composition/useAuth';
 import { Loading } from 'quasar';
+import useAuth from 'composition/useAuth';
 
-export default (props: unknown, ctx: SetupContext) => {
+export default function useAuthGuard(props: unknown, ctx: SetupContext) {
+  const { signedInUser, authState } = useAuth();
+
   watch(
-    [() => authState.isWaitingAuthentication, signedInUser],
-    async (val) => {
-      const [
-        waitAuthState, user,
-      ] = val as [typeof authState.isWaitingAuthentication, typeof signedInUser.value];
-
-      if (waitAuthState) {
+    [signedInUser, () => authState.isWaitingAuthentication],
+    async () => {
+      if (authState.isWaitingAuthentication) {
         Loading.show({
           message: 'authenticating...',
         });
       } else {
         Loading.hide();
 
-        if (!user) {
-          await ctx.root.$router.push({ name: 'Auth' });
+        if (!signedInUser.value) {
+          await ctx.root.$router.push({ name: 'MyCart' });
         }
       }
     },
     { immediate: true },
   );
-};
+}

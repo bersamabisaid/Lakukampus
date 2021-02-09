@@ -12,7 +12,10 @@
         <q-separator spaced />
 
         <div class="q-px-lg q-pt-xl column items-center">
-          <q-btn push>
+          <q-btn
+            push
+            @click="login"
+          >
             <q-avatar
               square
               size="md"
@@ -53,10 +56,17 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import { mdiGoogle } from '@quasar/extras/mdi-v5';
+import useAuth from 'composition/useAuth';
 import type { QDialog } from 'quasar';
 
 export default defineComponent({
   name: 'LoginDialog',
+
+  setup() {
+    return {
+      login: useAuth().login,
+    };
+  },
 
   data() {
     return {

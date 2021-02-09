@@ -1,16 +1,14 @@
 import { SetupContext, watch } from '@vue/composition-api';
-import { signedInUser, authState } from 'composition/useAuth';
 import { Notify } from 'quasar';
+import useAuth from 'composition/useAuth';
 
 export default (props: unknown, ctx: SetupContext) => {
-  watch(
-    [() => authState.isWaitingAuthentication, signedInUser],
-    async (val) => {
-      const [
-        waitAuthState, user,
-      ] = val as [typeof authState.isWaitingAuthentication, typeof signedInUser.value];
+  const { signedInUser, authState } = useAuth();
 
-      if (!waitAuthState && user) {
+  watch(
+    [signedInUser, () => authState.isWaitingAuthentication],
+    async () => {
+      if (!authState.isWaitingAuthentication && signedInUser.value) {
         Notify.create('You\'re already logged in!');
         await ctx.root.$router.push({ name: 'Dashboard' });
       }

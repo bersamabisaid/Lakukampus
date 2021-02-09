@@ -439,6 +439,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import useChatUI from 'composition/useChatUI';
+import useAuth from 'composition/useAuth';
 import LoginDialog from 'components/ui/LoginDialog.vue';
 import { compactObject } from 'utils/Object';
 import type { SearchQuery } from 'pages/Search/Index.vue';
@@ -453,13 +454,12 @@ export default defineComponent({
 
     return {
       setChatWindowOpen,
+      ...useAuth(),
     };
   },
 
   data() {
     return {
-      isLoggedIn: false,
-
       search: null as (null | string),
       category: null as (null | string),
       faculty: null as (null | string),
@@ -527,6 +527,9 @@ export default defineComponent({
     },
     filterDrawerShowIfAbove() {
       return this.$route.name === 'Search';
+    },
+    isLoggedIn(): boolean {
+      return Boolean(this.signedInUser);
     },
   },
 

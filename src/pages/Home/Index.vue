@@ -99,6 +99,7 @@
 </template>
 
 <script lang="ts">
+import { defineComponent } from '@vue/composition-api';
 import {
   commerce, image, random, company,
 } from 'faker';
@@ -108,7 +109,7 @@ import ProductList from 'components/modules/ProductList.vue';
 import HomeCarousel from './HomeCarousel.vue';
 import CategoryListSection, { Category } from './CategoryListSection.vue';
 
-export default {
+export default defineComponent({
   name: 'HomePage',
 
   components: {
@@ -134,5 +135,5 @@ export default {
       })) as Category[],
     };
   },
-};
+});
 </script>

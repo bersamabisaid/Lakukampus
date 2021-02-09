@@ -2,6 +2,8 @@ import { store } from 'quasar/wrappers';
 import Vuex from 'vuex';
 
 import chatModule from './Chat';
+import authModule from './Auth';
+import type { AuthStateInterface } from './Auth/state';
 import type { ChatStateInterface } from './Chat/state';
 
 /*
@@ -14,6 +16,7 @@ export interface StateInterface {
   // example: ExampleStateInterface;
   // Declared as unknown to avoid linting issue. Best to strongly type as per the line above.
   chatModule: ChatStateInterface;
+  authModule: AuthStateInterface;
 }
 
 export default store(({ Vue }) => {
@@ -22,6 +25,7 @@ export default store(({ Vue }) => {
   const Store = new Vuex.Store<StateInterface>({
     modules: {
       chatModule,
+      authModule,
     },
 
     // enable strict mode (adds overhead!)

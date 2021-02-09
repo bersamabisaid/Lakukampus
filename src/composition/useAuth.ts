@@ -1,38 +1,40 @@
-import { onBeforeMount, reactive, ref } from '@vue/composition-api';
+import { onBeforeMount, reactive } from '@vue/composition-api';
 import firebase, { auth } from 'src/firebase';
-import { Loading, SessionStorage } from 'quasar';
-import type fb from 'firebase';
+import { Loading } from 'quasar';
+import { useNamespacedMutations, useNamespacedState } from 'vuex-composition-helpers';
+import type { AuthStateInterface } from 'src/store/Auth/state';
+import type { AuthMutationInterface } from 'src/store/Auth/mutations';
 
 const providers = {
   Google: new firebase.auth.GoogleAuthProvider(),
 };
 
-export const signedInUser = ref<fb.User | null>(null);
-export const authState = reactive({
-  isWaitingAuthentication: true,
+export default function useAuth() {
+  const {
+    user: signedInUser, isWaitingRedirectResult, firebaseAuthStateListener, ...authState
+  } = useNamespacedState<AuthStateInterface>('authModule', [
+    'user', 'isWaitingAuthentication', 'isWaitingRedirectResult', 'firebaseAuthStateListener',
+  ]);
 
-  get isWaitingRedirectResult() {
-    return Boolean(SessionStorage.getItem('state.isWaitingRedirectResult'));
-  },
+  const {
+    setUser,
+    setWaitingRedirectResult,
+    setFirebaseAuthStateListener,
+    stopWaitingAuthentication,
+    unsubscribeFirebaseAuthStateListener,
+  } = useNamespacedMutations('authModule', [
+    'setUser',
+    'setWaitingRedirectResult',
+    'setFirebaseAuthStateListener',
+    'stopWaitingAuthentication',
+    'unsubscribeFirebaseAuthStateListener',
+  ]) as AuthMutationInterface;
 
-  set isWaitingRedirectResult(v) {
-    SessionStorage.set('state.isWaitingRedirectResult', v);
-  },
-});
-
-auth.onAuthStateChanged((user) => {
-  if (authState.isWaitingAuthentication) {
-    authState.isWaitingAuthentication = false;
-  }
-
-  signedInUser.value = user;
-});
-
-export default () => {
   const login = async () => {
-    authState.isWaitingRedirectResult = true;
+    setWaitingRedirectResult(true);
     await auth.signInWithRedirect(providers.Google);
   };
+
   const logout = () => {
     Loading.show({ message: 'Logging out' });
 
@@ -41,10 +43,19 @@ export default () => {
   };
 
   onBeforeMount(async () => {
-    if (authState.isWaitingRedirectResult) {
+    if (!firebaseAuthStateListener.value) {
+      const listener = auth.onAuthStateChanged((user) => {
+        stopWaitingAuthentication();
+        setUser(user?.toJSON());
+      });
+
+      setFirebaseAuthStateListener(listener);
+    }
+
+    if (isWaitingRedirectResult.value) {
       try {
         await auth.getRedirectResult();
-        authState.isWaitingRedirectResult = false;
+        setWaitingRedirectResult(false);
       } catch (err) {
         // eslint-disable-next-line no-console
         console.error({ ...err });
@@ -54,8 +65,13 @@ export default () => {
 
   return {
     signedInUser,
-    authState,
+    authState: reactive({
+      ...authState,
+      isWaitingRedirectResult,
+      firebaseAuthStateListener,
+    }),
     login,
     logout,
+    unsubscribeFirebaseAuthStateListener,
   };
-};
+}
