@@ -102,12 +102,14 @@
               color="amber-7"
               size="sm"
               outline
+              @click="openLoginDialog"
             />
             <q-btn
               label="Daftar"
               color="amber-7"
               size="sm"
               push
+              @click="openLoginDialog"
             />
           </template>
         </template>
@@ -437,8 +439,9 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import useChatUI from 'composition/useChatUI';
-import { SearchQuery } from 'pages/Search/Index.vue';
+import LoginDialog from 'components/ui/LoginDialog.vue';
 import { compactObject } from 'utils/Object';
+import type { SearchQuery } from 'pages/Search/Index.vue';
 import type { Route } from 'vue-router';
 import type { QForm } from 'quasar';
 
@@ -546,6 +549,13 @@ export default defineComponent({
 
     submitSearchForm() {
       (this.$refs.searchForm as QForm).submit();
+    },
+
+    openLoginDialog() {
+      this.$q.dialog({
+        component: LoginDialog,
+        parent: this,
+      });
     },
   },
 

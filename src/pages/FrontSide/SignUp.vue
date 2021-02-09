@@ -28,7 +28,7 @@
               class="q-mr-md"
               size="20px"
             >
-              <img :src="require('assets/images/Google_Logo.png')">
+              <img :src="require('assets/images/g-logo.png')">
             </q-avatar>
             <div>daftar dengan google</div>
           </q-btn>
