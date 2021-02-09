@@ -25,32 +25,32 @@ const routes: RouteConfig[] = [
         path: '/chat/:id?',
         component: () => import('pages/Chat/Index.vue'),
       },
-      {
-        path: '/:shopName',
-        component: { render: (e) => e('router-view') },
-        children: [
-          {
-            name: 'Shop',
-            path: '',
-            component: () => import('pages/Shop/Index.vue'),
-          },
-          {
-            name: 'Product',
-            path: ':id/:prodName?',
-            component: () => import('pages/Product/Index.vue'),
-          },
-        ],
-      },
     ],
   },
   {
-    path: '/lakukampus',
+    path: '/',
     component: () => import('layouts/MainFront.vue'),
     children: [
       {
         name: 'SignUp',
         path: '/signup',
         component: () => import('pages/FrontSide/SignUp.vue'),
+      },
+    ],
+  },
+  {
+    path: '/:shopName',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      {
+        name: 'Shop',
+        path: '',
+        component: () => import('pages/Shop/Index.vue'),
+      },
+      {
+        name: 'Product',
+        path: ':id/:prodName?',
+        component: () => import('pages/Product/Index.vue'),
       },
     ],
   },
