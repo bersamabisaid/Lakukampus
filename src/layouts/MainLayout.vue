@@ -5,7 +5,7 @@
       reveal
       class="bg-white"
     >
-      <q-toolbar class="q-py-sm">
+      <q-toolbar class="q-py-sm row q-gutter-md-x-md">
         <q-btn
           flat
           :to="{name: 'Home'}"
@@ -22,7 +22,7 @@
           />
         </q-btn>
 
-        <q-toolbar-title>
+        <q-toolbar-title class="col-grow">
           <q-input
             v-model="search"
             placeholder="Search"
@@ -30,7 +30,7 @@
             dense
             required
             clearable
-            @keypress.enter="$refs.searchForm.submit()"
+            @keypress.enter="submitSearchForm"
           >
             <q-btn
               slot="prepend"
@@ -46,53 +46,72 @@
               icon="search"
               round
               unelevated
-              @click="$refs.searchForm.submit()"
+              @click="submitSearchForm"
             />
           </q-input>
         </q-toolbar-title>
 
-        <q-btn
-          v-show="!isUnderMd"
-          label="Kategori"
-          icon="view_list"
-          size="sm"
-          color="grey-10"
-          flat
-        />
-        <q-btn
-          v-show="!isUnderMd"
-          label="Keranjang"
-          icon="shopping_cart"
-          :to="{name: 'MyCart'}"
-          size="sm"
-          color="grey-10"
-          flat
-        />
-        <q-btn
-          v-show="!isUnderMd"
-          label="Chat"
-          icon="chat_bubble"
-          size="sm"
-          color="grey-10"
-          flat
-          @click="setChatWindowOpen(state => !state)"
-        >
-          <q-badge
-            color="orange"
-            floating
-          >
-            4
-          </q-badge>
-        </q-btn>
-        <q-btn
-          v-show="!isUnderMd"
-          size="sm"
-          flat
-        >
-          <q-avatar>
-            <q-img src="https://cdn.quasar.dev/img/avatar.png" />
-          </q-avatar>
-        </q-btn>
+        <template v-if="!isUnderMd">
+          <q-btn
+            label="Kategori"
+            icon="view_list"
+            size="sm"
+            color="grey-10"
+            flat
+          />
+
+          <q-btn
+            label="Keranjang"
+            icon="shopping_cart"
+            :to="{name: 'MyCart'}"
+            size="sm"
+            color="grey-10"
+            flat
+          />
+
+          <template v-if="isLoggedIn">
+            <q-btn
+              label="Chat"
+              icon="chat_bubble"
+              size="sm"
+              color="grey-10"
+              flat
+              @click="setChatWindowOpen(state => !state)"
+            >
+              <q-badge
+                color="orange"
+                floating
+              >
+                4
+              </q-badge>
+            </q-btn>
+
+            <q-btn
+              size="sm"
+              flat
+            >
+              <q-avatar>
+                <q-img src="https://cdn.quasar.dev/img/avatar.png" />
+              </q-avatar>
+            </q-btn>
+          </template>
+
+          <template v-else>
+            <q-btn
+              label="Masuk"
+              color="amber-7"
+              size="sm"
+              outline
+            />
+            <q-btn
+              label="Daftar"
+              color="amber-7"
+              size="sm"
+              push
+            />
+          </template>
+        </template>
+
         <q-btn
           v-show="isUnderMd"
           icon="menu"
@@ -109,10 +128,34 @@
       side="right"
       overlay
       bordered
+      content-class="column"
     >
-      <q-scroll-area class="fit">
+      <div
+        v-if="isLoggedIn"
+        class="full-width q-py-md q-px-xl bg-light-blue text-white column items-end"
+      >
+        <q-avatar
+          size="4rem"
+          class="q-mb-sm"
+        >
+          <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+        </q-avatar>
+
+        <span class="text-weight-bold">
+          Lakukampus Developer
+        </span>
+
+        <span>developer@lakukampus.id</span>
+      </div>
+
+      <q-scroll-area class="col full-height">
         <q-list>
+          <q-item-label header>
+            Menu Utama
+          </q-item-label>
+
           <q-item
+            v-if="isLoggedIn"
             clickable
             v-ripple
             class="text-grey-10"
@@ -122,6 +165,57 @@
               <q-icon name="chat" />
             </q-item-section>
             <q-item-section>Chat</q-item-section>
+          </q-item>
+
+          <q-item
+            clickable
+            v-ripple
+            class="text-grey-10"
+            :to="{name: 'MyCart'}"
+          >
+            <q-item-section avatar>
+              <q-icon name="shopping_cart" />
+            </q-item-section>
+            <q-item-section>Keranjang Saya</q-item-section>
+          </q-item>
+
+          <q-item-label header>
+            Akun dan Preferensi
+          </q-item-label>
+
+          <q-item
+            clickable
+            v-ripple
+            class="text-grey-10"
+          >
+            <q-item-section avatar>
+              <q-icon name="settings" />
+            </q-item-section>
+            <q-item-section>Pengaturan</q-item-section>
+          </q-item>
+
+          <q-item
+            v-if="!isLoggedIn"
+            clickable
+            v-ripple
+            class="bg-amber text-grey-1"
+          >
+            <q-item-section avatar>
+              <q-icon name="login" />
+            </q-item-section>
+            <q-item-section>Daftar/Masuk</q-item-section>
+          </q-item>
+
+          <q-item
+            v-else
+            clickable
+            v-ripple
+            class="text-grey-10"
+          >
+            <q-item-section avatar>
+              <q-icon name="logout" />
+            </q-item-section>
+            <q-item-section>Keluar</q-item-section>
           </q-item>
         </q-list>
       </q-scroll-area>
@@ -346,6 +440,7 @@ import useChatUI from 'composition/useChatUI';
 import { SearchQuery } from 'pages/Search/Index.vue';
 import { compactObject } from 'utils/Object';
 import type { Route } from 'vue-router';
+import type { QForm } from 'quasar';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -360,6 +455,8 @@ export default defineComponent({
 
   data() {
     return {
+      isLoggedIn: false,
+
       search: null as (null | string),
       category: null as (null | string),
       faculty: null as (null | string),
@@ -445,6 +542,10 @@ export default defineComponent({
         name: 'Search',
         query: { ...searchQuery },
       });
+    },
+
+    submitSearchForm() {
+      (this.$refs.searchForm as QForm).submit();
     },
   },
 
