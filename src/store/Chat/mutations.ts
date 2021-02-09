@@ -1,6 +1,6 @@
-import { MutationTree } from 'vuex';
-import { MutationFns } from 'components/types';
-import { ChatStateInterface } from './state';
+import type { MutationTree } from 'vuex';
+import type { MutationFns } from 'components/types';
+import type { ChatStateInterface } from './state';
 
 type chatWindowOpenSetter = (currentState: boolean) => boolean;
 

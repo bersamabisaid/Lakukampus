@@ -1,5 +1,5 @@
-import { Module } from 'vuex';
-import { StateInterface } from 'src/store';
+import type { Module } from 'vuex';
+import type { StateInterface } from 'src/store';
 import state, { ChatStateInterface } from './state';
 import actions from './actions';
 import getters from './getters';
