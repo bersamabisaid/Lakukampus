@@ -19,6 +19,7 @@
         :key="`${tag.name}_${i}`"
         clickable
         v-ripple
+        :to="{name: 'Search', query: {tags: [tag.name]}}"
       >
         <q-item-section>
           <q-item-label>{{ tag.name }}</q-item-label>

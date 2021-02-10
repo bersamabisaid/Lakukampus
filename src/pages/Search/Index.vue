@@ -4,7 +4,7 @@
     style="min-height: 100vh;"
   >
     <product-list
-      :title="`Hasil pencarian: ${itemNameSearch}`"
+      :title="sectionTitle"
       :products="[]"
       class="q-pa-md"
     />
@@ -22,6 +22,7 @@ export interface SearchQuery {
   sortBy?: string;
   priceMin?: number;
   priceMax?: number;
+  tags?: string[] | string;
 }
 
 export default defineComponent({
@@ -36,8 +37,12 @@ export default defineComponent({
       return this.$route.query;
     },
 
-    itemNameSearch() {
-      return this.searchQuery.q;
+    itemNameSearch(): string {
+      return this.searchQuery.q || '';
+    },
+
+    sectionTitle(): string {
+      return `Hasil pencarian: ${this.itemNameSearch}`;
     },
   },
 });
