@@ -91,8 +91,45 @@
               flat
             >
               <q-avatar>
-                <q-img src="https://cdn.quasar.dev/img/avatar.png" />
+                <img src="https://cdn.quasar.dev/img/avatar.png">
               </q-avatar>
+
+              <q-menu content-class="column">
+                <div class="q-pt-sm bg-blue-grey-1 column items-center">
+                  <q-avatar>
+                    <img src="https://cdn.quasar.dev/img/avatar.png">
+                  </q-avatar>
+
+                  <h6 class="q-my-none">
+                    Developers
+                  </h6>
+                </div>
+
+                <q-separator />
+
+                <q-list style="min-width: 200px;">
+                  <q-item
+                    clickable
+                    v-close-popup
+                  >
+                    <q-item-section avatar>
+                      <q-icon name="settings" />
+                    </q-item-section>
+                    <q-item-section>Settings</q-item-section>
+                  </q-item>
+
+                  <q-item
+                    clickable
+                    v-close-popup
+                    @click="logout"
+                  >
+                    <q-item-section avatar>
+                      <q-icon name="logout" />
+                    </q-item-section>
+                    <q-item-section>Logout</q-item-section>
+                  </q-item>
+                </q-list>
+              </q-menu>
             </q-btn>
           </template>
 
@@ -104,6 +141,7 @@
               outline
               @click="openLoginDialog"
             />
+
             <q-btn
               label="Daftar"
               color="amber-7"
