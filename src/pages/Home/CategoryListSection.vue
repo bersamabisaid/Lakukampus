@@ -8,6 +8,7 @@
       label="Lihat semua kategori"
       color="primary"
       flat
+      :to="{name: 'Category'}"
     />
 
     <div class="row q-col-gutter-md q-col-gutter-md-lg">

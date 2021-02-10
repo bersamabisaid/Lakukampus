@@ -21,6 +21,11 @@ const routes: RouteConfig[] = [
         component: () => import('pages/Search/Index.vue'),
       },
       {
+        name: 'Category',
+        path: '/category',
+        component: () => import('pages/Category/Index.vue'),
+      },
+      {
         name: 'Chat',
         path: '/chat/:id?',
         component: () => import('pages/Chat/Index.vue'),
