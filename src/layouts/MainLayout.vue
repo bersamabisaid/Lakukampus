@@ -279,7 +279,7 @@
         </q-bar>
 
         <q-scroll-area class="col full-width q-py-sm">
-          <q-list>
+          <q-list class="q-pb-xl">
             <q-item dense>
               <q-item-section>
                 <q-input
@@ -360,6 +360,27 @@
                   type="number"
                   dense
                   outlined
+                />
+              </q-item-section>
+            </q-item>
+
+            <q-item-label header>
+              Tags
+            </q-item-label>
+
+            <q-item dense>
+              <q-item-section>
+                <q-select
+                  label="Masukkan tag disini..."
+                  v-model="tags"
+                  use-input
+                  use-chips
+                  multiple
+                  dense
+                  hide-dropdown-icon
+                  input-debounce="0"
+                  outlined
+                  new-value-mode="add-unique"
                 />
               </q-item-section>
             </q-item>
@@ -480,9 +501,9 @@ import useChatUI from 'composition/useChatUI';
 import useAuth from 'composition/useAuth';
 import LoginDialog from 'components/ui/LoginDialog.vue';
 import { compactObject } from 'utils/Object';
-import type { SearchQuery } from 'pages/Search/Index.vue';
 import type { Route } from 'vue-router';
 import type { QForm } from 'quasar';
+import type { SearchQuery } from 'pages/Search/Index.vue';
 
 export default defineComponent({
   name: 'MainLayout',
@@ -498,12 +519,14 @@ export default defineComponent({
 
   data() {
     return {
-      search: null as (null | string),
-      category: null as (null | string),
-      faculty: null as (null | string),
-      sortBy: null as (null | string),
-      priceMin: null as (null | number),
-      priceMax: null as (null | number),
+      search: undefined as (undefined | string),
+      category: undefined as (undefined | string),
+      faculty: undefined as (undefined | string),
+      sortBy: undefined as (undefined | string),
+      priceMin: undefined as (undefined | number),
+      priceMax: undefined as (undefined | number),
+      tags: undefined as (undefined | string | string[]),
+
       isMainDrawerOpen: false,
       isFilterDrawerOpen: false,
 
@@ -569,6 +592,9 @@ export default defineComponent({
     isLoggedIn(): boolean {
       return Boolean(this.signedInUser);
     },
+    arrayOfTags(): string[] {
+      return Array.isArray(this.tags) ? this.tags : [this.tags || ''];
+    },
   },
 
   methods: {
@@ -601,8 +627,22 @@ export default defineComponent({
   },
 
   watch: {
-    $route(val: Route) {
-      this.isFilterDrawerOpen = val.name === 'Search';
+    $route: {
+      handler(val: Route) {
+        this.isFilterDrawerOpen = val.name === 'Search';
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        ({
+          q: this.search,
+          category: this.category,
+          faculty: this.faculty,
+          sortBy: this.sortBy,
+          priceMin: this.priceMin,
+          priceMax: this.priceMax,
+          tags: this.tags,
+        } = val.query as SearchQuery);
+      },
+      immediate: true,
     },
   },
 });
