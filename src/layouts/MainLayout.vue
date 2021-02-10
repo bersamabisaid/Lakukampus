@@ -22,7 +22,7 @@
           />
         </q-btn>
 
-        <q-toolbar-title class="col-grow">
+        <q-toolbar-title class="col">
           <q-input
             v-model="search"
             placeholder="Search"
