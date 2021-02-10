@@ -1,17 +1,19 @@
 <template>
   <q-card class="category-card">
-    <q-img
-      :src="img"
-      width="100%"
-      height="200px"
-      class="category-card__img q-mr-md"
-    >
-      <div class="category-card__img__overlay absolute-bottom-left fit q-pa-md column reverse">
-        <h6 class="q-my-none">
-          {{ name }}
-        </h6>
-      </div>
-    </q-img>
+    <router-link :to="{name: 'Search', query: {category: name}}">
+      <q-img
+        :src="img"
+        width="100%"
+        height="200px"
+        class="category-card__img q-mr-md"
+      >
+        <div class="category-card__img__overlay absolute-bottom-left fit q-pa-md column reverse">
+          <h6 class="q-my-none">
+            {{ name }}
+          </h6>
+        </div>
+      </q-img>
+    </router-link>
 
     <q-list dense>
       <q-item
