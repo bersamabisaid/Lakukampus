@@ -58,6 +58,7 @@
             size="sm"
             color="grey-10"
             flat
+            :to="{name: 'Category'}"
           />
 
           <q-btn
