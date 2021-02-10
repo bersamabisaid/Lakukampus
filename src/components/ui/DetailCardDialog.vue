@@ -5,7 +5,7 @@
     @keyup.39="arrowRight"
   >
     <q-carousel
-      ref="myCarousel"
+      ref="theCarousel"
       swipeable
       animated
       infinite
@@ -41,9 +41,13 @@
   </q-dialog>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api';
+import { QCarousel } from 'quasar';
+
+export default defineComponent({
   name: 'DetailCardDialog',
+
   props: {
     value: {
       type: Boolean,
@@ -51,18 +55,20 @@ export default {
     },
   },
 
-  data: () => ({
-    slide: 1,
-    lorem: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
-  }),
+  data() {
+    return {
+      slide: 1,
+      lorem: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit.',
+    };
+  },
 
   methods: {
     arrowLeft() {
-      this.$refs.myCarousel.previous();
+      (this.$refs.theCarousel as QCarousel).previous();
     },
     arrowRight() {
-      this.$refs.myCarousel.next();
+      (this.$refs.theCarousel as QCarousel).next();
     },
   },
-};
+});
 </script>

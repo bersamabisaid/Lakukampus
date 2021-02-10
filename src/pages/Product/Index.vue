@@ -29,32 +29,40 @@
   </q-page-container>
 </template>
 
-<script>
+<script lang="ts">
+import { defineComponent } from '@vue/composition-api';
 import DetailCard from './DetailCard.vue';
 import DetailContent from './DetailContent.vue';
 
-export default {
+interface RouteParams {
+  id: string;
+  shopName: string;
+  productName: string;
+}
+
+export default defineComponent({
   name: 'DetailProduct',
 
   components: {
     DetailCard, DetailContent,
   },
 
-  data: () => ({
-    selected: [],
-    data: [
-    ],
-  }),
+  data() {
+    return {
+      selected: [],
+      data: [],
+    };
+  },
 
   computed: {
-    shopName() {
-      return this.$route.params.shopName;
+    shopName(): string {
+      return (this.$route.params as unknown as RouteParams).shopName;
     },
-    productId() {
-      return this.$route.params.id;
+    productId(): string {
+      return (this.$route.params as unknown as RouteParams).id;
     },
   },
-};
+});
 </script>
 
 <style lang="scss">

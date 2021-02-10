@@ -60,7 +60,11 @@ export default defineComponent({
 
   methods: {
     onLoadMoreTags(i: number) {
+      /* eslint-disable
+        @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
       this.categories[i].tags.push(...Array.from(Array(10), getTag));
+      /* eslint-enable
+        @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */
     },
   },
 });
