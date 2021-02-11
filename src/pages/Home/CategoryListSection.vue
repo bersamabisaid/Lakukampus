@@ -12,10 +12,11 @@
     />
 
     <div class="row q-col-gutter-md q-col-gutter-md-lg">
-      <div
-        v-for="category in categories"
-        :key="category.name"
-        class="col-12 col-sm-4 col-md-2"
+      <router-link
+        v-for="(category, i) in categories"
+        :key="`${i}_${_uid}`"
+        class="block normalize-anchor col-12 col-sm-4 col-md-2"
+        :to="{name: 'Search', query: {category: category.name}}"
       >
         <q-img
           :src="category.thumbnail"
@@ -26,7 +27,7 @@
         <h5 class="text-h6 text-center q-ma-none">
           {{ category.name }}
         </h5>
-      </div>
+      </router-link>
     </div>
   </section-layout>
 </template>
