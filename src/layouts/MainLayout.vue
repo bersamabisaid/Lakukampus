@@ -506,6 +506,8 @@ import type { Route } from 'vue-router';
 import type { QForm } from 'quasar';
 import type { SearchQuery } from 'pages/Search/Index.vue';
 
+const pagesWithAutoOpenFilterDrawer = ['Search', 'Recommended'];
+
 export default defineComponent({
   name: 'MainLayout',
 
@@ -588,7 +590,7 @@ export default defineComponent({
       return this.$q.screen.width < this.$q.screen.sizes.md;
     },
     filterDrawerShowIfAbove() {
-      return this.$route.name === 'Search';
+      return pagesWithAutoOpenFilterDrawer.includes(this.$route.name || '');
     },
     isLoggedIn(): boolean {
       return Boolean(this.signedInUser);
@@ -629,8 +631,11 @@ export default defineComponent({
 
   watch: {
     $route: {
-      handler(val: Route) {
-        this.isFilterDrawerOpen = val.name === 'Search';
+      handler(val: Route, oldVal: Route | undefined) {
+        // only hide filterDrawer when see route name change
+        if (val.name !== oldVal?.name) {
+          this.isFilterDrawerOpen = val.name === 'Search';
+        }
 
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         ({
