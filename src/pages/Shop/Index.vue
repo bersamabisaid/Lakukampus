@@ -11,32 +11,82 @@
 
     <main class="row q-mt-xl q-mx-xl">
       <div class="column items-start">
-        <div class="col-12">
+        <div
+          class="col-12"
+          style="width: 266px"
+        >
           <shop-detail />
         </div>
         <div
-          class="row q-ml-lg"
-          style="width: 968px; max-width: 100%"
+          class="row q-ml-md"
+          style="width: 940px;"
         >
           <div class="col-12 q-mb-xl">
-            <q-input
-              outlined
-              v-model="text"
-              label="Cari Produk Toko ini"
-              maxlength="12"
-              :dense="dense"
-            >
-              <template v-slot:append>
-                <q-btn
-                  icon="search"
-                  flat
-                  round
-                />
-              </template>
-            </q-input>
+            <div class="row">
+              <q-input
+                class="col"
+                outlined
+                v-model="text"
+                label="Cari Produk Toko ini"
+                dense
+              >
+                <template v-slot:append>
+                  <q-btn
+                    icon="search"
+                    flat
+                    round
+                  />
+                </template>
+              </q-input>
+
+              <div class="col-6" />
+
+              <div class="col">
+                <span class="q-mr-sm">Filter</span>
+                <q-btn-dropdown
+                  color="primary"
+                  label="Terbaru"
+                  dense
+                >
+                  <q-list>
+                    <q-item
+                      clickable
+                      v-close-popup
+                      @click="onItemClick"
+                    >
+                      <q-item-section>
+                        <q-item-label>Termurah</q-item-label>
+                      </q-item-section>
+                    </q-item>
+
+                    <q-item
+                      clickable
+                      v-close-popup
+                      @click="onItemClick"
+                    >
+                      <q-item-section>
+                        <q-item-label>Termahal</q-item-label>
+                      </q-item-section>
+                    </q-item>
+
+                    <q-item
+                      clickable
+                      v-close-popup
+                      @click="onItemClick"
+                    >
+                      <q-item-section>
+                        <q-item-label>Ulasan Terbanyak</q-item-label>
+                      </q-item-section>
+                    </q-item>
+                  </q-list>
+                </q-btn-dropdown>
+              </div>
+            </div>
           </div>
           <div class="col-12">
-            <product-list :products="products" />
+            <product-list
+              :products="products"
+            />
           </div>
         </div>
       </div>
