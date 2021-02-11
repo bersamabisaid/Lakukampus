@@ -22,26 +22,21 @@
         title="Spesial untuk kamu"
         more-action-label="Lihat rekomendasi lainnya"
         :products="products.slice(0, 6)"
+        :more-action-to="{name: 'Recommended'}"
       />
 
-      <section-layout
-        title="Barang baru"
-        class="column"
-      >
-        <div class="row q-col-gutter-md">
-          <div
-            v-for="n in 3"
-            :key="n"
-            class="col-4"
-          >
-            <q-img
-              src="https://picsum.photos/390/243"
-              height="200px"
-              class="rounded-borders shadow-1"
-            />
-          </div>
-        </div>
-      </section-layout>
+      <product-list
+        title="Paling laris"
+        more-action-label="Lihat barang laris lainnya"
+        :products="products.slice(0,6)"
+      />
+
+      <product-list
+        title="Sedang promo"
+        more-action-label="Lihat barang promo lainnya"
+        :products="products.slice(0,6)"
+        :more-action-to="{name: 'Recommended', query: {group: 'promo'}}"
+      />
 
       <product-list
         title="Danusan"
@@ -53,7 +48,23 @@
           class="self-center q-pt-xl"
         >
           <q-btn
-            label="Tampilkan lebih banyak"
+            label="Tampilkan lebih banyak barang danusan"
+            color="primary"
+          />
+        </div>
+      </product-list>
+
+      <product-list
+        title="Baru ditambahkan"
+        more-action-label="Lihat barang baru lainnya"
+        :products="products"
+      >
+        <div
+          slot="bottom"
+          class="self-center q-pt-xl"
+        >
+          <q-btn
+            label="Tampilkan lebih banyak barang baru"
             color="primary"
           />
         </div>
