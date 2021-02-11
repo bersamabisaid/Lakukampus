@@ -9,17 +9,28 @@
       :label="moreActionLabel"
       color="primary"
       flat
+      :to="moreActionTo"
     />
 
-    <div class="row q-col-gutter-lg">
+    <div
+      v-if="products.length"
+      :class="['row q-col-gutter-lg', listClass]"
+    >
       <div
         v-for="product in products"
         :key="product.name"
-        class="col-6 col-sm-4 col-md-2"
+        :class="['col-6 col-sm-4 col-md-2', itemClass]"
       >
         <product-card v-bind="product" />
       </div>
     </div>
+
+    <h3
+      v-else
+      class="text-center"
+    >
+      Tidak dapat menampilkan daftar :(
+    </h3>
 
     <slot
       name="bottom"
@@ -32,6 +43,7 @@
 import { defineComponent, PropType } from '@vue/composition-api';
 import ProductCard, { Product } from 'components/ui/ProductCard.vue';
 import SectionLayout from 'layouts/SectionLayout.vue';
+import type { Route } from 'vue-router';
 
 export default defineComponent({
   name: 'ProductListSection',
@@ -43,7 +55,7 @@ export default defineComponent({
   props: {
     title: {
       type: String,
-      required: true,
+      default: '',
     },
 
     products: {
@@ -52,6 +64,21 @@ export default defineComponent({
     },
 
     moreActionLabel: {
+      type: String,
+      required: false,
+    },
+
+    moreActionTo: {
+      type: Object as PropType<Route>,
+      required: false,
+    },
+
+    listClass: {
+      type: String,
+      required: false,
+    },
+
+    itemClass: {
       type: String,
       required: false,
     },
