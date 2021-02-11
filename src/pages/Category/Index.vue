@@ -69,20 +69,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style lang="scss">
-.category-card {
-  $root: &;
-
-  #{$root}__img {
-    &__overlay {
-      background: linear-gradient(
-          180deg,
-          transparent,
-          rgba(0, 0, 0, 0.3) 58.33%,
-          rgba(0, 0, 0, 0.55)
-        );
-    }
-  }
-}
-</style>

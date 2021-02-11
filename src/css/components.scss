@@ -1,0 +1,11 @@
+.q-img {
+  & &__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: map-get($space-sm, y) map-get($space-sm, x);
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.3) 58.33%, rgba(0, 0, 0, 0.55));
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}

@@ -7,7 +7,7 @@
         height="200px"
         class="category-card__img q-mr-md"
       >
-        <div class="category-card__img__overlay absolute-bottom-left fit q-pa-md column reverse">
+        <div class="category-card__img-overlay absolute-bottom-left fit q-pa-md column reverse">
           <h6 class="q-my-none">
             {{ name }}
           </h6>
@@ -114,3 +114,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style lang="scss">
+@import 'src/css/components.scss';
+
+.category-card {
+  & &__img-overlay {
+    @extend .q-img__overlay;
+    padding: map-get($space-sm, y) map-get($space-md, x) !important;
+  }
+}
+</style>
