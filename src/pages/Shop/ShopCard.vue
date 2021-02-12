@@ -122,7 +122,6 @@
               </div>
             </div>
           </div>
-          </q-btn>
         </q-card-section>
       </q-card>
     </q-list>
