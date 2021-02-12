@@ -4,9 +4,9 @@
     style="height: 90vh"
   >
     <chat-window-layout
-      class="fit"
-      side-bar-position="left"
       no-header-bar
+      side-bar-position="left"
+      class="fit shadow-5"
     >
       <chat-list
         slot="side-bar"

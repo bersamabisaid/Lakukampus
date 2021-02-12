@@ -12,7 +12,10 @@
         />
       </q-card>
 
-      <home-carousel class="col" />
+      <home-carousel
+        class="col"
+        :slides="slides"
+      />
     </header>
 
     <main class="column q-py-xl q-px-md q-px-md-xl q-gutter-y-xl">
@@ -112,7 +115,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import {
-  commerce, image, random, company,
+  commerce, random, company, image,
 } from 'faker';
 import type { Product } from 'components/ui/ProductCard.vue';
 import SectionLayout from 'layouts/SectionLayout.vue';
@@ -132,7 +135,7 @@ export default defineComponent({
       products: Array.from(Array(12), () => ({
         name: commerce.productName(),
         price: random.number({ min: 1000, max: 100000, precision: 1000 }),
-        photo: image.food(),
+        photo: image.technics(200),
         bestChoice: random.boolean(),
         facultyName: random.word(),
         shopName: company.companyName(),
@@ -140,10 +143,14 @@ export default defineComponent({
         discount: random.arrayElement([[], [1000], [1000, 50]]),
       })) as Product[],
 
-      categories: Array.from(Array(6)).map(() => ({
+      categories: Array.from(Array(6), () => ({
         name: commerce.department(),
-        thumbnail: random.image(),
+        thumbnail: image.abstract(200),
       })) as Category[],
+
+      slides: Array.from(Array(4), () => ({
+        img: 'https://picsum.photos/500',
+      })),
     };
   },
 });
