@@ -38,3 +38,6 @@ database-debug.log
 
 # Configuration files
 firebase.config.json
+
+# Caches
+.firebase
