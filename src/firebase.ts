@@ -7,7 +7,11 @@ import { emulators } from 'app/firebase.json';
 
 const DEV_HOST = 'localhost';
 
-firebase.initializeApp(config);
+if (firebase.apps.length) {
+  firebase.app();
+} else {
+  firebase.initializeApp(config);
+}
 
 const db = firebase.firestore();
 const auth = firebase.auth();
@@ -15,7 +19,7 @@ const fns = firebase.functions();
 
 /* eslint-disable no-restricted-globals */
 if (process.env.DEV || location.hostname === DEV_HOST) {
-  const authUrlEmulator = new URL(location.origin);
+  const authUrlEmulator = new URL('http://localhost');
   authUrlEmulator.hostname = DEV_HOST;
   authUrlEmulator.port = emulators.auth.port.toString();
 
