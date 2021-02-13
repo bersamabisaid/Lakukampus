@@ -2,8 +2,18 @@ import { SessionStorage } from 'quasar';
 import { auth } from 'src/firebase';
 import type fb from 'firebase';
 
+export interface IUser {
+  uid: string;
+  displayName: string;
+  email: string;
+  emailVerified: boolean;
+  createdAt: number;
+  phoneNumber: string | null;
+  photoURL: string | null;
+}
+
 const state = {
-  user: auth.currentUser?.toJSON(),
+  user: auth.currentUser?.toJSON() as IUser,
 
   isWaitingAuthentication: true,
 

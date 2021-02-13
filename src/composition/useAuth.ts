@@ -2,7 +2,7 @@ import { onBeforeMount, reactive } from '@vue/composition-api';
 import firebase, { auth } from 'src/firebase';
 import { Loading } from 'quasar';
 import { useNamespacedMutations, useNamespacedState } from 'vuex-composition-helpers';
-import type { AuthStateInterface } from 'src/store/Auth/state';
+import type { AuthStateInterface, IUser } from 'src/store/Auth/state';
 import type { AuthMutationInterface } from 'src/store/Auth/mutations';
 
 const providers = {
@@ -46,7 +46,7 @@ export default function useAuth() {
     if (!firebaseAuthStateListener.value) {
       const listener = auth.onAuthStateChanged((user) => {
         stopWaitingAuthentication();
-        setUser(user?.toJSON());
+        setUser(user?.toJSON() as IUser);
       });
 
       setFirebaseAuthStateListener(listener);

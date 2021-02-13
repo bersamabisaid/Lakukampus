@@ -25,7 +25,7 @@
         <q-toolbar-title class="col">
           <q-input
             v-model="search"
-            placeholder="Search"
+            placeholder="Cari iPhone 11 disini..."
             filled
             dense
             required
@@ -91,18 +91,32 @@
               size="sm"
               flat
             >
-              <q-avatar>
-                <img src="https://cdn.quasar.dev/img/avatar.png">
+              <q-avatar
+                color="primary"
+                text-color="white"
+              >
+                <img
+                  v-if="signedInUser.photoURL"
+                  :src="signedInUser.photoURL"
+                >
+                <span v-else>{{ signedInUser.displayName.charAt(0) }}</span>
               </q-avatar>
 
               <q-menu content-class="column">
                 <div class="q-pt-sm bg-blue-grey-1 column items-center">
-                  <q-avatar>
-                    <img src="https://cdn.quasar.dev/img/avatar.png">
+                  <q-avatar
+                    color="primary"
+                    text-color="white"
+                  >
+                    <img
+                      v-if="signedInUser.photoURL"
+                      :src="signedInUser.photoURL"
+                    >
+                    <span v-else>{{ signedInUser.displayName.charAt(0) }}</span>
                   </q-avatar>
 
                   <h6 class="q-my-none">
-                    Developers
+                    {{ signedInUser.displayName }}
                   </h6>
                 </div>
 
@@ -114,9 +128,19 @@
                     v-close-popup
                   >
                     <q-item-section avatar>
+                      <q-icon name="store" />
+                    </q-item-section>
+                    <q-item-section>Toko saya</q-item-section>
+                  </q-item>
+
+                  <q-item
+                    clickable
+                    v-close-popup
+                  >
+                    <q-item-section avatar>
                       <q-icon name="settings" />
                     </q-item-section>
-                    <q-item-section>Settings</q-item-section>
+                    <q-item-section>Pengaturan</q-item-section>
                   </q-item>
 
                   <q-item
@@ -127,7 +151,7 @@
                     <q-item-section avatar>
                       <q-icon name="logout" />
                     </q-item-section>
-                    <q-item-section>Logout</q-item-section>
+                    <q-item-section>Keluar</q-item-section>
                   </q-item>
                 </q-list>
               </q-menu>
@@ -176,17 +200,23 @@
         class="full-width q-py-md q-px-xl bg-light-blue text-white column items-end"
       >
         <q-avatar
+          color="primary"
+          text-color="white"
           size="4rem"
           class="q-mb-sm"
         >
-          <img src="https://cdn.quasar.dev/img/boy-avatar.png">
+          <img
+            v-if="signedInUser.photoURL"
+            :src="signedInUser.photoURL"
+          >
+          <span v-else>{{ signedInUser.displayName.charAt(0) }}</span>
         </q-avatar>
 
         <span class="text-weight-bold">
-          Lakukampus Developer
+          {{ signedInUser.displayName }}
         </span>
 
-        <span>developer@lakukampus.id</span>
+        <span>{{ signedInUser.email }}</span>
       </div>
 
       <q-scroll-area class="col full-height">
@@ -240,6 +270,7 @@
             clickable
             v-ripple
             class="bg-amber text-grey-1"
+            @click="login"
           >
             <q-item-section avatar>
               <q-icon name="login" />
