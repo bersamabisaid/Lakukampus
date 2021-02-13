@@ -1,10 +1,10 @@
 <template>
   <q-page
-    class="q-pa-xl row content-start items-baseline q-col-gutter-md"
+    class="q-pa-xl row content-start q-col-gutter-md"
     style="min-height: 100vh"
   >
     <div
-      v-for="e in 5"
+      v-for="e in 2"
       :key="`${_uid}_${e}`"
       class="col-4"
     >
@@ -15,7 +15,7 @@
         >
           <div
             slot="loading"
-            class="fit bg-blue"
+            class="fit bg-light-blue"
           />
 
           <div class="absolute-top full-height">
@@ -46,6 +46,17 @@
           </div>
         </q-img>
       </q-card>
+    </div>
+
+    <div class="col-4">
+      <q-btn
+        label="Buat toko baru"
+        icon="add"
+        size="lg"
+        color="light-blue"
+        text-color="white"
+        class="fit"
+      />
     </div>
   </q-page>
 </template>
