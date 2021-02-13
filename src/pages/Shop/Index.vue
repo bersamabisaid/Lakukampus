@@ -86,6 +86,7 @@
           <div class="col-12">
             <product-list
               :products="products"
+              item-class="col-12 col-md-3"
             />
           </div>
         </div>
