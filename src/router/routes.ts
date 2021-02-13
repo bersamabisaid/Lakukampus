@@ -28,7 +28,7 @@ const routes: RouteConfig[] = [
       {
         name: 'Recommended',
         path: '/recommended',
-        component: () => import('pages/Recommended.vue'),
+        component: () => import('pages/Recommended/Index.vue'),
       },
       {
         name: 'Chat',
