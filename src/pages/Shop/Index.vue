@@ -10,86 +10,63 @@
     </header>
 
     <main class="row q-mt-xl q-mx-xl">
-      <div class="column items-start">
-        <div
-          class="col-12"
-          style="width: 266px"
-        >
-          <shop-detail />
-        </div>
-        <div
-          class="row q-ml-md"
-          style="width: 940px;"
-        >
-          <div class="col-12 q-mb-xl">
-            <div class="row">
-              <q-input
-                class="col"
-                outlined
-                v-model="text"
-                label="Cari Produk Toko ini"
+      <div
+        class="col-12 col-md-2"
+        style="min-width: 266px"
+      >
+        <shop-detail />
+      </div>
+      <div class="col" />
+      <div class="col-12 col-md-9">
+        <div class="row">
+          <q-input
+            class="col"
+            outlined
+            v-model="text"
+            label="Cari Produk Toko ini"
+            dense
+          >
+            <template v-slot:append>
+              <q-btn
+                icon="search"
+                flat
+                round
+              />
+            </template>
+          </q-input>
+
+          <div class="col-6" />
+
+          <div class="col">
+            <div class="float-right">
+              <span class="q-mr-sm">Filter</span>
+              <q-btn-dropdown
+                color="primary"
+                label="Terbaru"
                 dense
               >
-                <template v-slot:append>
-                  <q-btn
-                    icon="search"
-                    flat
-                    round
-                  />
-                </template>
-              </q-input>
-
-              <div class="col-6" />
-
-              <div class="col">
-                <span class="q-mr-sm">Filter</span>
-                <q-btn-dropdown
-                  color="primary"
-                  label="Terbaru"
-                  dense
-                >
-                  <q-list>
-                    <q-item
-                      clickable
-                      v-close-popup
-                      @click="onItemClick"
-                    >
-                      <q-item-section>
-                        <q-item-label>Termurah</q-item-label>
-                      </q-item-section>
-                    </q-item>
-
-                    <q-item
-                      clickable
-                      v-close-popup
-                      @click="onItemClick"
-                    >
-                      <q-item-section>
-                        <q-item-label>Termahal</q-item-label>
-                      </q-item-section>
-                    </q-item>
-
-                    <q-item
-                      clickable
-                      v-close-popup
-                      @click="onItemClick"
-                    >
-                      <q-item-section>
-                        <q-item-label>Ulasan Terbanyak</q-item-label>
-                      </q-item-section>
-                    </q-item>
-                  </q-list>
-                </q-btn-dropdown>
-              </div>
+                <q-list>
+                  <q-item
+                    clickable
+                    v-close-popup
+                    @click="onItemClick"
+                    v-for="n in 3"
+                    :key="n"
+                  >
+                    <q-item-section>
+                      <q-item-label>{{ filter }}</q-item-label>
+                    </q-item-section>
+                  </q-item>
+                </q-list>
+              </q-btn-dropdown>
             </div>
           </div>
-          <div class="col-12">
-            <product-list
-              :products="products"
-              item-class="col-12 col-md-3"
-            />
-          </div>
         </div>
+        <product-list
+          :products="products.slice(0,10)"
+          item-class="col-12 col-md-3"
+          class="q-mt-lg"
+        />
       </div>
     </main>
   </q-page>
@@ -100,7 +77,7 @@ import { defineComponent } from '@vue/composition-api';
 import type { Product } from 'components/ui/ProductCard.vue';
 import ProductList from 'components/modules/ProductList.vue';
 import {
-  commerce, image, random, company,
+  commerce, image, random, company, address,
 } from 'faker';
 import ShopCard from './ShopCard.vue';
 import ShopDetail from './ShopDetail.vue';
@@ -121,6 +98,7 @@ export default defineComponent({
         discount: random.arrayElement([[], [1000], [1000, 50]]),
       })) as Product[],
       text: '',
+      filter: address.city(),
     };
   },
 
