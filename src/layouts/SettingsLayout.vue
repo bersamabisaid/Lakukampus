@@ -1,7 +1,7 @@
 <template>
   <q-page
     padding
-    class="row justify-center"
+    class="row justify-center items-baseline"
     style="min-height: 100vh"
   >
     <q-list
@@ -25,9 +25,7 @@
       class="q-mx-lg q-my-xl q-my-sm-xs fit max-w-screen-xs"
     >
       <q-card-section>
-        <keep-alive>
-          <router-view />
-        </keep-alive>
+        <router-view />
       </q-card-section>
     </q-card>
   </q-page>
@@ -35,6 +33,12 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
+import type { Route } from 'vue-router';
+
+interface SettingGroup {
+  label: string;
+  to: Route;
+}
 
 export default defineComponent({
   name: 'SettingsLayout',
@@ -47,10 +51,14 @@ export default defineComponent({
           to: '/settings',
         },
         {
-          label: 'Profil pengguna',
+          label: 'Biodata pengguna',
           to: { name: 'SettingsUserProfile' },
         },
-      ]),
+        {
+          label: 'Verifikasi akun',
+          to: { name: 'SettingsVerifyAccount' },
+        },
+      ] as SettingGroup[]),
     };
   },
 

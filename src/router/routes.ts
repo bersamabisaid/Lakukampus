@@ -40,9 +40,19 @@ const routes: RouteConfig[] = [
         component: () => import('layouts/SettingsLayout.vue'),
         children: [
           {
+            name: 'Settings',
+            path: '',
+            component: () => import('pages/Settings/General.vue'),
+          },
+          {
             name: 'SettingsUserProfile',
-            path: 'user-profile',
-            component: () => import('pages/Settings/UserProfile.vue'),
+            path: 'bio',
+            component: () => import('pages/Settings/Biodata.vue'),
+          },
+          {
+            name: 'SettingsVerifyAccount',
+            path: 'verify',
+            component: () => import('pages/Settings/VerifyAccount.vue'),
           },
         ],
       },

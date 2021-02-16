@@ -90,7 +90,7 @@ import useAuthGuard from 'composition/useAuthGuard';
 import ItemInput from './ItemInput.vue';
 
 export default defineComponent({
-  name: 'SettingsUserProfilePage',
+  name: 'SettingsBiodataPage',
 
   components: {
     SectionLayout, ItemInput,
