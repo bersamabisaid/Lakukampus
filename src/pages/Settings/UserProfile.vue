@@ -9,10 +9,10 @@
           class="q-my-sm"
         >
           <q-img
-            v-if="signedInUser.photoURL"
-            :src="signedInUser.photoURL"
+            v-if="photo"
+            :src="photo"
           />
-          <span v-else>{{ signedInUser.displayName.charAt(0) }}</span>
+          <span v-else>{{ name.charAt(0) }}</span>
         </q-avatar>
 
         <q-btn
@@ -86,7 +86,6 @@
 import { defineComponent } from '@vue/composition-api';
 import SectionLayout from 'layouts/SectionLayout.vue';
 import useUserProfileData from 'composition/useUserProfileData';
-import useAuth from 'composition/useAuth';
 import useAuthGuard from 'composition/useAuthGuard';
 import ItemInput from './ItemInput.vue';
 
@@ -99,10 +98,8 @@ export default defineComponent({
 
   setup(props, ctx) {
     useAuthGuard(props, ctx);
-    const { signedInUser } = useAuth();
 
     return {
-      signedInUser,
       ...useUserProfileData(),
     };
   },

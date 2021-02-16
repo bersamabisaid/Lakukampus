@@ -13,7 +13,7 @@ export interface IUser {
 }
 
 const state = {
-  user: auth.currentUser?.toJSON() as IUser,
+  user: auth.currentUser?.toJSON() as IUser | null,
 
   isWaitingAuthentication: true,
 
