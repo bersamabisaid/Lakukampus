@@ -31,27 +31,6 @@ const routes: RouteConfig[] = [
         component: () => import('pages/Recommended/Index.vue'),
       },
       {
-        path: '/dashboard',
-        component: { render: (e) => e('router-view') },
-        children: [
-          {
-            name: 'Dashboard',
-            path: '',
-            component: () => import('pages/Dashboard/Index.vue'),
-          },
-          {
-            name: 'MyShop',
-            path: 'my-shop',
-            component: () => import('pages/Dashboard/MyShop/Index.vue'),
-          },
-          {
-            name: 'MyProduct',
-            path: ':shopName',
-            component: () => import('pages/Dashboard/MyProduct/Index.vue'),
-          },
-        ],
-      },
-      {
         name: 'Chat',
         path: '/chat/:id?',
         component: () => import('pages/Chat/Index.vue'),
@@ -82,6 +61,28 @@ const routes: RouteConfig[] = [
         name: 'Product',
         path: ':id/:prodName?',
         component: () => import('pages/Product/Index.vue'),
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
+    // component: { render: (e) => e('router-view') },
+    component: () => import('layouts/DashboardLayout.vue'),
+    children: [
+      {
+        name: 'DashboardPage',
+        path: '/dashboard',
+        component: () => import('pages/Dashboard/Index.vue'),
+      },
+      {
+        name: 'MyShop',
+        path: 'my-shop',
+        component: () => import('pages/Dashboard/MyShop/Index.vue'),
+      },
+      {
+        name: 'MyProduct',
+        path: ':shopName',
+        component: () => import('pages/Dashboard/MyProduct/Index.vue'),
       },
     ],
   },
