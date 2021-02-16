@@ -12,7 +12,7 @@
             v-if="photo"
             :src="photo"
           />
-          <span v-else>{{ name.charAt(0) }}</span>
+          <span v-else>{{ name.charAt(0).toUpperCase() }}</span>
         </q-avatar>
 
         <q-btn

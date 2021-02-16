@@ -7,7 +7,7 @@
       <q-item-label>
         <q-input
           :value="value"
-          @change="$emit('change', $event)"
+          @input="$emit('input', $event)"
           :placeholder="label"
           outlined
           dense
