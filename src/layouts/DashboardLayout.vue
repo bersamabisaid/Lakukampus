@@ -19,10 +19,10 @@
     <q-drawer
       v-model="drawer"
       show-if-above
+      bordered
       :width="200"
-      :breakpoint="400"
     >
-      <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px; border-right: 1px solid #ddd">
+      <q-scroll-area style="height: calc(100% - 150px); margin-top: 150px;">
         <q-list padding>
           <q-item
             clickable
