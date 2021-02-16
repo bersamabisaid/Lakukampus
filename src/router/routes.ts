@@ -35,6 +35,17 @@ const routes: RouteConfig[] = [
         path: '/chat/:id?',
         component: () => import('pages/Chat/Index.vue'),
       },
+      {
+        path: '/settings',
+        component: () => import('layouts/SettingsLayout.vue'),
+        children: [
+          {
+            name: 'SettingsUserProfile',
+            path: 'user-profile',
+            component: () => import('pages/Settings/UserProfile.vue'),
+          },
+        ],
+      },
     ],
   },
   {
@@ -55,7 +66,7 @@ const routes: RouteConfig[] = [
     children: [
       {
         name: 'Dashboard',
-        path: '/dashboard',
+        path: '',
         component: () => import('pages/Dashboard/Index.vue'),
       },
       {

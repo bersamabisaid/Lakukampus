@@ -126,6 +126,7 @@
                   <q-item
                     clickable
                     v-close-popup
+                    :to="{name: 'MyShop'}"
                   >
                     <q-item-section avatar>
                       <q-icon name="store" />
@@ -136,6 +137,7 @@
                   <q-item
                     clickable
                     v-close-popup
+                    to="/settings"
                   >
                     <q-item-section avatar>
                       <q-icon name="settings" />
