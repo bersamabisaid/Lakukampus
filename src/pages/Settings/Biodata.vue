@@ -96,8 +96,8 @@ export default defineComponent({
     SectionLayout, ItemInput,
   },
 
-  setup(props, ctx) {
-    useAuthGuard(props, ctx);
+  setup() {
+    useAuthGuard();
 
     return {
       ...useUserProfileData(),

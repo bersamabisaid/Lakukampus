@@ -1,8 +1,8 @@
-import { SetupContext, watch } from '@vue/composition-api';
+import { getCurrentInstance, watch } from '@vue/composition-api';
 import { Loading } from 'quasar';
 import useAuth from 'composition/useAuth';
 
-export default function useAuthGuard(props: unknown, ctx: SetupContext) {
+export default function useAuthGuard() {
   const { signedInUser, authState } = useAuth();
 
   watch(
@@ -16,7 +16,7 @@ export default function useAuthGuard(props: unknown, ctx: SetupContext) {
         Loading.hide();
 
         if (!signedInUser.value) {
-          await ctx.root.$router.push({ name: 'MyCart' });
+          await getCurrentInstance()?.$router.push({ name: 'Home' });
         }
       }
     },
