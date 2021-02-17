@@ -4,6 +4,7 @@ import useAuth from 'composables/useAuth';
 
 export default function useAuthGuard() {
   const { signedInUser, authState } = useAuth();
+  const vueInstance = getCurrentInstance();
 
   watch(
     [signedInUser, () => authState.isWaitingAuthentication],
@@ -16,7 +17,7 @@ export default function useAuthGuard() {
         Loading.hide();
 
         if (!signedInUser.value) {
-          await getCurrentInstance()?.$router.push({ name: 'Home' });
+          await vueInstance?.$router.push({ name: 'Home' });
         }
       }
     },
