@@ -85,8 +85,8 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import SectionLayout from 'layouts/SectionLayout.vue';
-import useUserProfileData from 'composition/useUserProfileData';
-import useAuthGuard from 'composition/useAuthGuard';
+import useUserProfileData from 'composables/useUserProfileData';
+import useAuthGuard from 'composables/useAuthGuard';
 import ItemInput from './ItemInput.vue';
 
 export default defineComponent({

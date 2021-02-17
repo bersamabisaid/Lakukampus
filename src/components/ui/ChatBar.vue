@@ -18,7 +18,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import useChatUI from 'composition/useChatUI';
+import useChatUI from 'composables/useChatUI';
 
 export default defineComponent({
   name: 'ChatBar',

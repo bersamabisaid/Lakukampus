@@ -1,6 +1,6 @@
 import { getCurrentInstance, watch } from '@vue/composition-api';
 import { Loading } from 'quasar';
-import useAuth from 'composition/useAuth';
+import useAuth from 'composables/useAuth';
 
 export default function useAuthGuard() {
   const { signedInUser, authState } = useAuth();

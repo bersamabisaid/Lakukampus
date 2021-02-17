@@ -41,8 +41,8 @@ import ChatTitle from 'components/ChatWindow/ChatTitle.vue';
 import ChatList from 'components/ChatWindow/ChatList.vue';
 import ChatMessages, { IChatMessages } from 'components/ChatWindow/ChatMessages';
 import ChatTextInput from 'components/ChatWindow/ChatTextInput.vue';
-import useChatUI from 'composition/useChatUI';
-import useChat from 'composition/useChat';
+import useChatUI from 'composables/useChatUI';
+import useChat from 'composables/useChat';
 import { Contact } from 'components/ChatWindow/model';
 
 export default defineComponent({

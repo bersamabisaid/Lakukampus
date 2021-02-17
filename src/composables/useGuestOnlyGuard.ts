@@ -1,6 +1,6 @@
 import { SetupContext, watch } from '@vue/composition-api';
 import { Notify } from 'quasar';
-import useAuth from 'composition/useAuth';
+import useAuth from 'composables/useAuth';
 
 export default (props: unknown, ctx: SetupContext) => {
   const { signedInUser, authState } = useAuth();

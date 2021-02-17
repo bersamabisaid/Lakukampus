@@ -9,7 +9,7 @@
       "assets/*": ["src/assets/*"],
       "boot/*": ["src/boot/*"],
       "models/*": ["src/models/*"],
-      "composition/*": ["src/composition/*"],
+      "composables/*": ["src/composables/*"],
       "utils/*": ["src/utils/*"],
       "src/*": ["src/*"],
       "app/*": ["*"]

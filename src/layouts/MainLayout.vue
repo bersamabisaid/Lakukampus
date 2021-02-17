@@ -531,8 +531,8 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import useChatUI from 'composition/useChatUI';
-import useAuth from 'composition/useAuth';
+import useChatUI from 'composables/useChatUI';
+import useAuth from 'composables/useAuth';
 import LoginDialog from 'components/ui/LoginDialog.vue';
 import { compactObject } from 'utils/Object';
 import type { Route } from 'vue-router';

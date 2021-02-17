@@ -85,7 +85,7 @@ module.exports = configure((ctx) => ({
         ...cfg.resolve.alias,
 
         models: resolve(__dirname, './src/models'),
-        composition: resolve(__dirname, './src/composition'),
+        composables: resolve(__dirname, './src/composables'),
         utils: resolve(__dirname, './src/utils'),
       };
     },
@@ -131,7 +131,7 @@ module.exports = configure((ctx) => ({
   // animations: 'all', // --- includes all animations
   // https://quasar.dev/options/animations
   animations: [
-    'slideInUp',
+    'slideInUp', 'fadeInDown', 'fadeOutUp',
   ],
 
   // https://quasar.dev/quasar-cli/developing-ssr/configuring-ssr

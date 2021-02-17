@@ -51,13 +51,13 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import useChatUI from 'composition/useChatUI';
 import ChatWindowLayout from 'components/ChatWindow/ChatWindowLayout.vue';
 import ChatTitle from 'components/ChatWindow/ChatTitle.vue';
 import ChatList from 'components/ChatWindow/ChatList.vue';
 import ChatMessages, { IChatMessages } from 'components/ChatWindow/ChatMessages';
 import ChatTextInput from 'components/ChatWindow/ChatTextInput.vue';
-import useChat from 'composition/useChat';
+import useChatUI from 'composables/useChatUI';
+import useChat from 'composables/useChat';
 import type { Contact } from 'components/ChatWindow/model';
 
 export default defineComponent({

@@ -56,7 +56,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import { mdiGoogle } from '@quasar/extras/mdi-v5';
-import useAuth from 'composition/useAuth';
+import useAuth from 'composables/useAuth';
 import type { QDialog } from 'quasar';
 
 export default defineComponent({
