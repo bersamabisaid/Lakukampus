@@ -1,8 +1,25 @@
 <template>
   <q-page
-    class="q-pa-xl row content-start q-col-gutter-md"
+    class="max-w-sm q-pa-xl row content-start q-col-gutter-md"
     style="min-height: 100vh"
   >
+    <div class="col-12 q-pb-md">
+      <q-banner
+        inline-actions
+        rounded
+        class="bg-red text-white"
+      >
+        Silahkan verifikasi akun kamu sebelum membuat toko...
+        <q-btn
+          slot="action"
+          flat
+          color="white"
+          label="Verifikasi akun"
+          :to="{name: 'SettingsVerifyAccount'}"
+        />
+      </q-banner>
+    </div>
+
     <div
       v-for="e in 2"
       :key="`${_uid}_${e}`"
@@ -56,6 +73,7 @@
         color="light-blue"
         text-color="white"
         class="fit"
+        :to="{name: 'CreateShop'}"
       />
     </div>
   </q-page>

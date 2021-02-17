@@ -85,6 +85,11 @@ const routes: RouteConfig[] = [
         component: () => import('pages/Dashboard/MyShop/Index.vue'),
       },
       {
+        name: 'CreateShop',
+        path: 'my-shop/create',
+        component: () => import('pages/Dashboard/MyShop/CreateShop.vue'),
+      },
+      {
         name: 'MyProduct',
         path: ':shopName',
         component: () => import('pages/Dashboard/MyProduct/Index.vue'),
