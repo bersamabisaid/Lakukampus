@@ -1,5 +1,7 @@
-import { ref } from '@vue/composition-api';
-import useAuth from 'composition/useAuth';
+import {
+  reactive, toRefs,
+} from '@vue/composition-api';
+import useAuth from 'composables/useAuth';
 
 export default function useUserProfileData() {
   const { signedInUser } = useAuth();
@@ -8,19 +10,22 @@ export default function useUserProfileData() {
   } = signedInUser.value || {
     displayName: '', phoneNumber: '', email: '', photoURL: '',
   };
+  const profileData = reactive({
+    name: displayName,
+    phoneNumber,
+    email,
+    photo: photoURL,
+    department: '',
+    faculty: '',
+    batchYear: 2000,
+    studentId: '',
+    // studentIdCard: '',
+    originAddress: '',
+    currentAddress: '',
+    verified: false,
+  });
 
   return {
-    name: ref(displayName),
-    phoneNumber: ref(phoneNumber),
-    email: ref(email),
-    photo: ref(photoURL),
-    department: ref(''),
-    faculty: ref(''),
-    batchYear: ref(2000),
-    studentId: ref(''),
-    // studentIdCard: ref(''),
-    originAddress: ref(''),
-    currentAddress: ref(''),
-    verified: ref(false),
+    ...toRefs(profileData),
   };
 }
