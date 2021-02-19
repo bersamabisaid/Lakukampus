@@ -112,9 +112,7 @@
 import { defineComponent } from '@vue/composition-api';
 import SectionLayout from 'layouts/SectionLayout.vue';
 import useFormFule from 'composables/useFormRule';
-import useAuthGuard from 'composables/useAuthGuard';
 import Shop from 'models/Shop';
-import { createShop } from 'composables/useShopRepository';
 import type { QStepper, QForm } from 'quasar';
 
 const createImgInput = () => {
@@ -133,14 +131,13 @@ export default defineComponent({
   },
 
   setup() {
-    useAuthGuard();
     const { required, uniqueFieldFactory } = useFormFule();
+
     return {
       rule: {
         required,
         uniqueShopName: uniqueFieldFactory(Shop, 'name', 'Nama toko sudah tersedia'),
       },
-      createShop,
     };
   },
 
@@ -178,11 +175,12 @@ export default defineComponent({
 
         case 1:
           try {
-            await createShop({
+            await Shop.create({
               name: this.shopName,
               description: this.shopDesc,
             });
           } catch (err) {
+            // eslint-disable-next-line no-console
             console.log(err);
           }
 

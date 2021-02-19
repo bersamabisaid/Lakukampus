@@ -79,19 +79,25 @@ const routes: RouteConfig[] = [
         component: () => import('pages/Dashboard/Index.vue'),
       },
       {
-        name: 'MyShop',
-        path: 'my-shop',
-        component: () => import('pages/Dashboard/MyShop/Index.vue'),
-      },
-      {
         name: 'CreateShop',
-        path: 'my-shop/create',
-        component: () => import('pages/Dashboard/MyShop/CreateShop.vue'),
+        path: 'create-shop',
+        component: () => import('pages/Dashboard/CreateShop.vue'),
       },
       {
-        name: 'MyProduct',
         path: ':shopName',
-        component: () => import('pages/Dashboard/MyProduct/Index.vue'),
+        component: { render: (e) => e('router-view') },
+        children: [
+          {
+            name: 'MyShop',
+            path: '',
+            component: () => import('pages/Dashboard/MyShop.vue'),
+          },
+          {
+            name: 'MyProduct',
+            path: 'products',
+            component: () => import('pages/Dashboard/MyProduct.vue'),
+          },
+        ],
       },
     ],
   },

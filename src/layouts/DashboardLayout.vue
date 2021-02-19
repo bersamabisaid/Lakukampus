@@ -227,15 +227,26 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
+import useAuthGuard from 'composables/useAuthGuard';
 
 export default defineComponent({
   name: 'DashboardLayout',
+
+  setup() {
+    useAuthGuard();
+  },
 
   data() {
     return {
       drawer: false,
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
     };
+  },
+
+  methods: {
+    onItemClick() {
+      console.log('Anda ngeklik saya :)');
+    },
   },
 });
 
