@@ -2,10 +2,9 @@
   <q-layout view="lHh Lpr lff">
     <q-header
       elevated
-      class="bg-cyan-8"
+      class="bg-white"
     >
-      <q-toolbar>
-        <q-toolbar-title>Header</q-toolbar-title>
+      <q-toolbar class="text-dark">
         <q-btn
           flat
           @click="drawer = !drawer"
@@ -13,6 +12,13 @@
           dense
           icon="menu"
         />
+        <q-toolbar-title>
+          <q-img
+            :src="require('assets/images/Lakukampus_logo.png')"
+            width="180px"
+          />
+          Seller
+        </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
@@ -27,13 +33,27 @@
           <q-item
             clickable
             v-ripple
+            @click="drawer = !drawer"
           >
             <q-item-section avatar>
-              <q-icon name="inbox" />
+              <q-icon name="keyboard_arrow_left" />
             </q-item-section>
 
             <q-item-section>
-              Inbox
+              Sembunyikan
+            </q-item-section>
+          </q-item>
+
+          <q-item
+            clickable
+            v-ripple
+          >
+            <q-item-section avatar>
+              <q-icon name="house" />
+            </q-item-section>
+
+            <q-item-section>
+              Dashboard
             </q-item-section>
           </q-item>
 
@@ -47,7 +67,7 @@
             </q-item-section>
 
             <q-item-section>
-              Star
+              Daftar Barang
             </q-item-section>
           </q-item>
 
@@ -56,11 +76,11 @@
             v-ripple
           >
             <q-item-section avatar>
-              <q-icon name="send" />
+              <q-icon name="paid" />
             </q-item-section>
 
             <q-item-section>
-              Send
+              Transaksi
             </q-item-section>
           </q-item>
 
@@ -69,11 +89,24 @@
             v-ripple
           >
             <q-item-section avatar>
-              <q-icon name="drafts" />
+              <q-icon name="supervisor_account" />
             </q-item-section>
 
             <q-item-section>
-              Drafts
+              Karyawan
+            </q-item-section>
+          </q-item>
+
+          <q-item
+            clickable
+            v-ripple
+          >
+            <q-item-section avatar>
+              <q-icon name="settings" />
+            </q-item-section>
+
+            <q-item-section>
+              Pengaturan
             </q-item-section>
           </q-item>
         </q-list>
@@ -99,6 +132,91 @@
       </q-img>
     </q-drawer>
 
+    <q-drawer
+      side="right"
+      v-model="drawerRight"
+      show-if-above
+      bordered
+      :width="300"
+      :breakpoint="500"
+      content-class="bg-grey-3"
+    >
+      <q-scroll-area class="fit">
+        <div class="q-pa-sm">
+          <q-card
+            flat
+            bordered
+            class="my-card bg-grey-1"
+          >
+            <q-card-section>
+              <div class="row items-center no-wrap">
+                <div class="col">
+                  <div class="text-h6">
+                    <q-icon
+                      name="campaign"
+                      size="md"
+                    />
+                    Informasi
+                  </div>
+                </div>
+
+                <div class="col-auto">
+                  <q-btn-dropdown label="Info">
+                    <q-list>
+                      <q-item
+                        clickable
+                        v-close-popup
+                        @click="onItemClick"
+                      >
+                        <q-item-section>
+                          <q-item-label>Photos</q-item-label>
+                        </q-item-section>
+                      </q-item>
+
+                      <q-item
+                        clickable
+                        v-close-popup
+                        @click="onItemClick"
+                      >
+                        <q-item-section>
+                          <q-item-label>Videos</q-item-label>
+                        </q-item-section>
+                      </q-item>
+
+                      <q-item
+                        clickable
+                        v-close-popup
+                        @click="onItemClick"
+                      >
+                        <q-item-section>
+                          <q-item-label>Articles</q-item-label>
+                        </q-item-section>
+                      </q-item>
+                    </q-list>
+                  </q-btn-dropdown>
+                </div>
+              </div>
+            </q-card-section>
+
+            <q-card-section>
+              {{ lorem }}
+            </q-card-section>
+
+            <q-separator />
+
+            <q-card-actions>
+              <q-btn flat>
+                Action 1
+              </q-btn>
+              <q-btn flat>
+                Action 2
+              </q-btn>
+            </q-card-actions>
+          </q-card>
+        </div>
+      </q-scroll-area>
+    </q-drawer>
+
     <q-page-container>
       <transition enter-active-class="animated slideInUp">
         <router-view />
@@ -116,6 +234,7 @@ export default defineComponent({
   data() {
     return {
       drawer: false,
+      lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut',
     };
   },
 });

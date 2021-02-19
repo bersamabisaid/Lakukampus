@@ -71,7 +71,6 @@ const routes: RouteConfig[] = [
   },
   {
     path: '/dashboard',
-    // component: { render: (e) => e('router-view') },
     component: () => import('layouts/DashboardLayout.vue'),
     children: [
       {
