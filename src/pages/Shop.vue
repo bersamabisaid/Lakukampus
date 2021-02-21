@@ -74,13 +74,13 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import type { Product } from 'components/ui/ProductCard.vue';
-import ProductList from 'components/modules/ProductList.vue';
 import {
   commerce, image, random, company, address,
 } from 'faker';
-import ShopCard from './ShopCard.vue';
-import ShopDetail from './ShopDetail.vue';
+import ProductList from 'components/modules/ProductList.vue';
+import ShopCard from 'components/ui/Shop/ShopCard.vue';
+import ShopDetail from 'components/ui/Shop/ShopDetail.vue';
+import type { Product } from 'components/ProductCard.vue';
 
 export default defineComponent({
   name: 'ShopPage',

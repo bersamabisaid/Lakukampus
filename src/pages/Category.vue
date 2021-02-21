@@ -32,7 +32,7 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
 import { random, internet } from 'faker';
-import CategoryCard, { Category, Tag } from './CategoryCard.vue';
+import CategoryCard, { Category, Tag } from 'components/ui/Category/CategoryCard.vue';
 
 const getTag = function (): Tag {
   return {

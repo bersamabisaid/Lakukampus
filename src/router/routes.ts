@@ -8,32 +8,32 @@ const routes: RouteConfig[] = [
       {
         name: 'Home',
         path: '',
-        component: () => import('pages/Home/Index.vue'),
+        component: () => import('pages/Home.vue'),
       },
       {
         name: 'MyCart',
         path: '/my-cart',
-        component: () => import('pages/MyCart/Index.vue'),
+        component: () => import('pages/MyCart.vue'),
       },
       {
         name: 'Search',
         path: '/search',
-        component: () => import('pages/Search/Index.vue'),
+        component: () => import('pages/Search.vue'),
       },
       {
         name: 'Category',
         path: '/category',
-        component: () => import('pages/Category/Index.vue'),
+        component: () => import('pages/Category.vue'),
       },
       {
         name: 'Recommended',
         path: '/recommended',
-        component: () => import('pages/Recommended/Index.vue'),
+        component: () => import('pages/Recommended.vue'),
       },
       {
         name: 'Chat',
         path: '/chat/:id?',
-        component: () => import('pages/Chat/Index.vue'),
+        component: () => import('pages/Chat.vue'),
       },
       {
         path: '/settings',
@@ -108,12 +108,12 @@ const routes: RouteConfig[] = [
       {
         name: 'Shop',
         path: '',
-        component: () => import('pages/Shop/Index.vue'),
+        component: () => import('pages/Shop.vue'),
       },
       {
         name: 'Product',
         path: ':id/:prodName?',
-        component: () => import('pages/Product/Index.vue'),
+        component: () => import('pages/Product.vue'),
       },
     ],
   },

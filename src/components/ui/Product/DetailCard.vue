@@ -94,7 +94,7 @@
 
 <script>
 import { random, commerce } from 'faker';
-import ImageDetailCarousel from 'components/ui/ImageDetailCarousel.vue';
+import ImageDetailCarousel from 'components/ImageDetailCarousel.vue';
 
 export default {
   name: 'DetailCard',

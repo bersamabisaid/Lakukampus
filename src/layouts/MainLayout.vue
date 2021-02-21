@@ -70,7 +70,7 @@
             flat
           />
 
-          <template v-if="isLoggedIn">
+          <template v-if="signedInUser">
             <q-btn
               label="Chat"
               icon="chat_bubble"
@@ -198,7 +198,7 @@
       content-class="column"
     >
       <div
-        v-if="isLoggedIn"
+        v-if="signedInUser"
         class="full-width q-py-md q-px-xl bg-light-blue text-white column items-end"
       >
         <q-avatar
@@ -533,11 +533,11 @@
 import { defineComponent } from '@vue/composition-api';
 import useChatUI from 'composables/useChatUI';
 import useAuth from 'composables/useAuth';
-import LoginDialog from 'components/ui/LoginDialog.vue';
+import LoginDialog from 'components/LoginDialog.vue';
 import { compactObject } from 'utils/Object';
 import type { Route } from 'vue-router';
 import type { QForm } from 'quasar';
-import type { SearchQuery } from 'pages/Search/Index.vue';
+import type { SearchQuery } from 'pages/Search.vue';
 
 const pagesWithAutoOpenFilterDrawer = ['Search', 'Recommended'];
 
