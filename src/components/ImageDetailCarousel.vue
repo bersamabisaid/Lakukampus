@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import DetailCardDialog from 'components/ui/DetailCardDialog.vue';
+import DetailCardDialog from 'components/DetailCardDialog.vue';
 
 export default {
   name: 'ImageDetailCarousel',

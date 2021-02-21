@@ -117,11 +117,11 @@ import { defineComponent } from '@vue/composition-api';
 import {
   commerce, random, company, image,
 } from 'faker';
-import type { Product } from 'components/ui/ProductCard.vue';
 import SectionLayout from 'layouts/SectionLayout.vue';
 import ProductList from 'components/modules/ProductList.vue';
-import HomeCarousel from './HomeCarousel.vue';
-import CategoryListSection, { Category } from './CategoryListSection.vue';
+import HomeCarousel from 'components/ui/Home/HomeCarousel.vue';
+import CategoryListSection, { Category } from 'components/ui/Home/CategoryListSection.vue';
+import type { Product } from 'components/ProductCard.vue';
 
 export default defineComponent({
   name: 'HomePage',

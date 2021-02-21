@@ -91,7 +91,7 @@ import {
   commerce, random, image, company,
 } from 'faker';
 import ProductList from 'components/modules/ProductList.vue';
-import type { Product } from 'components/ui/ProductCard.vue';
+import type { Product } from 'components/ProductCard.vue';
 
 const getProduct = () => ({
   name: commerce.productName(),

@@ -31,8 +31,8 @@
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import DetailCard from './DetailCard.vue';
-import DetailContent from './DetailContent.vue';
+import DetailCard from 'components/ui/Product/DetailCard.vue';
+import DetailContent from 'components/ui/Product/DetailContent.vue';
 
 interface RouteParams {
   id: string;

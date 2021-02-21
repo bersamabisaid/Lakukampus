@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from '@vue/composition-api';
-import ProductCard, { Product } from 'components/ui/ProductCard.vue';
+import ProductCard, { Product } from 'components/ProductCard.vue';
 import SectionLayout from 'layouts/SectionLayout.vue';
 import type { Route } from 'vue-router';
 
