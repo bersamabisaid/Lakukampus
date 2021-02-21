@@ -8,6 +8,6 @@ RUN npm i -g @quasar/cli
 
 RUN npm i
 
-RUN quasar build
+RUN quasar build -m pwa
 
-CMD ["quasar", "serve", "dist/spa", "-p", "8000"]
+CMD ["quasar", "serve", "dist/pwa", "-p", "8000"]
