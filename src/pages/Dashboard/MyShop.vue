@@ -24,27 +24,11 @@
 
           <q-card-section horizontal>
             <div class="row items-center">
-              <q-card-section
-                class="col-4 col-md-3 q-pa-sm"
-                v-for="n in 6"
-                :key="n"
-              >
-                <div>
-                  <q-card class="my-card custom-card">
-                    <q-card-section
-                      v-ripple
-                      class="column items-center"
-                    >
-                      <div class="text-primary text-weight-medium">
-                        0
-                      </div>
-                      <div class="text-center text-caption">
-                        Pengiriman perlu diproses
-                      </div>
-                    </q-card-section>
-                  </q-card>
-                </div>
-              </q-card-section>
+              <important-card
+                v-for="link in importantCardCustom"
+                :key="link.id"
+                v-bind="link"
+              />
             </div>
           </q-card-section>
         </q-card>
@@ -69,33 +53,14 @@
 
           <q-separator />
 
-          <q-card-section
-            horizontal
-            class="col-4 col-md-6"
-          >
-            <q-card-section
-              horizontal
-              v-for="n in 2"
-              :key="n"
-            >
-              <div>
-                <q-card
-                  vertical
-                  class="my-card custom-card"
-                  flat
-                  v-for="i in 2"
-                  :key="i"
-                >
-                  <q-card-section>
-                    <q-icon
-                      name="thumb_up_off_alt"
-                      size="md"
-                    /><br>
-                    feedback positif
-                  </q-card-section>
-                </q-card>
-              </div>
-            </q-card-section>
+          <q-card-section horizontal>
+            <div class="row">
+              <summary-card
+                v-for="icon in summaryCardCustom"
+                :key="icon.id"
+                v-bind="icon"
+              />
+            </div>
 
             <q-separator vertical />
 
@@ -107,7 +72,7 @@
       </div>
 
       <!-- PERFORMA TOKO -->
-      <div class="col-12">
+      <!-- <div class="col-12">
         <q-card
           class="my-card"
           flat
@@ -160,13 +125,16 @@
             </q-card-section>
           </q-card-section>
         </q-card>
-      </div>
+      </div> -->
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
+import ImportantCard from 'components/ui/ImportantCard.vue';
+import SummaryCard from 'components/ui/SummaryCard.vue';
+import { uid } from 'quasar';
 
 export default defineComponent({
   name: 'DashboardPage',
@@ -174,7 +142,66 @@ export default defineComponent({
   data() {
     return {
       lorem: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      importantCardCustom: [
+        {
+          id: uid(),
+          number: 1,
+          caption: 'Sudah bayar',
+          link: '',
+        },
+        {
+          id: uid(),
+          number: 2,
+          caption: 'Pesanan baru',
+          link: '',
+        },
+        {
+          id: uid(),
+          number: 3,
+          caption: 'Siap dikirim',
+          link: '',
+        },
+        {
+          id: uid(),
+          number: 4,
+          caption: 'Pesanan dikomplain',
+          link: '',
+        },
+        {
+          id: uid(),
+          number: 5,
+          caption: 'Produk habis',
+          link: '',
+        },
+        {
+          id: uid(),
+          number: 6,
+          caption: 'Produk dilarang',
+          link: '',
+        },
+      ],
+      summaryCardCustom: [
+        {
+          id: uid(),
+          icon: 'thumb_up_off_alt',
+          caption: 'Feedback Positif',
+        },
+        {
+          id: uid(),
+          icon: 'thumb_down_off_alt',
+          caption: 'Feedback Negative',
+        },
+        {
+          id: uid(),
+          icon: 'assignment_ind',
+          caption: 'Pelanggan',
+        },
+      ],
     };
+  },
+  components: {
+    ImportantCard,
+    SummaryCard,
   },
 });
 </script>

@@ -33,20 +33,6 @@
           <q-item
             clickable
             v-ripple
-            @click="drawer = !drawer"
-          >
-            <q-item-section avatar>
-              <q-icon name="keyboard_arrow_left" />
-            </q-item-section>
-
-            <q-item-section>
-              Sembunyikan
-            </q-item-section>
-          </q-item>
-
-          <q-item
-            clickable
-            v-ripple
           >
             <q-item-section avatar>
               <q-icon name="house" />
@@ -246,6 +232,12 @@ export default defineComponent({
   methods: {
     onItemClick() {
       console.log('Anda ngeklik saya :)');
+    },
+  },
+
+  computed: {
+    isUnderMd(): boolean {
+      return this.$q.screen.width < this.$q.screen.sizes.md;
     },
   },
 });

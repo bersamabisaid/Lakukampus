@@ -89,7 +89,7 @@ const routes: RouteConfig[] = [
         children: [
           {
             name: 'MyShop',
-            path: '',
+            path: '/shop',
             component: () => import('pages/Dashboard/MyShop.vue'),
           },
           {
