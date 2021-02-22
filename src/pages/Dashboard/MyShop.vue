@@ -34,7 +34,6 @@
         </q-card>
       </div>
 
-      <!-- DAFTAR BARANG n MSH BLUM TAU-->
       <div class="col-12">
         <q-card
           class="my-card"
@@ -71,8 +70,7 @@
         </q-card>
       </div>
 
-      <!-- PERFORMA TOKO -->
-      <!-- <div class="col-12">
+      <div class="col-12">
         <q-card
           class="my-card"
           flat
@@ -84,56 +82,32 @@
             </q-item-section>
 
             <q-item-section>
-              <q-item-label>Performa Toko</q-item-label>
+              <q-item-label>Analisis Toko</q-item-label>
             </q-item-section>
           </q-item>
 
           <q-separator />
 
-          <q-card-section
-            horizontal
-            class="col-4 col-md-6"
-          >
-            <q-card-section
-              horizontal
-              v-for="n in 2"
-              :key="n"
-            >
-              <div>
-                <q-card
-                  vertical
-                  class="my-card custom-card"
-                  flat
-                  v-for="i in 2"
-                  :key="i"
-                >
-                  <q-card-section>
-                    <q-icon
-                      name="thumb_up_off_alt"
-                      size="md"
-                    /><br>
-                    feedback positif
-                  </q-card-section>
-                </q-card>
-              </div>
-            </q-card-section>
-
-            <q-separator vertical />
-
-            <q-card-section class="col-4 col-md-6">
-              Pelanggan
-            </q-card-section>
+          <q-card-section horizontal>
+            <div class="row items-center">
+              <analysis-card
+                v-for="caption in analysisCardCustom"
+                :key="caption.id"
+                v-bind="caption"
+              />
+            </div>
           </q-card-section>
         </q-card>
-      </div> -->
+      </div>
     </div>
   </q-page>
 </template>
 
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api';
-import ImportantCard from 'components/ui/ImportantCard.vue';
-import SummaryCard from 'components/ui/SummaryCard.vue';
+import ImportantCard from 'components/ui/Dashboard/ImportantCard.vue';
+import SummaryCard from 'components/ui/Dashboard/SummaryCard.vue';
+import AnalysisCard from 'components/ui/Dashboard/AnalysisCard.vue';
 import { uid } from 'quasar';
 
 export default defineComponent({
@@ -197,11 +171,29 @@ export default defineComponent({
           caption: 'Pelanggan',
         },
       ],
+      analysisCardCustom: [
+        {
+          id: uid(),
+          caption: 'Pendapatan bersih',
+          number: 120000,
+        },
+        {
+          id: uid(),
+          caption: 'Produk dilihat',
+          number: 170,
+        },
+        {
+          id: uid(),
+          caption: 'Produk terjual',
+          number: 170,
+        },
+      ],
     };
   },
   components: {
     ImportantCard,
     SummaryCard,
+    AnalysisCard,
   },
 });
 </script>

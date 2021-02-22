@@ -6,12 +6,12 @@
           v-ripple
           class="column items-center"
         >
-          <div class="text-primary text-weight-medium">
+          <span class="text-primary text-weight-medium">
             {{ number }}
-          </div>
-          <div class="text-center text-caption">
+          </span>
+          <span class="text-center text-caption">
             {{ caption }}
-          </div>
+          </span>
         </q-card-section>
       </q-card>
     </div>
