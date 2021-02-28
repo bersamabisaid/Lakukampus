@@ -16,7 +16,9 @@
       >
         <shop-detail />
       </div>
+
       <div class="col" />
+
       <div class="col-12 col-md-9">
         <div class="row">
           <q-input

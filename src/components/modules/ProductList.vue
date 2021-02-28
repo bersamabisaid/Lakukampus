@@ -19,7 +19,7 @@
       <div
         v-for="product in products"
         :key="product.name"
-        :class="['col-6 col-sm-4 col-md-2', itemClass]"
+        :class="itemClass || 'col-6 col-sm4 col-md-2'"
       >
         <product-card v-bind="product" />
       </div>
