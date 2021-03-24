@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "quasar dev",
-    "lint": "eslint --ext .js,.ts,.vue ./src --fix",
+    "lint": "eslint --cache --ext .js,.ts,.vue ./src --fix",
     "test": "echo \"No test specified\" && exit 0",
     "start-emulator": "firebase emulators:start"
   },
